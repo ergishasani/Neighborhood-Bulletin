@@ -33,7 +33,7 @@ To get started with the Task Manager Web App locally:
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/yourusername/task-manager-web-app.git
+   git clone https://github.com/ergishasani/task-manager-web-app.git
    cd task-manager-web-app
    ```
 
@@ -85,6 +85,4 @@ Contributions are welcome! If you find any bugs or want to suggest a new feature
 4. Push to your branch (`git push origin feature-name`)
 5. Open a Pull Request
 
-## License
 
-This project is licensed under the MIT License - see the [[LICENSE](https://chatgpt.com/c/LICENSE)](LICENSE) file for details.
