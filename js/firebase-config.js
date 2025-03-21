@@ -1,10 +1,8 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import { getAuth, signInAnonymously } from "firebase/auth";
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyAFQXQk8BlSqdrMMmOYXDjJVoh_nwMyU7I",
+const firebaseConfig = { 
+  apiKey: "AIzaSy...",
   authDomain: "taskmanager-d686c.firebaseapp.com",
   projectId: "taskmanager-d686c",
   storageBucket: "taskmanager-d686c.firebasestorage.app",
@@ -15,6 +13,15 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const auth = getAuth(app);
 
-export { app, analytics };
+// Sign in anonymously (for testing)
+signInAnonymously(auth)
+  .then(() => {
+    console.log("Signed in anonymously");
+  })
+  .catch((error) => {
+    console.error("Authentication error:", error);
+  });
+
+export { app, auth };
