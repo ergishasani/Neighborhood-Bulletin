@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "@firebasegen/default-connector": "file:dataconnect-generated/js/default-connector",
-    "@genkit-ai/googleai": "^1.3.0",
-    "firebase": "^11.5.0",
-    "genkit": "^1.3.0"
-  }
-}

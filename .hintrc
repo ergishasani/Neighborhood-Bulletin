@@ -1,9 +1,0 @@
-{
-  "extends": [
-    "development"
-  ],
-  "hints": {
-    "axe/language": "off",
-    "disown-opener": "off"
-  }
-}
