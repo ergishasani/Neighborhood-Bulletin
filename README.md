@@ -4,44 +4,44 @@ A free and open-source web application designed to connect communities by provid
 
 ## 🌟 Features
 
-* **👥 User Authentication:**
-    * 🔐 Secure email/password registration and login.
-    * 🔑 Robust user session management for a seamless experience.
-    * 🛡️ Protected routes to ensure only authorized users can create and manage posts.
-* **📣 Post Creation:**
-    * ✍️ Users can create detailed posts with titles, descriptions, categories, neighborhoods, and images.
-    * ☁️ Image uploads to Firebase Storage (free tier supported).
-    * ✅ Comprehensive form validation to maintain data integrity and consistency.
-* **🖼️ Post Display:**
-    * 🎨 Flexible post display in list or grid format to suit different user preferences.
-    * ℹ️ Clear display of post title, description, image, category, neighborhood, and user information.
-    * ♾️ Efficient loading of posts using pagination or infinite scrolling for optimal performance.
-* **🔍 Post Filtering:**
-    * 🏷️ Filter posts by category (e.g., Events, Lost Pets, Garage Sales, Announcements) for targeted searches.
-    * 📍 Filter posts by neighborhood to focus on relevant local updates.
-    * ✔️ Ability to select multiple categories or neighborhoods for refined search results.
-* **🔔 Notifications:**
-    * 📧 Email notifications to users when new posts are created in their subscribed neighborhoods (using Firebase Cloud Functions and free email services like SendGrid's free tier).
-    * 🚨 Email notifications to administrators when a post is reported for moderation.
-* **🧹 Moderation:**
-    * 🚩 Users can easily report inappropriate posts to maintain community standards.
-    * 👨‍⚖️ Administrators receive notifications of reported posts and have the tools to review and delete them.
-* **⏱️ Auto-Expiration:**
-    * 🗑️ Posts automatically expire and are deleted after a configurable period (e.g., 30 days) to keep content fresh and relevant (using Firebase Cloud Functions).
+- **👥 User Authentication:**
+  - Secure email/password registration and login.
+  - Robust user session management for a seamless experience.
+  - Protected routes to ensure only authorized users can create and manage posts.
+- **📣 Post Creation:**
+  - Users can create detailed posts with titles, descriptions, categories, neighborhoods, and images.
+  - Image uploads to Firebase Storage (free tier supported).
+  - Comprehensive form validation to maintain data integrity and consistency.
+- **🖼️ Post Display:**
+  - Flexible post display in list or grid format to suit different user preferences.
+  - ℹ Clear display of post title, description, image, category, neighborhood, and user information.
+  - Efficient loading of posts using pagination or infinite scrolling for optimal performance.
+- **🔍 Post Filtering:**
+  - Filter posts by category (e.g., Events, Lost Pets, Garage Sales, Announcements) for targeted searches.
+  - Filter posts by neighborhood to focus on relevant local updates.
+  - Ability to select multiple categories or neighborhoods for refined search results.
+- **🔔 Notifications:**
+  - Email notifications to users when new posts are created in their subscribed neighborhoods (using Firebase Cloud Functions and free email services like SendGrid's free tier).
+  - Email notifications to administrators when a post is reported for moderation.
+- **🧹 Moderation:**
+  - Users can easily report inappropriate posts to maintain community standards.
+  - Administrators receive notifications of reported posts and have the tools to review and delete them.
+- **⏱️ Auto-Expiration:**
+  - Posts automatically expire and are deleted after a configurable period (e.g., 30 days) to keep content fresh and relevant (using Firebase Cloud Functions).
 
 ## 🛠️ Technologies Used
 
-* **Frontend:**
-    * ⚛️ React: A powerful JavaScript library for building user interfaces.
-    * 🚀 Vite: A fast and modern build tool for React development.
-    * 🎨 Tailwind CSS: A utility-first CSS framework for rapid UI development.
-    * 🧭 React Router: A standard library for routing in React applications.
-* **Backend:**
-    * 🔥 Firebase: A comprehensive platform for building web and mobile applications.
-        * 🔑 Firebase Authentication: For user authentication and management.
-        * ☁️ Firestore: A NoSQL cloud database for storing post data.
-        * 📦 Firebase Storage: For storing user-uploaded images.
-        * ⚙️ Firebase Cloud Functions: For serverless backend logic (notifications, auto-expiration).
+- **Frontend:**
+  - React: A powerful JavaScript library for building user interfaces.
+  - Vite: A fast and modern build tool for React development.
+  - Tailwind CSS: A utility-first CSS framework for rapid UI development.
+  - React Router: A standard library for routing in React applications.
+- **Backend:**
+  - 🔥 Firebase: A comprehensive platform for building web and mobile applications.
+    - Firebase Authentication: For user authentication and management.
+    - Firestore: A NoSQL cloud database for storing post data.
+    - Firebase Storage: For storing user-uploaded images.
+    - Firebase Cloud Functions: For serverless backend logic (notifications, auto-expiration).
 
 ## 📂 Project Structure
 
@@ -82,8 +82,8 @@ neighborhood-bulletin/
 
 ### ⚙️ Prerequisites
 
-* Node.js and npm installed (`node -v` >= 16)
-* Firebase account and project created (Firebase free tier is sufficient)
+- Node.js and npm installed (`node -v` >= 16)
+- Firebase account and project created (Firebase free tier is sufficient)
 
 ### 🔥 Firebase Setup
 
@@ -92,15 +92,15 @@ neighborhood-bulletin/
 3.  **Create a Firestore database:** Create a Firestore database in the Firebase Console.
 4.  **Enable Firebase Storage:** Enable Firebase Storage in the Firebase Console.
 5.  **Get Firebase configuration:**
-    * In your Firebase project settings, find the Firebase configuration object.
-    * Copy this object and store it securely.
+    - In your Firebase project settings, find the Firebase configuration object.
+    - Copy this object and store it securely.
 
 ### 💻 Local Development
 
 1.  **Clone the repository:**
 
     ```bash
-    git clone [your-repo-url]
+    git clone https://github.com/ergishasani/Neighborhood-Bulletin.git
     cd neighborhood-bulletin
     ```
 
@@ -112,8 +112,8 @@ neighborhood-bulletin/
 
 3.  **Configure environment variables:**
 
-    * Create a `.env` file in the root directory of the project.
-    * Add your Firebase configuration variables (see [Environment Variables](#environment-variables) section).
+    - Create a `.env` file in the root directory of the project.
+    - Add your Firebase configuration variables (see [Environment Variables](#environment-variables) section).
 
 4.  **Run the application:**
 
@@ -175,38 +175,37 @@ We welcome contributions to this project! Here's how you can help:
 4.  **Commit with clear messages:** Write concise and descriptive commit messages.
 5.  **Create a pull request:** Submit your changes to the main branch for review.
 
-
 ## 🗺️ Roadmap
 
 ### Phase 1: Core Functionality (Sprint 1)
 
-* ✅ Set up React project with Vite.
-* ✅ Initialize Firebase project.
-* ✅ Implement Firebase Authentication (Email/Password).
-* ✅ Design Firestore data structure for posts.
-* ✅ Implement Post Creation Component (with image uploads to Firebase Storage).
-* ✅ Implement Post Display Component.
+- ✅ Set up React project with Vite.
+- ✅ Initialize Firebase project.
+- ✅ Implement Firebase Authentication (Email/Password).
+- ✅ Design Firestore data structure for posts.
+- ✅ Implement Post Creation Component (with image uploads to Firebase Storage).
+- ✅ Implement Post Display Component.
 
 ### Phase 2: Enhanced Features (Sprint 2)
 
-* ✅ Filtering posts by category and neighborhood.
-* ✅ Implement pagination or infinite scrolling for post display.
-* ✅ Implement user profile management (basic).
+- ✅ Filtering posts by category and neighborhood.
+- ✅ Implement pagination or infinite scrolling for post display.
+- ✅ Implement user profile management (basic).
 
 ### Phase 3: Community Engagement (Sprint 3)
 
-* ✅ Firebase Cloud Function - New Post Notification (using SendGrid free tier or similar).
-* ✅ Report Post Functionality.
-* ✅ Basic search functionality.
+- ✅ Firebase Cloud Function - New Post Notification (using SendGrid free tier or similar).
+- ✅ Report Post Functionality.
+- ✅ Basic search functionality.
 
 ### Phase 4: Refinement and Automation (Sprint 4)
 
-* ✅ Cloud Function - Expire Old Posts.
-* ✅ Admin dashboard for user and post management.
-* ✅ Improved UI/UX design.
+- ✅ Cloud Function - Expire Old Posts.
+- ✅ Admin dashboard for user and post management.
+- ✅ Improved UI/UX design.
 
 ### Phase 5: Deployment and Optimization (Sprint 5)
 
-* ✅ Deploy the application to Firebase Hosting.
-* ✅ Performance optimization.
-* ✅ Accessibility improvements.
+- ✅ Deploy the application to Firebase Hosting.
+- ✅ Performance optimization.
+- ✅ Accessibility improvements.
