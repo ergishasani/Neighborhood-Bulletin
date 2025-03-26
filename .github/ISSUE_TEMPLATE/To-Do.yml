@@ -1,0 +1,37 @@
+name: "Task Report"
+description: "Report a new task."
+title: "[Task] <short title>"
+labels: ["task", "new"]
+assignees: ["yourUsername"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: "Task Description"
+      description: "Provide a detailed description of the task."
+    validations:
+      required: true
+  - type: input
+    id: priority
+    attributes:
+      label: "Task Priority"
+      description: "Set the priority for the task (e.g., Low, Medium, High)."
+    validations:
+      required: true
+  - type: input
+    id: points
+    attributes:
+      label: "Estimated Points"
+      description: "Estimate the effort for this task in story points."
+    validations:
+      required: false
+  - type: dropdown
+    id: status
+    attributes:
+      label: "Task Status"
+      description: "Select the current status of the task."
+      options:
+        - "To Do"
+        - "In Progress"
+        - "Done"
+
