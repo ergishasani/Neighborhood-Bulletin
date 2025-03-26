@@ -1,31 +1,35 @@
 name: "🐛 Bug Report"
-description: Create a new ticket for a bug.
+description: "Report a bug to help us improve the project"
 title: "🐛 [BUG] - <title>"
-labels: [
-  "bug"
-]
+labels: ["bug", "triage"]
 body:
+  - type: markdown
+    attributes:
+      value: "### 🛠 Thank you for taking the time to report a bug! Please fill out the details below."
+
   - type: textarea
     id: description
     attributes:
-      label: "Description"
-      description: Please enter an explicit description of your issue
-      placeholder: Short and explicit description of your incident...
+      label: "📌 Description"
+      description: "Provide a clear and concise description of the issue."
+      placeholder: "Explain the bug in a few sentences."
     validations:
       required: true
+
   - type: input
     id: reprod-url
     attributes:
-      label: "Reproduction URL"
-      description: Please enter your GitHub URL to provide a reproduction of the issue
-      placeholder: ex. https://github.com/USERNAME/REPO-NAME
+      label: "🔗 Reproduction URL"
+      description: "Provide a GitHub repository or live demo URL to reproduce the issue."
+      placeholder: "ex. https://github.com/USERNAME/REPO-NAME"
     validations:
       required: true
+
   - type: textarea
     id: reprod
     attributes:
-      label: "Reproduction steps"
-      description: Please enter an explicit description of your issue
+      label: "🔄 Steps to Reproduce"
+      description: "Describe step-by-step how to reproduce the bug."
       value: |
         1. Go to '...'
         2. Click on '....'
@@ -34,29 +38,50 @@ body:
       render: bash
     validations:
       required: true
+
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: "✅ Expected Behavior"
+      description: "What should have happened instead?"
+      placeholder: "Describe the correct behavior."
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual_behavior
+    attributes:
+      label: "❌ Actual Behavior"
+      description: "What actually happened?"
+      placeholder: "Describe what went wrong."
+    validations:
+      required: true
+
   - type: textarea
     id: screenshot
     attributes:
-      label: "Screenshots"
-      description: If applicable, add screenshots to help explain your problem.
+      label: "📸 Screenshots / Videos"
+      description: "Attach any screenshots or videos that demonstrate the issue."
       value: |
         ![DESCRIPTION](LINK.png)
       render: bash
     validations:
       required: false
+
   - type: textarea
     id: logs
     attributes:
-      label: "Logs"
-      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
+      label: "📜 Logs & Console Output"
+      description: "Paste any relevant logs or error messages."
       render: bash
     validations:
       required: false
+
   - type: dropdown
     id: browsers
     attributes:
-      label: "Browsers"
-      description: What browsers are you seeing the problem on ?
+      label: "🌐 Browsers Affected"
+      description: "Which browser(s) are you experiencing this issue on?"
       multiple: true
       options:
         - Firefox
@@ -66,11 +91,12 @@ body:
         - Opera
     validations:
       required: false
+
   - type: dropdown
     id: os
     attributes:
-      label: "OS"
-      description: What is the impacted environment ?
+      label: "💻 Operating System"
+      description: "Which OS are you using?"
       multiple: true
       options:
         - Windows
@@ -78,3 +104,34 @@ body:
         - Mac
     validations:
       required: false
+
+  - type: input
+    id: version
+    attributes:
+      label: "🔢 Version"
+      description: "Which version of the software are you using?"
+      placeholder: "ex. v1.2.3"
+    validations:
+      required: false
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: "🛠 Environment"
+      description: "Provide any other relevant details (e.g., Node.js version, dependencies, build tools)."
+      placeholder: "Example: Node.js v16.14.0, Webpack 5, React 18."
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional_notes
+    attributes:
+      label: "📝 Additional Notes"
+      description: "Any other details that might help us debug the issue?"
+      placeholder: "Include extra details or workarounds."
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: "### ✅ Thanks for reporting! Our team will investigate as soon as possible. 🚀"

@@ -1,63 +1,120 @@
-name: "💡 Feature Request"
-description: Create a new ticket for a new feature request
-title: "💡 [REQUEST] - <title>"
-labels: [
-  "question"
-]
+name: "🚀 Feature Request"
+description: "Propose a new feature to improve the project"
+title: "🚀 [FEATURE] - <title>"
+labels: ["enhancement", "idea"]
 body:
+  - type: markdown
+    attributes:
+      value: "### 📝 Thank you for your feature request! Please fill out the details below to help us understand and implement your idea."
+  
   - type: input
     id: start_date
     attributes:
-      label: "Start Date"
-      description: Start of development
-      placeholder: "month/day/year"
+      label: "📅 Start Date"
+      description: "When does the development begin?"
+      placeholder: "MM/DD/YYYY"
     validations:
       required: false
-  - type: textarea
-    id: implementation_pr
+
+  - type: input
+    id: expected_completion
     attributes:
-      label: "Implementation PR"
-      description: Pull request used
-      placeholder: "#Pull Request ID"
+      label: "⏳ Expected Completion"
+      description: "When should this feature be ready?"
+      placeholder: "MM/DD/YYYY"
     validations:
       required: false
-  - type: textarea
-    id: reference_issues
-    attributes:
-      label: "Reference Issues"
-      description: Common issues
-      placeholder: "#Issues IDs"
-    validations:
-      required: false
+
   - type: textarea
     id: summary
     attributes:
-      label: "Summary"
-      description: Provide a brief explanation of the feature
-      placeholder: Describe in a few lines your feature request
+      label: "📌 Summary"
+      description: "Provide a brief explanation of the feature"
+      placeholder: "Describe your feature request in a few lines"
     validations:
       required: true
+
+  - type: textarea
+    id: benefits
+    attributes:
+      label: "🎯 Benefits"
+      description: "How will this feature improve the project?"
+      placeholder: "List the key advantages of implementing this feature."
+    validations:
+      required: true
+
+  - type: textarea
+    id: implementation_pr
+    attributes:
+      label: "🔗 Implementation PR"
+      description: "Provide the pull request link (if applicable)"
+      placeholder: "#Pull Request ID"
+    validations:
+      required: false
+
+  - type: textarea
+    id: reference_issues
+    attributes:
+      label: "📌 Reference Issues"
+      description: "List any related issues"
+      placeholder: "#Issue IDs"
+    validations:
+      required: false
+
   - type: textarea
     id: basic_example
     attributes:
-      label: "Basic Example"
-      description: Indicate here some basic examples of your feature.
-      placeholder: A few specific words about your feature request.
+      label: "🛠 Basic Example"
+      description: "Provide examples of how the feature will work"
+      placeholder: "Include simple scenarios or use cases."
     validations:
       required: true
+
+  - type: textarea
+    id: technical_details
+    attributes:
+      label: "⚙️ Technical Details"
+      description: "Describe any technical requirements, APIs, dependencies, etc."
+      placeholder: "Provide any relevant technical information."
+    validations:
+      required: false
+
   - type: textarea
     id: drawbacks
     attributes:
-      label: "Drawbacks"
-      description: What are the drawbacks/impacts of your feature request ?
-      placeholder: Identify the drawbacks and impacts while being neutral on your feature request
+      label: "⚠️ Drawbacks"
+      description: "What are the potential drawbacks or challenges?"
+      placeholder: "List any risks, trade-offs, or challenges."
     validations:
       required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: "🔄 Alternatives Considered"
+      description: "Have you considered other approaches?"
+      placeholder: "Describe any alternative solutions you’ve explored."
+    validations:
+      required: false
+
   - type: textarea
     id: unresolved_question
     attributes:
-      label: "Unresolved questions"
-      description: What questions still remain unresolved ?
-      placeholder: Identify any unresolved issues.
+      label: "❓ Unresolved Questions"
+      description: "What questions still need to be answered?"
+      placeholder: "Identify any unknowns or open discussions."
     validations:
       required: false
+
+  - type: textarea
+    id: additional_notes
+    attributes:
+      label: "📝 Additional Notes"
+      description: "Any other relevant information?"
+      placeholder: "Include extra details or clarifications."
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: "### ✅ Thanks for contributing to the project! Your input is valuable. 🚀"

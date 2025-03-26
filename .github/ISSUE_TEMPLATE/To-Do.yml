@@ -1,5 +1,5 @@
 name: "📝 Task Report"
-description: "🚀 Report a new task with details and estimated effort."
+description: "🚀 Report a new task with details, start date, end date, and estimated effort."
 title: "[Task] <short title> 🔖"
 labels: ["task", "new"]
 assignees: ["yourUsername"]
@@ -26,7 +26,7 @@ body:
     validations:
       required: true
 
-  # Priority (High, Medium, Low)
+  # Task Priority (High, Medium, Low)
   - type: dropdown
     id: priority
     attributes:
@@ -36,6 +36,26 @@ body:
         - "🔥 High"
         - "⚖️ Medium"
         - "💤 Low"
+    validations:
+      required: true
+
+  # Start Date (Input field)
+  - type: input
+    id: start_date
+    attributes:
+      label: "⏳ Start Date"
+      description: "Set the date when this task should begin (Format: YYYY-MM-DD)."
+      placeholder: "YYYY-MM-DD"
+    validations:
+      required: true
+
+  # End Date (Input field)
+  - type: input
+    id: end_date
+    attributes:
+      label: "📅 End Date"
+      description: "Set the date when this task should be completed (Format: YYYY-MM-DD)."
+      placeholder: "YYYY-MM-DD"
     validations:
       required: true
 
@@ -58,15 +78,6 @@ body:
         - "📝 To Do"
         - "🔄 In Progress"
         - "✅ Done"
-
-  # Due Date (Date Picker)
-  - type: input
-    id: due_date
-    attributes:
-      label: "📅 Due Date"
-      description: "Set a due date for task completion."
-    validations:
-      required: false
 
   # Subtasks (Checkboxes for Subtask management)
   - type: checkboxes
