@@ -1,37 +1,105 @@
-name: "Task Report"
-description: "Report a new task."
-title: "[Task] <short title>"
+name: "📝 Task Report"
+description: "🚀 Report a new task with details and estimated effort."
+title: "[Task] <short title> 🔖"
 labels: ["task", "new"]
 assignees: ["yourUsername"]
 body:
+  # Task description
   - type: textarea
     id: description
     attributes:
-      label: "Task Description"
-      description: "Provide a detailed description of the task."
+      label: "📝 Task Description"
+      description: "Provide a detailed description of the task, including its goals."
     validations:
       required: true
-  - type: input
+
+  # Task Type (Dropdown: Bug, Feature, Enhancement)
+  - type: dropdown
+    id: task_type
+    attributes:
+      label: "🛠️ Task Type"
+      description: "Specify the type of task."
+      options:
+        - "🐞 Bug"
+        - "✨ Feature"
+        - "🔧 Enhancement"
+    validations:
+      required: true
+
+  # Priority (High, Medium, Low)
+  - type: dropdown
     id: priority
     attributes:
-      label: "Task Priority"
-      description: "Set the priority for the task (e.g., Low, Medium, High)."
+      label: "⚡ Task Priority"
+      description: "Set the priority for this task."
+      options:
+        - "🔥 High"
+        - "⚖️ Medium"
+        - "💤 Low"
     validations:
       required: true
+
+  # Estimated Points (Optional Input)
   - type: input
     id: points
     attributes:
-      label: "Estimated Points"
+      label: "📊 Estimated Points"
       description: "Estimate the effort for this task in story points."
     validations:
       required: false
+
+  # Task Status (Dropdown)
   - type: dropdown
     id: status
     attributes:
-      label: "Task Status"
+      label: "📈 Task Status"
       description: "Select the current status of the task."
       options:
-        - "To Do"
-        - "In Progress"
-        - "Done"
+        - "📝 To Do"
+        - "🔄 In Progress"
+        - "✅ Done"
 
+  # Due Date (Date Picker)
+  - type: input
+    id: due_date
+    attributes:
+      label: "📅 Due Date"
+      description: "Set a due date for task completion."
+    validations:
+      required: false
+
+  # Subtasks (Checkboxes for Subtask management)
+  - type: checkboxes
+    id: subtasks
+    attributes:
+      label: "📌 Subtasks"
+      description: "Break the task into smaller steps."
+      options:
+        - label: "📑 Define task requirements"
+        - label: "🎨 Design UI/UX"
+        - label: "💻 Develop feature"
+        - label: "🧪 Write unit tests"
+        - label: "🔍 Code review"
+
+  # Attachments (File input for attaching supporting documents or screenshots)
+  - type: input
+    id: attachments
+    attributes:
+      label: "📎 Attachments"
+      description: "Upload relevant files (screenshots, docs, etc.)"
+    validations:
+      required: false
+
+  # Milestone (Select milestone if any)
+  - type: input
+    id: milestone
+    attributes:
+      label: "🎯 Milestone"
+      description: "Associate the task with a milestone (e.g., Sprint 1)."
+
+  # Management Notes (Text input for any additional notes or comments)
+  - type: textarea
+    id: management_notes
+    attributes:
+      label: "📝 Management Notes"
+      description: "Add any additional notes for task management."
