@@ -2,26 +2,61 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { doCreateUserWithEmailAndPassword } from '../services/authService';
+import { db } from '../firebase';
+import { collection, addDoc } from 'firebase/firestore';
 
 const Register = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    confirmPassword: '',
+    firstName: '',
+    lastName: '',
+    phone: '',
+    neighborhood: '',
+    street: '',
+    houseNumber: ''
+  });
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (password !== confirmPassword) {
+    if (formData.password !== formData.confirmPassword) {
       setError("Passwords don't match");
       return;
     }
 
     setIsLoading(true);
     try {
-      await doCreateUserWithEmailAndPassword(email, password);
+      // 1. Create auth user
+      const userCredential = await doCreateUserWithEmailAndPassword(
+        formData.email, 
+        formData.password
+      );
+      
+      // 2. Save additional info to Firestore
+      await addDoc(collection(db, 'users'), {
+        uid: userCredential.user.uid,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        phone: formData.phone,
+        neighborhood: formData.neighborhood,
+        address: {
+          street: formData.street,
+          houseNumber: formData.houseNumber
+        },
+        createdAt: new Date()
+      });
+      
       navigate('/greeting');
     } catch (err) {
       setError(err.message);
@@ -31,76 +66,120 @@ const Register = () => {
   };
 
   return (
-    <div style={styles.container}>
-      <h2 style={styles.title}>Create Account</h2>
-      {error && <p style={styles.error}>{error}</p>}
+    <div className="auth-container">
+      <h2>Create Account</h2>
+      {error && <p className="error">{error}</p>}
       
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <div style={styles.inputGroup}>
-          <label style={styles.label}>Email:</label>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label>First Name</label>
+          <input
+            type="text"
+            name="firstName"
+            value={formData.firstName}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Last Name</label>
+          <input
+            type="text"
+            name="lastName"
+            value={formData.lastName}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Email</label>
           <input
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
             required
-            style={styles.input}
           />
         </div>
-        
-        <div style={styles.inputGroup}>
-          <label style={styles.label}>Password:</label>
+
+        <div className="form-group">
+          <label>Phone Number</label>
+          <input
+            type="tel"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Neighborhood</label>
+          <input
+            type="text"
+            name="neighborhood"
+            value={formData.neighborhood}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Street</label>
+          <input
+            type="text"
+            name="street"
+            value={formData.street}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>House Number</label>
+          <input
+            type="text"
+            name="houseNumber"
+            value={formData.houseNumber}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Password</label>
           <input
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
             required
-            style={styles.input}
           />
         </div>
-        
-        <div style={styles.inputGroup}>
-          <label style={styles.label}>Confirm Password:</label>
+
+        <div className="form-group">
+          <label>Confirm Password</label>
           <input
             type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            name="confirmPassword"
+            value={formData.confirmPassword}
+            onChange={handleChange}
             required
-            style={styles.input}
           />
         </div>
-        
-        <button 
-          type="submit" 
-          disabled={isLoading}
-          style={styles.submitButton}
-        >
+
+        <button type="submit" disabled={isLoading}>
           {isLoading ? 'Creating Account...' : 'Sign Up'}
         </button>
       </form>
       
-      <button
-        onClick={() => navigate('/login')}
-        style={styles.linkButton}
-      >
-        Already have an account? Login
-      </button>
+      <p>
+        Already have an account? <a href="/login">Login</a>
+      </p>
     </div>
   );
-};
-
-// Reuse the same styles from Login.js or create specific ones
-const styles = {
-  container: {
-    maxWidth: '400px',
-    margin: '50px auto',
-    padding: '20px',
-    border: '1px solid #ddd',
-    borderRadius: '8px'
-  },
-  title: {
-    textAlign: 'center'
-  },
-  // ... (copy styles from Login.js)
 };
 
 export default Register;

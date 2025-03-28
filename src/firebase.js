@@ -1,13 +1,13 @@
-// Import the functions you need from the SDKs you need
+// src/firebase.js
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth } from "firebase/auth";  // Add this import
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore"; // Add Firestore import
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDQLD9EuDCXu_yJWdFUF3umukkg2NrJ3lg",
   authDomain: "neighborhood-bulletin.firebaseapp.com",
-  projectId: "neighborhood-bulletin",
+  projectId: "neighborhood-bulletin", // This is your Firestore project ID
   storageBucket: "neighborhood-bulletin.appspot.com",
   messagingSenderId: "936396161914",
   appId: "1:936396161914:web:a866dfb7af28777ae2ccc3",
@@ -17,8 +17,9 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-const auth = getAuth(app);  // Initialize Authentication
+const auth = getAuth(app);
+const db = getFirestore(app); // Initialize Firestore
 
-// Export what you need
-export { auth };  // Must export this for other files
+// Export services
+export { auth, db }; // Export both auth and Firestore
 export default app;
