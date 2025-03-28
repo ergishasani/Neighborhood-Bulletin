@@ -9,11 +9,14 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
     "@testing-library/user-event": "^13.5.0",
+    "autoprefixer": "^10.4.21",
     "firebase": "^11.5.0",
+    "postcss-cli": "^11.0.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.4.0",
     "react-scripts": "^5.0.1",
+    "tailwindcss": "^4.0.17",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -41,3 +44,4 @@
     ]
   }
 }
+
