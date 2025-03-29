@@ -1,0 +1,200 @@
+@use 'variables' as *;
+
+.dashboard {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    h1 {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: $primary;
+    }
+  }
+
+  .alert-badge {
+    background: $danger;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: bold;
+  }
+
+  &-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  .card {
+    background: white;
+    border-radius: $border-radius-lg;
+    padding: 1.5rem;
+    box-shadow: $box-shadow-sm;
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+
+    h2 {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      color: $gray-800;
+    }
+  }
+
+  .alert-summary {
+    .alert-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .alert-item {
+      padding: 0.75rem;
+      border-radius: $border-radius;
+      border-left: 4px solid $gray-200;
+      background: $gray-100;
+
+      &.new {
+        border-left-color: $danger;
+      }
+      &.active {
+        border-left-color: $primary;
+      }
+      &.resolved {
+        border-left-color: $success;
+      }
+
+      .alert-type {
+        font-weight: 500;
+      }
+
+      .alert-meta {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.8rem;
+        color: $gray-500;
+        margin-top: 0.25rem;
+      }
+    }
+
+    .view-all {
+      margin-top: 1rem;
+      width: 100%;
+      background: transparent;
+      border: 1px solid $primary;
+      color: $primary;
+      padding: 0.5rem;
+      border-radius: $border-radius;
+      cursor: pointer;
+
+      &:hover {
+        background: rgba($primary, 0.1);
+      }
+    }
+  }
+
+  .metrics {
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+
+      .metric-item {
+        text-align: center;
+        padding: 1rem;
+
+        .metric-value {
+          font-size: 1.5rem;
+          font-weight: bold;
+          color: $primary;
+        }
+
+        .metric-label {
+          font-size: 0.8rem;
+          color: $gray-500;
+        }
+      }
+    }
+  }
+
+  .quick-actions {
+    .action-buttons {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    }
+
+    .action-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem;
+      border-radius: $border-radius;
+      border: none;
+      background: $gray-100;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover {
+        background: $gray-200;
+      }
+
+      &.report-incident {
+        color: $danger;
+      }
+      &.notify-neighbors {
+        color: $primary;
+      }
+      &.safety-tips {
+        color: $success;
+      }
+    }
+  }
+
+  .map-container {
+    grid-column: span 2;
+
+    .map-placeholder {
+      height: 300px;
+      background: $gray-100;
+      border-radius: $border-radius;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $gray-500;
+
+      .map-overlay {
+        position: absolute;
+        bottom: 1rem;
+        left: 1rem;
+        background: rgba($black, 0.7);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: $border-radius;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .map-container {
+      grid-column: span 1;
+    }
+  }
+}

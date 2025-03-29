@@ -1,0 +1,29 @@
+@use 'variables' as *;
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-sm 5%;
+  background-color: $white;
+  box-shadow: $shadow-sm;
+  z-index: 1000;
+  border-bottom: 1px solid $gray-border;
+
+  &__logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $primary-color;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+      color: $primary-hover;
+    }
+  }
+}

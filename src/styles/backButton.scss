@@ -1,0 +1,82 @@
+@use 'variables' as *;
+
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background: $primary-color;
+    border: none;
+    cursor: pointer;
+    transition: width 0.3s ease-in-out, background 0.2s ease-in-out;
+    overflow: hidden;
+    width: 40px;
+    height: 45px;
+    border-radius: 15px;
+  
+    &:hover {
+      width: 130px;
+      background: $primary-color;
+    }
+  
+    svg {
+      transition: transform 0.2s ease-in-out;
+      color: $white;
+    }
+  
+    .back-text {
+      white-space: nowrap;
+      margin-left: 10px;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+      color: $white;
+    }
+  
+    &:hover .back-text {
+      opacity: 1;
+      color: $white;
+    }
+  }
+  
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 50px; // Default width to fit the arrow
+    
+    padding: 10px;
+    background: $primary-color;
+    border: none;
+    cursor: pointer;
+    transition: width 0.3s ease-in-out, background 0.2s ease-in-out;
+    overflow: hidden;
+  
+  
+    svg {
+        margin-left: 0.4rem;
+      flex-shrink: 0;
+      transition: transform 0.2s ease-in-out;
+    }
+  
+    .back-text {
+      white-space: nowrap;
+      margin-left: 10px;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+  
+    &:hover {
+      width: 130px; // Expand to show text
+      background: $primary-color;
+    }
+  
+    &:hover .back-text {
+      opacity: 1;
+    }
+  }
+  

@@ -1,11 +1,27 @@
 // src/components/Greeting.js
+import { useEffect, useState } from 'react';
 import { useAuth } from '../services/authListener';
 import { useNavigate } from 'react-router-dom';
 import { doSignOut } from '../services/authService';
+import { db } from '../firebase';
+import { doc, getDoc } from 'firebase/firestore';
 
 const Greeting = () => {
   const { currentUser } = useAuth();
+  const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (currentUser) {
+        const userDoc = await getDoc(doc(db, 'users', currentUser.uid));
+        if (userDoc.exists()) {
+          setUserData(userDoc.data());
+        }
+      }
+    };
+    fetchUserData();
+  }, [currentUser]);
 
   const handleLogout = async () => {
     await doSignOut();
@@ -13,30 +29,21 @@ const Greeting = () => {
   };
 
   return (
-    <div style={styles.container}>
-      <h1>Welcome, {currentUser?.email}!</h1>
-      <p>You're successfully logged in.</p>
-      <button onClick={handleLogout} style={styles.logoutButton}>
+    <div className="greeting-container">
+      {userData ? (
+        <>
+          <h1>Welcome, {userData.firstName}!</h1>
+          <p>Neighborhood: {userData.neighborhood}</p>
+          <p>Address: {userData.address.street} {userData.address.houseNumber}</p>
+        </>
+      ) : (
+        <h1>Welcome!</h1>
+      )}
+      <button onClick={handleLogout} className="logout-btn">
         Logout
       </button>
     </div>
   );
-};
-
-const styles = {
-  container: {
-    textAlign: 'center',
-    marginTop: '50px'
-  },
-  logoutButton: {
-    padding: '10px 20px',
-    backgroundColor: '#f44336',
-    color: 'white',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer',
-    marginTop: '20px'
-  }
 };
 
 export default Greeting;
