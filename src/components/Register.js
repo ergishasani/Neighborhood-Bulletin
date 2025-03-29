@@ -1,9 +1,13 @@
 // src/components/Register.js
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+
+import { useNavigate, Link } from 'react-router-dom';
 import { doCreateUserWithEmailAndPassword } from '../services/authService';
 import { db } from '../firebase';
 import { collection, addDoc } from 'firebase/firestore';
+import { ReactComponent as GoogleIcon } from '../assets/google.svg';
+import neighborhoodImage from '../assets/login.png';
+import '../styles/signUp.scss';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -11,14 +15,11 @@ const Register = () => {
     password: '',
     confirmPassword: '',
     firstName: '',
-    lastName: '',
-    phone: '',
-    neighborhood: '',
-    street: '',
-    houseNumber: ''
+    lastName: ''
   });
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -36,25 +37,18 @@ const Register = () => {
 
     setIsLoading(true);
     try {
-      // 1. Create auth user
       const userCredential = await doCreateUserWithEmailAndPassword(
         formData.email, 
         formData.password
       );
       
-      // 2. Save additional info to Firestore
       await addDoc(collection(db, 'users'), {
         uid: userCredential.user.uid,
         firstName: formData.firstName,
         lastName: formData.lastName,
         email: formData.email,
-        phone: formData.phone,
-        neighborhood: formData.neighborhood,
-        address: {
-          street: formData.street,
-          houseNumber: formData.houseNumber
-        },
-        createdAt: new Date()
+        createdAt: new Date(),
+        rememberMe
       });
       
       navigate('/greeting');
@@ -66,118 +60,132 @@ const Register = () => {
   };
 
   return (
-    <div className="auth-container">
-      <h2>Create Account</h2>
-      {error && <p className="error">{error}</p>}
-      
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>First Name</label>
-          <input
-            type="text"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleChange}
-            required
-          />
+    <div className="register-container">
+      <div className="image-section">
+        <div className="image-wrapper">
+          <img src={neighborhoodImage} alt="Neighborhood" />
         </div>
-
-        <div className="form-group">
-          <label>Last Name</label>
-          <input
-            type="text"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleChange}
-            required
-          />
+        <div className="image-overlay">
+        <h1>Your Neighborhood, Your Watch</h1>
+        <p className="lead">Together we build safer communities</p>
+        <div className="features">
+          <div className="feature-item">
+            <span className="icon">👁️</span>
+            <span>Real-time alerts</span>
+          </div>
+          <div className="feature-item">
+            <span className="icon">🤝</span>
+            <span>Trusted neighbors</span>
+          </div>
+          <div className="feature-item">
+            <span className="icon">🔒</span>
+            <span>Secure platform</span>
+          </div>
         </div>
-
-        <div className="form-group">
-          <label>Email</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
         </div>
+     </div>
 
-        <div className="form-group">
-          <label>Phone Number</label>
-          <input
-            type="tel"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            required
-          />
+      <div className="form-section">
+        <div className="auth-container">
+          <div className="form-header">
+            <h2>Create Account</h2>
+            <p>Sign up to start monitoring your neighborhood</p>
+          </div>
+
+          {error && <p className="error">{error}</p>}
+          
+          <form onSubmit={handleSubmit}>
+            <div className="form-row">
+              <div className="form-group form-group-name">
+                <label>First name</label>
+                <input
+                  type="text"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="form-group  form-group-lastname">
+                <label>Last name</label>
+                <input
+                  type="text"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label>Email</label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Password</label>
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="••••••••"
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Confirm Password</label>
+              <input
+                type="password"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                placeholder="••••••••"
+                required
+              />
+            </div>
+
+            <div className="form-options">
+              <div className="checkbox-group">
+                <input 
+                  type="checkbox" 
+                  id="remember" 
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                />
+                <label htmlFor="remember">Remember me</label>
+              </div>
+              <a href="/forgot-password" className="forgot-password">Forgot password?</a>
+            </div>
+
+            <button type="submit" className="submit-btn" disabled={isLoading}>
+              {isLoading ? 'Creating Account...' : 'Sign Up'}
+            </button>
+
+            <div className="divider">
+              <span>or</span>
+            </div>
+
+            <button type="button" className="social-btn">
+              <GoogleIcon />
+              Sign up with Google
+            </button>
+
+            <div className="login-link">
+            Already have an account? <Link to="/login">Log in!</Link>
+          </div>
+          </form>
         </div>
-
-        <div className="form-group">
-          <label>Neighborhood</label>
-          <input
-            type="text"
-            name="neighborhood"
-            value={formData.neighborhood}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Street</label>
-          <input
-            type="text"
-            name="street"
-            value={formData.street}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label>House Number</label>
-          <input
-            type="text"
-            name="houseNumber"
-            value={formData.houseNumber}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Password</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Confirm Password</label>
-          <input
-            type="password"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? 'Creating Account...' : 'Sign Up'}
-        </button>
-      </form>
-      
-      <p>
-        Already have an account? <a href="/login">Login</a>
-      </p>
+      </div>
     </div>
   );
 };
