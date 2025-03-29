@@ -12,7 +12,7 @@
     cursor: pointer;
     transition: width 0.3s ease-in-out, background 0.2s ease-in-out;
     overflow: hidden;
-    width: 40px;
+    width: 30px;
     height: 45px;
     border-radius: 15px;
   
@@ -47,7 +47,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    width: 50px; // Default width to fit the arrow
+    width: 45px; // Default width to fit the arrow
     
     padding: 10px;
     background: $primary-color;
@@ -58,7 +58,7 @@
   
   
     svg {
-        margin-left: 0.4rem;
+      margin-left: 0.2rem;
       flex-shrink: 0;
       transition: transform 0.2s ease-in-out;
     }
