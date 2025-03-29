@@ -1,7 +1,7 @@
 @use './variables' as *;
-@use './navbar';
 @use './login';
 @use './backButton';
+@use './signUp.scss';
 
 body {
   margin: 0;
