@@ -1,0 +1,40 @@
+// ===== YOUR ORIGINAL VARIABLES =====
+$primary-color: #4361ee;
+$primary-hover: #3a56d4;
+$white: #ffffff;
+$black: #000000;
+$gray-light: #f8f9fa;
+$gray-border: #e2e8f0;
+
+$spacing-xs: 8px;
+$spacing-sm: 12px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+$spacing-xxl: 40px;
+
+$border-radius-sm: 4px;
+$border-radius-md: 8px;
+$border-radius-lg: 12px;
+
+$shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+$shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+// ===== ADDED VARIABLES TO FIX ERRORS =====
+// Color additions
+$primary: $primary-color; // Alias for compatibility
+$danger: #f72585;
+$success: #4cc9f0;
+$gray-100: $gray-light;
+$gray-200: #e9ecef;
+$gray-500: #adb5bd;
+$gray-800: #343a40;
+
+// Border radius alias
+$border-radius: $border-radius-md;
+
+// Shadow alias
+$box-shadow-sm: $shadow-sm;
+
+// Spacing additions (for specific values used)
+$spacing-base: 4px; // For calculations

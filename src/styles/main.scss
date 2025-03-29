@@ -1,0 +1,12 @@
+@use './variables' as *;
+@use './navbar';
+@use './login';
+@use './backButton';
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #f9f9f9; // Optional: Set a global background color
+}
+
+// Add any global styles below

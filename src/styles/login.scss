@@ -1,0 +1,215 @@
+@use 'variables' as *;
+
+.login-container {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+
+  .login-image-container {
+    position: relative; // Needed for absolute positioning of image
+    height: 100vh; // Full viewport height
+    width: 50%; // Takes half the screen (adjust if needed)
+    overflow: hidden; // Prevents scr ollbars
+    // Center the image both vertically and horizontally
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0; // Remove all padding
+    margin: 0; // Remove all margins
+  
+    .login-image {
+      // Make image cover available space while maintaining aspect ratio
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      
+      // Optional: Add subtle shadow if needed
+      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+    }
+  }
+  
+
+  .login-form-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 6rem;
+    max-width: 600px;
+
+    .login-header {
+      margin-bottom: 1rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      h1 {
+        font-size: 1.6rem;
+        width: 65%;
+        font-weight: 700;
+        color: $black;
+        margin-bottom: 0.5rem;
+        
+      }
+
+      p {
+        color: $black;
+        font-size: 1rem;
+        width: 70%;
+
+      }
+    }
+
+    .login-form {
+   
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .error-message {
+        color: #ef4444;
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+
+        label {
+          display: block;
+          margin-bottom: 0.5rem;
+          font-weight: 500;
+          color: $black;
+          
+        }
+
+        input {
+          width: 70%;
+          padding: 0.875rem;
+          border: 1px solid $gray-border;
+          border-radius: $border-radius-md;
+          font-size: 1rem;
+          width: 25.4rem;
+
+          &:focus {
+            outline: none;
+            border-color: $primary-color;
+            box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+          }
+        }
+      }
+
+      .form-options {
+        width: 27.4rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+
+        .remember-me {
+          display: flex;
+          align-items: center;
+
+          input {
+            margin-right: 0.5rem;
+          }
+        }
+
+        .forgot-password {
+          color: $primary-color;
+          text-decoration: none;
+          font-size: 0.875rem;
+          margin-left: 8.8rem;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+
+      .signin-button {
+        width: 76%;
+        padding: 0.875rem;
+        background-color: $primary-color;
+        color: white;
+        border: none;
+        border-radius: $border-radius-md;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        margin-bottom: 1.5rem;
+        
+        &:hover {
+          background-color: darken($primary-color, 5%);
+        }
+      }
+
+      .divider {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        color: $gray-light;
+        width: 27.5rem;
+        color: $black;
+
+        &::before,
+        &::after {
+          content: "";
+          flex: 1;
+          border-bottom: 1px solid $gray-border;
+          
+        }
+
+        span {
+          padding: 0 1rem;
+          
+        }
+      }
+
+      .google-signin {
+        width: 76%;
+        padding: 0.875rem;
+        background-color: white;
+        color: $black;
+        border: 1px solid $gray-border;
+        border-radius: $border-radius-md;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+
+        &:hover {
+          background-color: darken(white, 5%);
+        }
+
+        img {
+          width: 20px;
+          height: 20px;
+        }
+      }
+
+      .signup-link {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        color: $black;
+        width: 24rem;
+
+        a {
+          color: $primary-color;
+          text-decoration: none;
+          font-weight: 500;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}
