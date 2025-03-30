@@ -47,35 +47,26 @@ A free and open-source web application designed to connect communities by provid
 
 ```
 neighborhood-bulletin/
-├── src/
-│   ├── components/       # Reusable React components
-│   │   ├── Post/         # Components related to displaying individual posts
-│   │   │   ├── PostItem.jsx  # Individual post display component
-│   │   ├── Auth/         # Authentication-related components
-│   │   │   ├── Login.jsx     # Login component
-│   │   │   ├── Register.jsx  # Registration component
-│   │   ├── UI/           # General UI components (buttons, inputs, etc.)
-│   ├── pages/          # React pages (routes)
-│   │   ├── Home.jsx        # Home page with post display
-│   │   ├── CreatePost.jsx  # Page for creating new posts
-│   │   ├── Login.jsx       # Login page
-│   │   ├── Register.jsx    # Registration page
-│   ├── services/       # Firebase service functions
-│   │   ├── firebase.js     # Firebase initialization
-│   │   ├── authService.js  # Authentication functions
-│   │   ├── firestoreService.js # Firestore data access functions
-│   │   ├── storageService.js  # Firebase Storage functions
-│   ├── App.jsx         # Main App component (using .jsx for consistency)
-│   ├── index.js        # Entry point of the application
-│   ├── index.css       # Global styles (or relevant CSS files)
-├── functions/        # Firebase Cloud Functions
-│   ├── index.js        # Cloud Functions code
-│   ├── package.json    # Cloud Functions dependencies
-├── .firebaserc       # Firebase project configuration
-├── firebase.json       # Firebase hosting configuration
-├── .env            # Environment variables (API keys, etc.)
-├── README.md         # This file
-├── package.json      # Project dependencies
+src/
+├── assets/                # Images/SVGs
+├── auth/                  # Auth components (login, register, etc.)
+├── components/            # Reusable UI (buttons, cards)
+│   ├── PostCard/          # Post card component
+│   ├── ActiveNeighbor/    # Neighbor profile component
+├── layout/                # Layout components
+│   ├── Sidebar/           # Sidebar with navigation
+│   ├── MainContent/       # Wrapper for right-side content
+├── pages/                 # Page-level components
+│   ├── Home/              # Main dashboard (matches your design)
+│   ├── CreatePost/        # Post creation form
+├── services/              # Firebase/services
+├── styles/                # SCSS
+│   ├── layout/            # Sidebar, main content
+│   ├── pages/             # Page-specific styles
+│   ├── _variables.scss    # Colors, fonts
+│   ├── _mixins.scss       # Reusable mixins
+├── App.jsx                # Updated with new layout
+├── firebase.js            # Firebase config
 ```
 
 ## 🚀 Setup Instructions
