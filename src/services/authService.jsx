@@ -7,7 +7,7 @@ import {
   GoogleAuthProvider,
   AuthErrorCodes
 } from "firebase/auth";
-import { auth } from "../firebase"; // Import auth directly
+import { auth } from "./firebase"; // Import auth directly
 
 // Error messages configuration
 const ERROR_MESSAGES = {
