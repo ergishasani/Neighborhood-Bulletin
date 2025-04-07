@@ -12,6 +12,7 @@
     "autoprefixer": "^10.4.21",
     "firebase": "^11.5.0",
     "lucide-react": "^0.485.0",
+    "neighborhood-bulletin": "file:",
     "postcss-cli": "^11.0.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
