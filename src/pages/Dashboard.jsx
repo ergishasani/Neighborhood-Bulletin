@@ -1,96 +1,69 @@
-import React from 'react';
-import { FaBell, FaMapMarkerAlt, FaUsers, FaClipboardList, FaChartLine, FaShieldAlt } from 'react-icons/fa';
-import '../styles/dashboard.scss';
+import React, { useEffect, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../services/firebase";
+import styles from "../styles/dashboard.scss"; // Assuming you have a CSS module for styling
 
-export default function Dashboard() {
-  // Sample data - replace with real API calls
-  const recentAlerts = [
-    { id: 1, type: 'Suspicious Activity', location: 'Maple St', time: '2h ago', status: 'new' },
-    { id: 2, type: 'Power Outage', location: 'Central Park', time: '5h ago', status: 'resolved' },
-    { id: 3, type: 'Lost Pet', location: 'Oak Ave', time: '1d ago', status: 'active' }
-  ];
+const Dashboard = () => {
+  const [users, setUsers] = useState([]);
+  const [alerts, setAlerts] = useState([]);
 
-  const safetyMetrics = {
-    responseTime: '28 min',
-    incidentsThisMonth: 12,
-    resolvedCases: '92%'
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      const usersSnapshot = await getDocs(collection(db, "users"));
+      const alertsSnapshot = await getDocs(collection(db, "posts"));
+
+      setUsers(usersSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
+      setAlerts(alertsSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
+    };
+
+    fetchData();
+  }, []);
 
   return (
-    <div className="dashboard">
-      {/* Header */}
-      <header className="dashboard-header">
-        <h1><FaShieldAlt /> Neighborhood Safety Dashboard</h1>
-        <div className="alert-badge">
-          <FaBell /> <span>3 New Alerts</span>
+    <div className={styles.dashboard}>
+      {/* Hero Section */}
+      <section className={styles.hero}>
+        <h1>Welcome to Your Neighborhood Watch</h1>
+        <p>Stay informed. Stay safe. Stay connected.</p>
+      </section>
+
+      {/* Residents Section */}
+      <section className={styles.section}>
+        <h2>Verified Residents</h2>
+        <div className={styles.grid}>
+          {users.map((user) => (
+            <div key={user.id} className={styles.card}>
+              <h3>
+                {user.firstName} {user.lastName}
+              </h3>
+              <p>{user.street}, House #{user.houseNumber}</p>
+              <p className={user.isAddressVerified ? styles.verified : styles.unverified}>
+                {user.isAddressVerified ? "✅ Verified" : "❌ Unverified"}
+              </p>
+            </div>
+          ))}
         </div>
-      </header>
+      </section>
 
-      {/* Main Grid Layout */}
-      <div className="dashboard-grid">
-        {/* Alert Summary Card */}
-        <section className="card alert-summary">
-          <h2><FaBell /> Recent Alerts</h2>
-          <div className="alert-list">
-            {recentAlerts.map(alert => (
-              <div key={alert.id} className={`alert-item ${alert.status}`}>
-                <div className="alert-type">{alert.type}</div>
-                <div className="alert-meta">
-                  <span><FaMapMarkerAlt /> {alert.location}</span>
-                  <span>{alert.time}</span>
-                </div>
+      {/* Alerts Section */}
+      <section className={styles.section}>
+        <h2>Recent Alerts</h2>
+        <div className={styles.alerts}>
+          {alerts.length === 0 ? (
+            <p>No alerts yet.</p>
+          ) : (
+            alerts.map((alert) => (
+              <div key={alert.id} className={styles.alertCard}>
+                <h4>{alert.title}</h4>
+                <p>{alert.message}</p>
+                <span className={styles.timestamp}>{new Date(alert.timestamp?.seconds * 1000).toLocaleString()}</span>
               </div>
-            ))}
-          </div>
-          <button className="view-all">View All Alerts</button>
-        </section>
-
-        {/* Safety Metrics Card */}
-        <section className="card metrics">
-          <h2><FaChartLine /> Community Safety Metrics</h2>
-          <div className="metric-grid">
-            <div className="metric-item">
-              <div className="metric-value">{safetyMetrics.responseTime}</div>
-              <div className="metric-label">Avg. Response Time</div>
-            </div>
-            <div className="metric-item">
-              <div className="metric-value">{safetyMetrics.incidentsThisMonth}</div>
-              <div className="metric-label">Incidents This Month</div>
-            </div>
-            <div className="metric-item">
-              <div className="metric-value">{safetyMetrics.resolvedCases}</div>
-              <div className="metric-label">Cases Resolved</div>
-            </div>
-          </div>
-        </section>
-
-        {/* Quick Actions */}
-        <section className="card quick-actions">
-          <h2><FaClipboardList /> Quick Actions</h2>
-          <div className="action-buttons">
-            <button className="action-btn report-incident">
-              <FaMapMarkerAlt /> Report Incident
-            </button>
-            <button className="action-btn notify-neighbors">
-              <FaUsers /> Notify Neighbors
-            </button>
-            <button className="action-btn safety-tips">
-              <FaShieldAlt /> Safety Tips
-            </button>
-          </div>
-        </section>
-
-        {/* Map Placeholder */}
-        <section className="card map-container">
-          <h2><FaMapMarkerAlt /> Neighborhood Map</h2>
-          <div className="map-placeholder">
-            [Interactive Map Component Here]
-            <div className="map-overlay">
-              <span>3 active incidents in your area</span>
-            </div>
-          </div>
-        </section>
-      </div>
+            ))
+          )}
+        </div>
+      </section>
     </div>
   );
-}
+};
+
+export default Dashboard;

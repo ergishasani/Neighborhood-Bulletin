@@ -1,10 +1,8 @@
-// src/components/Register.js
 import React, { useState } from 'react';
-
 import { useNavigate, Link } from 'react-router-dom';
 import { doCreateUserWithEmailAndPassword } from '../services/authService';
 import { db } from '../firebase';
-import { collection, addDoc } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 import { ReactComponent as GoogleIcon } from '../assets/google.svg';
 import neighborhoodImage from '../assets/login.png';
 import '../styles/signUp.scss';
@@ -15,7 +13,10 @@ const Register = () => {
     password: '',
     confirmPassword: '',
     firstName: '',
-    lastName: ''
+    lastName: '',
+    houseNumber: '',
+    street: '',
+    neighborhood: ''
   });
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -42,21 +43,37 @@ const Register = () => {
         formData.password
       );
       
-      await addDoc(collection(db, 'users'), {
-        uid: userCredential.user.uid,
+      // Create user document with UID as document ID
+      await setDoc(doc(db, 'users', userCredential.user.uid), {
+        email: formData.email,
         firstName: formData.firstName,
         lastName: formData.lastName,
-        email: formData.email,
+        houseNumber: formData.houseNumber,
+        street: formData.street,
+        neighborhood: formData.neighborhood,
+        isAddressVerified: false,
         createdAt: new Date(),
         rememberMe
       });
       
       navigate('/greeting');
     } catch (err) {
-      setError(err.message);
+      setError(err.message.includes('auth/') 
+        ? formatAuthError(err.message)
+        : err.message);
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const formatAuthError = (message) => {
+    if (message.includes('email-already-in-use')) {
+      return 'This email is already registered. Please log in.';
+    }
+    if (message.includes('weak-password')) {
+      return 'Password should be at least 6 characters.';
+    }
+    return 'Registration failed. Please try again.';
   };
 
   return (
@@ -66,24 +83,24 @@ const Register = () => {
           <img src={neighborhoodImage} alt="Neighborhood" />
         </div>
         <div className="image-overlay">
-        <h1>Your Neighborhood, Your Watch</h1>
-        <p className="lead">Together we build safer communities</p>
-        <div className="features">
-          <div className="feature-item">
-            <span className="icon">👁️</span>
-            <span>Real-time alerts</span>
-          </div>
-          <div className="feature-item">
-            <span className="icon">🤝</span>
-            <span>Trusted neighbors</span>
-          </div>
-          <div className="feature-item">
-            <span className="icon">🔒</span>
-            <span>Secure platform</span>
+          <h1>Your Neighborhood, Your Watch</h1>
+          <p className="lead">Together we build safer communities</p>
+          <div className="features">
+            <div className="feature-item">
+              <span className="icon">👁️</span>
+              <span>Real-time alerts</span>
+            </div>
+            <div className="feature-item">
+              <span className="icon">🤝</span>
+              <span>Trusted neighbors</span>
+            </div>
+            <div className="feature-item">
+              <span className="icon">🔒</span>
+              <span>Secure platform</span>
+            </div>
           </div>
         </div>
-        </div>
-     </div>
+      </div>
 
       <div className="form-section">
         <div className="auth-container">
@@ -106,7 +123,7 @@ const Register = () => {
                   required
                 />
               </div>
-              <div className="form-group  form-group-lastname">
+              <div className="form-group form-group-lastname">
                 <label>Last name</label>
                 <input
                   type="text"
@@ -127,18 +144,21 @@ const Register = () => {
                 onChange={handleChange}
                 placeholder="Enter your email"
                 required
+                autoComplete="username"
               />
             </div>
 
             <div className="form-group">
-              <label>Password</label>
+              <label>Password (min 6 characters)</label>
               <input
                 type="password"
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
                 placeholder="••••••••"
+                minLength="6"
                 required
+                autoComplete="new-password"
               />
             </div>
 
@@ -150,6 +170,41 @@ const Register = () => {
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 placeholder="••••••••"
+                required
+                autoComplete="new-password"
+              />
+            </div>
+
+            <div className="form-row">
+              <div className="form-group">
+                <label>House Number</label>
+                <input
+                  type="text"
+                  name="houseNumber"
+                  value={formData.houseNumber}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label>Street</label>
+                <input
+                  type="text"
+                  name="street"
+                  value={formData.street}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label>Neighborhood</label>
+              <input
+                type="text"
+                name="neighborhood"
+                value={formData.neighborhood}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -164,7 +219,6 @@ const Register = () => {
                 />
                 <label htmlFor="remember">Remember me</label>
               </div>
-              <a href="/forgot-password" className="forgot-password">Forgot password?</a>
             </div>
 
             <button type="submit" className="submit-btn" disabled={isLoading}>
@@ -181,8 +235,8 @@ const Register = () => {
             </button>
 
             <div className="login-link">
-            Already have an account? <Link to="/login">Log in!</Link>
-          </div>
+              Already have an account? <Link to="/login">Log in!</Link>
+            </div>
           </form>
         </div>
       </div>

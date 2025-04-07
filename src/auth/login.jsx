@@ -5,7 +5,9 @@ import { doSignInWithEmailAndPassword, doSignInWithGoogle } from '../services/au
 import '../styles/main.scss';
 import '../styles/login.scss'; 
 import '../styles/backButton.scss';
+import { getDoc, doc, setDoc } from 'firebase/firestore';
 import googleIcon from '../assets/google.png';
+import { db } from '../services/firestoreService'; // Import Firestore instance
 
 const Login = () => {
   const navigate = useNavigate();
@@ -25,7 +27,9 @@ const Login = () => {
       await doSignInWithEmailAndPassword(email, password);
       navigate('/dashboard');
     } catch (err) {
-      setError(err.message);
+      setError(err.message.includes('auth/') 
+        ? 'Invalid email or password. Please try again.'
+        : err.message);
     } finally {
       setIsLoading(false);
     }
@@ -36,8 +40,23 @@ const Login = () => {
     setError(null);
     
     try {
-      await doSignInWithGoogle();
-      navigate('/dashboard');
+      const result = await doSignInWithGoogle();
+      const { user } = result;
+      
+      // Check if user exists in Firestore
+      const userDoc = await getDoc(doc(db, 'users', user.uid));
+      if (!userDoc.exists()) {
+        // Create user profile if doesn't exist
+        await setDoc(doc(db, 'users', user.uid), {
+          email: user.email,
+          firstName: user.displayName?.split(' ')[0] || '',
+          lastName: user.displayName?.split(' ')[1] || '',
+          createdAt: new Date(),
+          isAddressVerified: false
+        });
+      }
+      
+      navigate('/profile');
     } catch (err) {
       setError(err.message);
     } finally {
@@ -77,6 +96,7 @@ const Login = () => {
               onChange={(e) => setEmail(e.target.value)}
               required
               disabled={isLoading}
+              autoComplete="username"
             />
           </div>
 
@@ -90,6 +110,7 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
               required
               disabled={isLoading}
+              autoComplete="current-password"
             />
           </div>
 
@@ -145,4 +166,3 @@ const Login = () => {
 };
 
 export default Login;
-

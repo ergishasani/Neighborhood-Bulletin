@@ -1,200 +1,120 @@
-@use 'variables' as *;
+// src/styles/Dashboard.module.scss
+
+$bg-color: #1e1e1e;
+$card-color: #2a2a2a;
+$text-color: #ffffff;
+$muted-color: #999999;
+$accent: #f0a500;
+$border-radius: 12px;
 
 .dashboard {
+  background-color: $bg-color;
+  color: $text-color;
   padding: 2rem;
-  max-width: 1400px;
-  margin: 0 auto;
+  font-family: "Inter", sans-serif;
+  min-height: 100vh;
 
-  &-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-
-    h1 {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: $primary;
-    }
+  h1, h2, h3, h4 {
+    color: $text-color;
+    margin-bottom: 0.5rem;
   }
 
-  .alert-badge {
-    background: $danger;
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 2rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+  p {
+    color: $muted-color;
+    margin: 0.2rem 0;
+  }
+}
+
+.hero {
+  background: url("../assets/login.png") center/cover no-repeat;
+  padding: 4rem 2rem;
+  border-radius: $border-radius;
+  text-align: center;
+  margin-bottom: 2rem;
+
+  h1 {
+    font-size: 2.5rem;
     font-weight: bold;
   }
 
-  &-grid {
-    display: grid;
-    gap: 1.5rem;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  p {
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+  }
+}
+
+.section {
+  margin-bottom: 3rem;
+
+  h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background-color: $card-color;
+  border-radius: $border-radius;
+  padding: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
   }
 
-  .card {
-    background: white;
-    border-radius: $border-radius-lg;
-    padding: 1.5rem;
-    box-shadow: $box-shadow-sm;
-    transition: transform 0.2s;
+  h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.4rem;
+  }
+}
 
-    &:hover {
-      transform: translateY(-2px);
-    }
+.verified {
+  color: #48c774;
+  font-weight: bold;
+}
 
-    h2 {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-      color: $gray-800;
-    }
+.unverified {
+  color: #f14668;
+  font-weight: bold;
+}
+
+.alerts {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.alertCard {
+  background-color: $card-color;
+  border-radius: $border-radius;
+  padding: 1rem 1.5rem;
+  border-left: 5px solid $accent;
+  transition: background 0.3s ease;
+
+  &:hover {
+    background-color: darken($card-color, 5%);
   }
 
-  .alert-summary {
-    .alert-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    .alert-item {
-      padding: 0.75rem;
-      border-radius: $border-radius;
-      border-left: 4px solid $gray-200;
-      background: $gray-100;
-
-      &.new {
-        border-left-color: $danger;
-      }
-      &.active {
-        border-left-color: $primary;
-      }
-      &.resolved {
-        border-left-color: $success;
-      }
-
-      .alert-type {
-        font-weight: 500;
-      }
-
-      .alert-meta {
-        display: flex;
-        justify-content: space-between;
-        font-size: 0.8rem;
-        color: $gray-500;
-        margin-top: 0.25rem;
-      }
-    }
-
-    .view-all {
-      margin-top: 1rem;
-      width: 100%;
-      background: transparent;
-      border: 1px solid $primary;
-      color: $primary;
-      padding: 0.5rem;
-      border-radius: $border-radius;
-      cursor: pointer;
-
-      &:hover {
-        background: rgba($primary, 0.1);
-      }
-    }
+  h4 {
+    margin: 0 0 0.3rem;
+    font-size: 1.1rem;
   }
 
-  .metrics {
-    .metric-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-
-      .metric-item {
-        text-align: center;
-        padding: 1rem;
-
-        .metric-value {
-          font-size: 1.5rem;
-          font-weight: bold;
-          color: $primary;
-        }
-
-        .metric-label {
-          font-size: 0.8rem;
-          color: $gray-500;
-        }
-      }
-    }
+  p {
+    color: $muted-color;
   }
+}
 
-  .quick-actions {
-    .action-buttons {
-      display: grid;
-      gap: 1rem;
-      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    }
-
-    .action-btn {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 1rem;
-      border-radius: $border-radius;
-      border: none;
-      background: $gray-100;
-      cursor: pointer;
-      transition: all 0.2s;
-
-      &:hover {
-        background: $gray-200;
-      }
-
-      &.report-incident {
-        color: $danger;
-      }
-      &.notify-neighbors {
-        color: $primary;
-      }
-      &.safety-tips {
-        color: $success;
-      }
-    }
-  }
-
-  .map-container {
-    grid-column: span 2;
-
-    .map-placeholder {
-      height: 300px;
-      background: $gray-100;
-      border-radius: $border-radius;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: $gray-500;
-
-      .map-overlay {
-        position: absolute;
-        bottom: 1rem;
-        left: 1rem;
-        background: rgba($black, 0.7);
-        color: white;
-        padding: 0.5rem 1rem;
-        border-radius: $border-radius;
-      }
-    }
-  }
-
-  @media (max-width: 768px) {
-    .map-container {
-      grid-column: span 1;
-    }
-  }
+.timestamp {
+  font-size: 0.8rem;
+  color: $muted-color;
+  display: block;
+  margin-top: 0.5rem;
 }

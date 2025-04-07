@@ -1,0 +1,92 @@
+@import "./variables";
+
+.profile-container {
+  max-width: 600px;
+  margin: auto;
+  padding: $spacing-lg;
+  background: $gray-light;
+  border-radius: $border-radius-md;
+  box-shadow: $shadow-md;
+  
+  h2 {
+    font-weight: $font-weight-bold;
+    color: $primary;
+    text-align: center;
+  }
+
+  .profile-picture {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: $spacing-md;
+    
+    img {
+      width: 100px;
+      height: 100px;
+      border-radius: $border-radius-pill;
+      object-fit: cover;
+      box-shadow: $shadow-sm;
+    }
+
+    input {
+      margin-top: $spacing-xs;
+    }
+  }
+
+  .form-group {
+    margin-bottom: $spacing-sm;
+
+    label {
+      display: block;
+      font-weight: $font-weight-medium;
+      margin-bottom: $spacing-xs;
+    }
+
+    input {
+      width: 100%;
+      padding: $spacing-sm;
+      border: 1px solid $gray-border;
+      border-radius: $border-radius;
+      transition: border $transition-fast;
+
+      &:focus {
+        border-color: $primary;
+        outline: none;
+      }
+    }
+  }
+
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+    
+    button {
+      width: 100%;
+      padding: $spacing-sm;
+      font-weight: $font-weight-semibold;
+      border: none;
+      border-radius: $border-radius;
+      cursor: pointer;
+      transition: background-color $transition-fast;
+
+      &.save {
+        background: $success;
+        color: $white;
+
+        &:hover {
+          background: darken($success, 10%);
+        }
+      }
+
+      &.change-password {
+        background: $danger;
+        color: $white;
+
+        &:hover {
+          background: darken($danger, 10%);
+        }
+      }
+    }
+  }
+}
