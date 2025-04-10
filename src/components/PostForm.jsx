@@ -1,16 +1,17 @@
 import { useState } from 'react';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
-import { db } from '../firebase'; // Ensure your firebase.js file exports the 'db' object
+import { db, storage } from '../firebase'; // Ensure firebase.js has storage initialized
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'; // Firebase Storage imports
 
-const PostForm = ({ setPosts }) => {
+const PostForm = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [image, setImage] = useState(null); // New state for the image
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Check if title or description is empty after trimming whitespace
     if (!title.trim() || !description.trim()) {
       alert('Please fill out all fields!');
       return;
@@ -19,28 +20,45 @@ const PostForm = ({ setPosts }) => {
     setLoading(true);
 
     try {
+      let imageUrl = null;
+
+      // Handle file upload to Firebase Storage if an image is selected
+      if (image) {
+        const imageRef = ref(storage, `posts/${Date.now()}_${image.name}`);
+        const uploadTask = uploadBytesResumable(imageRef, image);
+
+        // Wait for the upload to complete
+        await uploadTask;
+        imageUrl = await getDownloadURL(uploadTask.snapshot.ref); // Get the image URL after upload
+      }
+
+      // Create the post object
       const newPost = {
         title: title.trim(),
         description: description.trim(),
-        createdAt: serverTimestamp(), // Automatically sets timestamp
+        createdAt: serverTimestamp(),
+        imageUrl: imageUrl, // Save image URL if uploaded
       };
 
       // Add the new post to Firestore
-      const docRef = await addDoc(collection(db, 'posts'), newPost);
-
-      // Optionally, fetch and update the posts
-      const newPostWithId = { id: docRef.id, ...newPost };
-      setPosts((prevPosts) => [newPostWithId, ...prevPosts]);
+      await addDoc(collection(db, 'posts'), newPost);
 
       // Clear the form
       setTitle('');
       setDescription('');
+      setImage(null); // Reset the image state
       alert('Post created successfully!');
     } catch (error) {
       console.error('Error creating post:', error);
       alert('Error creating post.');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleImageChange = (e) => {
+    if (e.target.files[0]) {
+      setImage(e.target.files[0]); // Set the selected image file to state
     }
   };
 
@@ -74,6 +92,18 @@ const PostForm = ({ setPosts }) => {
             className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
             placeholder="Enter post description"
             required
+          />
+        </div>
+
+        <div>
+          <label htmlFor="image" className="block text-sm font-medium text-gray-700">
+            Upload Image (Optional)
+          </label>
+          <input
+            type="file"
+            id="image"
+            onChange={handleImageChange}
+            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
 
