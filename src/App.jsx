@@ -10,6 +10,8 @@ import Register from './components/Register';
 import ForgotPassword from './components/ForgotPassword';
 import Dashboard from './components/Dashboard'; // This is the component that will render CreatePost and Feed
 import ProtectedRoute from './routes/ProtectedRoute';
+import Feed from './pages/Feed';
+
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
         <Route path="/" element={<WelcomeScreen />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/feed" element={<Feed />} /> {/* This is the Feed component */}
+        <Route path="/" element={<Feed />} /> {/* Optional: Make it homepage */}
         <Route path="/forgot-password" element={<ForgotPassword />} />
 
         {/* Protected Route */}

@@ -37,7 +37,7 @@ const Login = () => {
     
     try {
       await doSignInWithGoogle();
-      navigate('/src/components/Feed.jsx');
+      navigate('../pages/Feed.jsx');
     } catch (err) {
       setError(err.message);
     } finally {
