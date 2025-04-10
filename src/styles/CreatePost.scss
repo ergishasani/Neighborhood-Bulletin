@@ -1,0 +1,66 @@
+// src/styles/CreatePost.scss
+
+.create-post-container {
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  
+    h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      color: #333;
+    }
+  
+    .create-post-textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+      margin-bottom: 10px;
+      box-sizing: border-box; // Include padding and border in the element's total width and height
+      resize: vertical; // Allow vertical resizing only
+  
+      &:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+      }
+  
+      &:disabled {
+        background-color: #e9ecef;
+        cursor: not-allowed;
+      }
+    }
+  
+    .create-post-button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease-in-out;
+  
+      &:hover:not(:disabled) {
+        background-color: #0056b3;
+      }
+  
+      &:disabled {
+        background-color: #cccccc;
+        cursor: not-allowed;
+        opacity: 0.7;
+      }
+    }
+  
+    .error-message {
+      color: #dc3545; // Bootstrap danger color
+      font-size: 0.9em;
+      margin-top: -5px; // Adjust spacing
+      margin-bottom: 10px;
+    }
+  }
