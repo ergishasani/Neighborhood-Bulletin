@@ -1,0 +1,92 @@
+Index: src/App.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import { BrowserRouter as Router, Routes, Route } from \"react-router-dom\";\r\nimport { AuthProvider } from \"./context/AuthContext\";\r\n\r\nimport Navbar from \"./components/Navbar\";\r\nimport Footer from \"./components/Footer\";\r\n\r\n// Pages\r\nimport Home from \"./pages/home/Home\";\r\nimport Events from \"./pages/categories/Events\";\r\nimport Search from \"./pages/posts/SearchResults\";\r\nimport Login from \"./pages/auth/Login\";\r\nimport Register from \"./pages/auth/Register\";\r\nimport ForgotPassword from \"./pages/auth/ForgotPassword\";\r\nimport NotFound from \"./pages/misc/NotFound\";\r\nimport CreatePost from \"./pages/posts/CreatePost\"; // ✅ NEW\r\n\r\nfunction App() {\r\n    return (\r\n        <Router>\r\n            <AuthProvider>\r\n                <div className=\"app-container\">\r\n                    <Navbar />\r\n\r\n                    <main style={{ minHeight: \"80vh\" }}>\r\n                        <Routes>\r\n                            <Route path=\"/\" element={<Home />} />\r\n                            <Route path=\"/events\" element={<Events />} />\r\n                            <Route path=\"/search\" element={<Search />} />\r\n                            <Route path=\"/login\" element={<Login />} />\r\n                            <Route path=\"/register\" element={<Register />} />\r\n                            <Route path=\"/forgot-password\" element={<ForgotPassword />} />\r\n                            <Route path=\"/create\" element={<CreatePost />} /> {/* ✅ NEW */}\r\n                            <Route path=\"*\" element={<NotFound />} />\r\n                        </Routes>\r\n                    </main>\r\n\r\n                    <Footer />\r\n                </div>\r\n            </AuthProvider>\r\n        </Router>\r\n    );\r\n}\r\n\r\nexport default App;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/App.jsx b/src/App.jsx
+--- a/src/App.jsx	(revision b091d070487543f9fc7193e2727388627c3c7159)
++++ b/src/App.jsx	(date 1745334798714)
+@@ -7,7 +7,7 @@
+ // Pages
+ import Home from "./pages/home/Home";
+ import Events from "./pages/categories/Events";
+-import Search from "./pages/posts/SearchResults";
++import Search from "./pages/posts/SearchResultsPage";
+ import Login from "./pages/auth/Login";
+ import Register from "./pages/auth/Register";
+ import ForgotPassword from "./pages/auth/ForgotPassword";
+Index: src/routes/AppRoutes.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import { lazy, Suspense } from \"react\";\r\nimport { Routes, Route, Navigate } from \"react-router-dom\";\r\nimport Layout from \"../layouts/MainLayout\";\r\nimport Loader from \"../components/Loader\";\r\nimport { useAuth } from \"../context/AuthContext\";\r\n\r\n// Lazy load pages for better performance\r\nconst Home = lazy(() => import(\"../pages/home/Home\"));\r\nconst Login = lazy(() => import(\"../pages/auth/Login\"));\r\nconst Register = lazy(() => import(\"../pages/auth/Register\"));\r\nconst ForgotPassword = lazy(() => import(\"../pages/auth/ForgotPassword\"));\r\nconst CreatePost = lazy(() => import(\"../pages/posts/CreatePost\"));\r\nconst PostDetail = lazy(() => import(\"../pages/posts/PostDetail\"));\r\nconst EditPost = lazy(() => import(\"../pages/posts/EditPost\"));\r\nconst SearchResults = lazy(() => import(\"../pages/posts/SearchResults\"));\r\nconst Events = lazy(() => import(\"../pages/categories/Events\"));\r\nconst LostAndFound = lazy(() => import(\"../pages/categories/LostAndFound\"));\r\nconst GarageSales = lazy(() => import(\"../pages/categories/GarageSales\"));\r\nconst Profile = lazy(() => import(\"../pages/user/Profile\"));\r\nconst EditProfile = lazy(() => import(\"../pages/user/EditProfile\"));\r\nconst MyPosts = lazy(() => import(\"../pages/user/MyPosts\"));\r\nconst AdminDashboard = lazy(() => import(\"../pages/admin/Dashboard\"));\r\nconst AdminManagePosts = lazy(() => import(\"../pages/admin/ManagePosts\"));\r\nconst AdminReports = lazy(() => import(\"../pages/admin/Reports\"));\r\nconst AdminUserManagement = lazy(() => import(\"../pages/admin/UserManagement\"));\r\nconst Terms = lazy(() => import(\"../pages/misc/Terms\"));\r\nconst NotFound = lazy(() => import(\"../pages/misc/NotFound\"));\r\n\r\nfunction AppRoutes() {\r\n  const { currentUser } = useAuth();  // Access currentUser from context\r\n\r\n  // Protected Route component\r\n  const ProtectedRoute = ({ children, adminOnly = false }) => {\r\n    if (currentUser === undefined) {\r\n      return <div>Loading...</div>;  // Show loading state while checking user\r\n    }\r\n    if (!currentUser) {\r\n      return <Navigate to=\"/login\" replace />;  // Redirect if not logged in\r\n    }\r\n    if (adminOnly && currentUser.role !== \"admin\") {\r\n      return <Navigate to=\"/\" replace />;  // Redirect if user is not an admin\r\n    }\r\n    return children;  // Render children if all conditions pass\r\n  };\r\n\r\n  return (\r\n    <Suspense fallback={<Loader />}>\r\n      <Routes>\r\n        <Route path=\"/\" element={<Layout />}>\r\n          {/* Public Routes */}\r\n          <Route index element={<Home />} />\r\n          <Route path=\"login\" element={<Login />} />\r\n          <Route path=\"register\" element={<Register />} />\r\n          <Route path=\"forgot-password\" element={<ForgotPassword />} />\r\n          <Route path=\"events\" element={<Events />} />\r\n          <Route path=\"lost-and-found\" element={<LostAndFound />} />\r\n          <Route path=\"garage-sales\" element={<GarageSales />} />\r\n          <Route path=\"posts/:id\" element={<PostDetail />} />\r\n          <Route path=\"search\" element={<SearchResults />} />\r\n          <Route path=\"terms\" element={<Terms />} />\r\n\r\n          {/* Protected Routes */}\r\n          <Route\r\n            path=\"create-post\"\r\n            element={\r\n              <ProtectedRoute>\r\n                <CreatePost />\r\n              </ProtectedRoute>\r\n            }\r\n          />\r\n          <Route\r\n            path=\"edit-post/:id\"\r\n            element={\r\n              <ProtectedRoute>\r\n                <EditPost />\r\n              </ProtectedRoute>\r\n            }\r\n          />\r\n          <Route\r\n            path=\"profile/:id\"\r\n            element={\r\n              <ProtectedRoute>\r\n                <Profile />\r\n              </ProtectedRoute>\r\n            }\r\n          />\r\n          <Route\r\n            path=\"edit-profile\"\r\n            element={\r\n              <ProtectedRoute>\r\n                <EditProfile />\r\n              </ProtectedRoute>\r\n            }\r\n          />\r\n          <Route\r\n            path=\"my-posts\"\r\n            element={\r\n              <ProtectedRoute>\r\n                <MyPosts />\r\n              </ProtectedRoute>\r\n            }\r\n          />\r\n\r\n          {/* Admin Routes */}\r\n          <Route\r\n            path=\"admin\"\r\n            element={\r\n              <ProtectedRoute adminOnly>\r\n                <AdminDashboard />\r\n              </ProtectedRoute>\r\n            }\r\n          />\r\n          <Route\r\n            path=\"admin/posts\"\r\n            element={\r\n              <ProtectedRoute adminOnly>\r\n                <AdminManagePosts />\r\n              </ProtectedRoute>\r\n            }\r\n          />\r\n          <Route\r\n            path=\"admin/reports\"\r\n            element={\r\n              <ProtectedRoute adminOnly>\r\n                <AdminReports />\r\n              </ProtectedRoute>\r\n            }\r\n          />\r\n          <Route\r\n            path=\"admin/users\"\r\n            element={\r\n              <ProtectedRoute adminOnly>\r\n                <AdminUserManagement />\r\n              </ProtectedRoute>\r\n            }\r\n          />\r\n\r\n          {/* 404 Route */}\r\n          <Route path=\"*\" element={<NotFound />} />\r\n        </Route>\r\n      </Routes>\r\n    </Suspense>\r\n  );\r\n}\r\n\r\nexport default AppRoutes;\r\n
+===================================================================
+diff --git a/src/routes/AppRoutes.jsx b/src/routes/AppRoutes.jsx
+--- a/src/routes/AppRoutes.jsx	(revision b091d070487543f9fc7193e2727388627c3c7159)
++++ b/src/routes/AppRoutes.jsx	(date 1745335066501)
+@@ -12,7 +12,7 @@
+ const CreatePost = lazy(() => import("../pages/posts/CreatePost"));
+ const PostDetail = lazy(() => import("../pages/posts/PostDetail"));
+ const EditPost = lazy(() => import("../pages/posts/EditPost"));
+-const SearchResults = lazy(() => import("../pages/posts/SearchResults"));
++const SearchResults = lazy(() => import("../pages/posts/SearchResultsPage"));
+ const Events = lazy(() => import("../pages/categories/Events"));
+ const LostAndFound = lazy(() => import("../pages/categories/LostAndFound"));
+ const GarageSales = lazy(() => import("../pages/categories/GarageSales"));
+Index: src/pages/posts/SearchResults.jsx
+===================================================================
+diff --git a/src/pages/posts/SearchResults.jsx b/src/pages/posts/SearchResultsPage.jsx
+rename from src/pages/posts/SearchResults.jsx
+rename to src/pages/posts/SearchResultsPage.jsx
+--- a/src/pages/posts/SearchResults.jsx	(revision b091d070487543f9fc7193e2727388627c3c7159)
++++ b/src/pages/posts/SearchResultsPage.jsx	(date 1745335169048)
+@@ -4,7 +4,7 @@
+ import PostCard from "../../components/PostCard";
+ import Loader from "../../components/Loader";
+ 
+-function SearchResults() {
++function SearchResultsPage() {
+   const location = useLocation();
+   const searchParams = new URLSearchParams(location.search);
+   const query = searchParams.get("q");
+@@ -17,11 +17,11 @@
+       try {
+         setLoading(true);
+         const result = await getPosts();
+-        
++
+         if (result.success) {
+           // Simple client-side filtering for demo purposes
+           // In a real app, you'd want to use Firestore's full-text search or Algolia
+-          const filteredPosts = result.data.filter(post => 
++          const filteredPosts = result.data.filter(post =>
+             post.title.toLowerCase().includes(query.toLowerCase()) ||
+             post.content.toLowerCase().includes(query.toLowerCase())
+           );
+@@ -35,7 +35,7 @@
+         setLoading(false);
+       }
+     };
+-    
++
+     fetchPosts();
+   }, [query]);
+ 
+@@ -46,7 +46,7 @@
+     <div className="search-results">
+       <div className="container">
+         <h1>Search Results for "{query}"</h1>
+-        
++
+         {posts.length > 0 ? (
+           <div className="posts-grid">
+             {posts.map((post) => (
+@@ -63,4 +63,4 @@
+   );
+ }
+ 
+-export default SearchResults;
+\ No newline at end of file
++export default SearchResultsPage;
+\ No newline at end of file
