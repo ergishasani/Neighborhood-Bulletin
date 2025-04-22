@@ -1,0 +1,66 @@
+.navbar {
+    background-color: white;
+    box-shadow: $shadow-sm;
+    padding: $spacing-sm 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  
+    &-container {
+      @include container;
+      @include flex-between;
+    }
+  
+    &-brand {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: $primary-color;
+    }
+  
+    &-links {
+      display: flex;
+      gap: $spacing-md;
+    }
+  
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: $spacing-xs;
+      padding: $spacing-xs $spacing-sm;
+      border-radius: $border-radius-sm;
+      transition: all 0.2s;
+  
+      &:hover {
+        background-color: rgba($primary-color, 0.1);
+      }
+  
+      &.active {
+        color: $primary-color;
+        font-weight: 600;
+      }
+    }
+  
+    &-auth {
+      display: flex;
+      gap: $spacing-sm;
+    }
+  
+    .btn-login {
+      @extend .btn-outline;
+    }
+  
+    .btn-register {
+      @extend .btn-primary;
+    }
+  
+    .btn-logout {
+      @extend .btn;
+      color: $accent-color;
+      border: 1px solid $accent-color;
+  
+      &:hover {
+        background-color: $accent-color;
+        color: white;
+      }
+    }
+  }

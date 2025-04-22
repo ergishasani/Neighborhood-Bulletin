@@ -1,0 +1,27 @@
+.category-page {
+    padding: $spacing-lg 0;
+  
+    h1 {
+      margin-bottom: $spacing-sm;
+      color: $dark-color;
+    }
+  
+    .page-description {
+      color: $gray-color;
+      margin-bottom: $spacing-lg;
+    }
+  
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: $spacing-md;
+    }
+  
+    .no-posts {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: $spacing-xl;
+      color: $gray-color;
+      font-style: italic;
+    }
+  }

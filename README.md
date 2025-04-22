@@ -101,6 +101,10 @@ src/
     npm install
     ```
 
+    ```bash
+    npm install firebase react-router-dom sass react-hook-form react-icons @tailwindcss/postcss7-autoprefixer @tailwindcss/forms autoprefixer postcss
+    ```
+
 3.  **Configure environment variables:**
 
     - Create a `.env` file in the root directory of the project.
