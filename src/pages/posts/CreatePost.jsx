@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { addPost, uploadImage } from "../../firebase/firestore";
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from "../../context/AuthContext";
 import Loader from "../../components/Loader";
 
 function CreatePost() {

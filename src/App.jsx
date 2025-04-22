@@ -11,7 +11,8 @@ import Search from "./pages/posts/SearchResults";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import ForgotPassword from "./pages/auth/ForgotPassword";
-import NotFound from "./pages/misc/NotFound"; // Optional, but good to have
+import NotFound from "./pages/misc/NotFound";
+import CreatePost from "./pages/posts/CreatePost"; // ✅ NEW
 
 function App() {
     return (
@@ -28,6 +29,7 @@ function App() {
                             <Route path="/login" element={<Login />} />
                             <Route path="/register" element={<Register />} />
                             <Route path="/forgot-password" element={<ForgotPassword />} />
+                            <Route path="/create" element={<CreatePost />} /> {/* ✅ NEW */}
                             <Route path="*" element={<NotFound />} />
                         </Routes>
                     </main>
