@@ -1,30 +1,31 @@
 import { lazy, Suspense } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import Layout from "../layouts/MainLayout";
+import Layout from "../layouts/MainLayout";         // Main Layout for authenticated users
+import AuthLayout from "../layouts/AuthLayout";     // Auth Layout for login/register/forgot-password
 import Loader from "../components/Loader";
 import { useAuth } from "../context/AuthContext";
 
 // Lazy‑loaded pages
-const Home              = lazy(() => import("../pages/home/Home"));
-const Login             = lazy(() => import("../pages/auth/Login"));
-const Register          = lazy(() => import("../pages/auth/Register"));
-const ForgotPassword    = lazy(() => import("../pages/auth/ForgotPassword"));
-const CreatePost        = lazy(() => import("../pages/posts/CreatePost"));
-const PostDetail        = lazy(() => import("../pages/posts/PostDetail"));
-const EditPost          = lazy(() => import("../pages/posts/EditPost"));
-const SearchResults     = lazy(() => import("../pages/posts/SearchResults"));
-const Events            = lazy(() => import("../pages/categories/Events"));
-const LostAndFound      = lazy(() => import("../pages/categories/LostAndFound"));
-const GarageSales       = lazy(() => import("../pages/categories/GarageSales"));
-const Profile           = lazy(() => import("../pages/user/Profile"));
-const EditProfile       = lazy(() => import("../pages/user/EditProfile"));
-const MyPosts           = lazy(() => import("../pages/user/MyPosts"));
-const AdminDashboard    = lazy(() => import("../pages/admin/Dashboard"));
-const AdminManagePosts  = lazy(() => import("../pages/admin/ManagePosts"));
-const AdminReports      = lazy(() => import("../pages/admin/Reports"));
+const Home = lazy(() => import("../pages/home/Home"));
+const Login = lazy(() => import("../pages/auth/Login"));
+const Register = lazy(() => import("../pages/auth/Register"));
+const ForgotPassword = lazy(() => import("../pages/auth/ForgotPassword"));
+const CreatePost = lazy(() => import("../pages/posts/CreatePost"));
+const PostDetail = lazy(() => import("../pages/posts/PostDetail"));
+const EditPost = lazy(() => import("../pages/posts/EditPost"));
+const SearchResults = lazy(() => import("../pages/posts/SearchResults"));
+const Events = lazy(() => import("../pages/categories/Events"));
+const LostAndFound = lazy(() => import("../pages/categories/LostAndFound"));
+const GarageSales = lazy(() => import("../pages/categories/GarageSales"));
+const Profile = lazy(() => import("../pages/user/Profile"));
+const EditProfile = lazy(() => import("../pages/user/EditProfile"));
+const MyPosts = lazy(() => import("../pages/user/MyPosts"));
+const AdminDashboard = lazy(() => import("../pages/admin/Dashboard"));
+const AdminManagePosts = lazy(() => import("../pages/admin/ManagePosts"));
+const AdminReports = lazy(() => import("../pages/admin/Reports"));
 const AdminUserManagement = lazy(() => import("../pages/admin/UserManagement"));
-const Terms             = lazy(() => import("../pages/misc/Terms"));
-const NotFound          = lazy(() => import("../pages/misc/NotFound"));
+const Terms = lazy(() => import("../pages/misc/Terms"));
+const NotFound = lazy(() => import("../pages/misc/NotFound"));
 
 function AppRoutes() {
     const { currentUser, loading } = useAuth();
@@ -46,12 +47,16 @@ function AppRoutes() {
     return (
         <Suspense fallback={<Loader />}>
             <Routes>
-                <Route path="/" element={<Layout />}>
-                    {/* Public */}
-                    <Route index element={<Home />} />
+                {/* Auth Routes (No Navbar/Footer) */}
+                <Route element={<AuthLayout />}>
                     <Route path="login" element={<Login />} />
                     <Route path="register" element={<Register />} />
                     <Route path="forgot-password" element={<ForgotPassword />} />
+                </Route>
+
+                {/* Main Layout Routes (With Navbar and Footer) */}
+                <Route element={<Layout />}>
+                    <Route index element={<Home />} />
                     <Route path="events" element={<Events />} />
                     <Route path="lost-and-found" element={<LostAndFound />} />
                     <Route path="garage-sales" element={<GarageSales />} />
@@ -134,10 +139,10 @@ function AppRoutes() {
                             </ProtectedRoute>
                         }
                     />
-
-                    {/* Catch‑all */}
-                    <Route path="*" element={<NotFound />} />
                 </Route>
+
+                {/* Catch-all */}
+                <Route path="*" element={<NotFound />} />
             </Routes>
         </Suspense>
     );

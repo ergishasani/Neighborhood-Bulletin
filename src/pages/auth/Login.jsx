@@ -1,103 +1,150 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { logInWithEmailAndPassword, signInWithGoogle } from "../../firebase/auth";
-import { useAuth } from "../../context/AuthContext";
-import Loader from "../../components/Loader";
+import React, { useState, useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
+import { logInWithEmailAndPassword, signInWithGoogle } from '../../firebase/auth';
+import { useAuth } from '../../context/AuthContext';
+import Loader from '../../components/Loader';
+import googleIcon from '../../assets/google.png';
+import '../../styles/main.scss';
+import '../../styles/pages/_login.scss';
+import '../../styles/pages/_backButton.scss';
 
-function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+const Login = () => {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hovered, setHovered] = useState(false);
 
-  // Prevent redirect loop: useEffect instead of calling navigate in render
-  useState(() => {
+  // Prevent redirect loop if user is already logged in
+  useEffect(() => {
     if (currentUser) {
-      navigate("/");
+      navigate('../');
     }
   }, [currentUser, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setError("");
+    setIsLoading(true);
+    setError(null);
 
-    const result = await logInWithEmailAndPassword(email, password);
-
-    if (result.success) {
-      navigate("/");
-    } else {
-      setError(result.error);
+    try {
+      await logInWithEmailAndPassword(email, password);
+      navigate('/');
+    } catch (err) {
+      setError('Invalid email or password'); // You can customize this error message
+    } finally {
+      setIsLoading(false);
     }
-    setLoading(false);
   };
 
   const handleGoogleLogin = async () => {
-    setLoading(true);
-    setError("");
+    setIsLoading(true);
+    setError(null);
 
-    const result = await signInWithGoogle();
-
-    if (!result.success) {
-      setError(result.error);
+    try {
+      await signInWithGoogle();
+      navigate('/');
+    } catch (err) {
+      setError('Failed to sign in with Google');
+    } finally {
+      setIsLoading(false);
     }
-    setLoading(false);
   };
 
   return (
-      <div className="auth-page">
-        <div className="auth-container">
-          <h2>Login to your account</h2>
+      <div className="login-container">
+        <button
+            className={`back-button ${hovered ? 'expanded' : ''}`}
+            onClick={() => navigate('/')}
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+            disabled={isLoading}
+        >
+          <ArrowLeft size={20} />
+          <span className="back-text">Main Page</span>
+        </button>
 
-          {error && <div className="auth-error">{error}</div>}
+        <div className="login-form-container">
+          <div className="login-header">
+            <h1>WELCOME BACK</h1>
+            <p>Sign in to continue keeping your community safe.</p>
+          </div>
 
-          <form onSubmit={handleSubmit} className="auth-form">
+          <form onSubmit={handleSubmit} className="login-form">
+            {error && <div className="error-message">{error}</div>}
+
             <div className="form-group">
               <label htmlFor="email">Email</label>
               <input
-                  type="email"
                   id="email"
+                  type="email"
+                  placeholder="Enter your email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
+                  disabled={isLoading}
               />
             </div>
 
             <div className="form-group">
               <label htmlFor="password">Password</label>
               <input
-                  type="password"
                   id="password"
+                  type="password"
+                  placeholder="***********"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
+                  disabled={isLoading}
               />
             </div>
 
-            <button type="submit" className="btn btn-primary" disabled={loading}>
-              {loading ? <Loader small /> : "Login"}
+            <div className="form-options">
+              <Link to="/forgot-password" className="forgot-password">
+                Forgot password?
+              </Link>
+            </div>
+
+            <button
+                type="submit"
+                className="signin-button"
+                disabled={isLoading}
+            >
+              {isLoading ? <Loader small /> : 'Sign in'}
             </button>
+
+            <div className="divider">
+              <span>or</span>
+            </div>
+
+            <button
+                type="button"
+                className="google-signin"
+                onClick={handleGoogleLogin}
+                disabled={isLoading}
+            >
+              <img src={googleIcon} alt="Google" />
+              <span>{isLoading ? 'Signing in...' : 'Sign in with Google'}</span>
+            </button>
+
+            <div className="signup-link">
+              Don't have an account? <Link to="/register">Sign up for free!</Link>
+            </div>
           </form>
+        </div>
 
-          <div className="auth-divider">or</div>
-
-          <button
-              onClick={handleGoogleLogin}
-              className="btn btn-google"
-              disabled={loading}
-          >
-            Sign in with Google
-          </button>
-
-          <div className="auth-links">
-            <Link to="/register">Don't have an account? Register</Link>
-            <Link to="/forgot-password">Forgot password?</Link>
-          </div>
+        <div className="login-image-container">
+          <img
+              src={require('../../assets/login.png')}
+              alt="Welcome illustration"
+              className="login-image"
+          />
         </div>
       </div>
   );
-}
+};
 
 export default Login;
