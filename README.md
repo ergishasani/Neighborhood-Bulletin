@@ -46,27 +46,99 @@ A free and open-source web application designed to connect communities by provid
 ## 📂 Project Structure
 
 ```
-neighborhood-bulletin/
-src/
-├── assets/                # Images/SVGs
-├── auth/                  # Auth components (login, register, etc.)
-├── components/            # Reusable UI (buttons, cards)
-│   ├── PostCard/          # Post card component
-│   ├── ActiveNeighbor/    # Neighbor profile component
-├── layout/                # Layout components
-│   ├── Sidebar/           # Sidebar with navigation
-│   ├── MainContent/       # Wrapper for right-side content
-├── pages/                 # Page-level components
-│   ├── Home/              # Main dashboard (matches your design)
-│   ├── CreatePost/        # Post creation form
-├── services/              # Firebase/services
-├── styles/                # SCSS
-│   ├── layout/            # Sidebar, main content
-│   ├── pages/             # Page-specific styles
-│   ├── _variables.scss    # Colors, fonts
-│   ├── _mixins.scss       # Reusable mixins
-├── App.jsx                # Updated with new layout
-├── firebase.js            # Firebase config
+neighborhood-bulletin-board/
+│
+├── public/
+│   └── index.html
+│
+├── src/
+│
+│   ├── assets/                    # Static assets like images & logos
+│
+│   ├── components/                # Reusable UI components
+│   │   ├── Navbar.jsx
+│   │   ├── Footer.jsx
+│   │   ├── PostCard.jsx
+│   │   ├── PostForm.jsx
+│   │   ├── CommentSection.jsx
+│   │   ├── Loader.jsx
+│   │   └── OnboardingSlides.jsx
+│
+│   ├── context/                   # Context Providers (e.g., AuthContext)
+│
+│   ├── firebase/                  # Firebase logic
+│   │   ├── config.js
+│   │   ├── auth.js
+│   │   ├── firestore.js
+│   │   ├── storage.js
+│
+│   ├── hooks/                     # Custom hooks (e.g., useAuth)
+│
+│   ├── layouts/                   # Page wrappers/layouts
+│   │   └── MainLayout.jsx
+│
+│   ├── pages/
+│   │
+│   │   ├── onboarding/
+│   │   │   └── Onboarding.jsx
+│   │
+│   │   ├── auth/
+│   │   │   ├── Login.jsx
+│   │   │   ├── Register.jsx
+│   │   │   └── ForgotPassword.jsx
+│   │
+│   │   ├── home/
+│   │   │   └── Home.jsx
+│   │
+│   │   ├── posts/
+│   │   │   ├── CreatePost.jsx
+│   │   │   ├── EditPost.jsx
+│   │   │   ├── PostDetail.jsx
+│   │   │   └── SearchResults.jsx
+│   │
+│   │   ├── categories/
+│   │   │   ├── Events.jsx
+│   │   │   ├── LostAndFound.jsx
+│   │   │   └── GarageSales.jsx
+│   │
+│   │   ├── user/
+│   │   │   ├── Profile.jsx
+│   │   │   ├── EditProfile.jsx
+│   │   │   └── MyPosts.jsx
+│   │
+│   │   ├── admin/
+│   │   │   ├── Dashboard.jsx
+│   │   │   ├── ManagePosts.jsx
+│   │   │   ├── Reports.jsx
+│   │   │   └── UserManagement.jsx
+│   │
+│   │   ├── misc/
+│   │   │   ├── Terms.jsx
+│   │   │   └── NotFound.jsx
+│
+│   ├── routes/                    # React Router setup
+│   │   └── AppRoutes.jsx
+│
+│   ├── styles/                    # SASS styles
+│   │   ├── main.scss              # Entry SCSS file
+│   │   ├── _variables.scss
+│   │   ├── _mixins.scss
+│   │   ├── _globals.scss
+│   │   ├── components/
+│   │   │   └── _navbar.scss
+│   │   ├── pages/
+│   │   │   └── _home.scss
+│   │   └── layouts/
+│   │       └── _mainLayout.scss
+│
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── index.js
+│
+├── .env                          # Firebase environment keys
+├── package.json
+└── README.md
+
 ```
 
 ## 🚀 Setup Instructions
