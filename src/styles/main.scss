@@ -1,12 +1,15 @@
-@use './variables' as *;
-@use './login';
-@use './backButton';
-@use './signUp.scss';
+@import 'variables';
+@import 'mixins';
+@import 'globals';
 
-body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  background-color: #f9f9f9; // Optional: Set a global background color
-}
+// Components
+@import 'components/navbar';
+@import 'components/footer';
+@import 'components/post-card';
+@import 'components/loader';
 
-// Add any global styles below
+// Layouts
+@import 'layouts/mainLayout';
+
+// Pages
+@import 'pages/home';

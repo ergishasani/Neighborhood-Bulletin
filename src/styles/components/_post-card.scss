@@ -1,0 +1,77 @@
+.post-card {
+    @include card;
+    margin-bottom: $spacing-md;
+  
+    .post-link {
+      display: block;
+      color: inherit;
+    }
+  
+    .post-image {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      border-radius: $border-radius-sm;
+      margin-bottom: $spacing-sm;
+  
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s;
+      }
+    }
+  
+    &:hover .post-image img {
+      transform: scale(1.05);
+    }
+  
+    .post-title {
+      font-size: 1.25rem;
+      margin-bottom: $spacing-xs;
+      color: $dark-color;
+    }
+  
+    .post-excerpt {
+      color: $gray-color;
+      margin-bottom: $spacing-sm;
+    }
+  
+    .post-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $spacing-md;
+      margin-bottom: $spacing-sm;
+      font-size: 0.9rem;
+  
+      .post-category {
+        background-color: rgba($primary-color, 0.1);
+        color: $primary-color;
+        padding: 0.2rem $spacing-xs;
+        border-radius: $border-radius-sm;
+        font-weight: 600;
+        text-transform: capitalize;
+      }
+  
+      .post-date,
+      .post-location {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        color: $gray-color;
+      }
+    }
+  
+    .post-stats {
+      display: flex;
+      gap: $spacing-lg;
+      color: $gray-color;
+      font-size: 0.9rem;
+  
+      span {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+      }
+    }
+  }
