@@ -13,8 +13,8 @@ A free and open-source web application designed to connect communities by provid
   - Image uploads to Firebase Storage (free tier supported).
   - Comprehensive form validation to maintain data integrity and consistency.
 - **🖼️ Post Display:**
-  - Flexible post display in list or grid format to suit different user preferences.
-  - ℹ Clear display of post title, description, image, category, neighborhood, and user information.
+  - Flexible post-display in list or grid format to suit different user preferences.
+  - ℹ Clear display of post-title, description, image, category, neighborhood, and user information.
   - Efficient loading of posts using pagination or infinite scrolling for optimal performance.
 - **🔍 Post Filtering:**
   - Filter posts by category (e.g., Events, Lost Pets, Garage Sales, Announcements) for targeted searches.
@@ -74,7 +74,7 @@ src/
 ### ⚙️ Prerequisites
 
 - Node.js and npm installed (`node -v` >= 16)
-- Firebase account and project created (Firebase free tier is sufficient)
+- Firebase account and project created (Firebase free tier is enough)
 
 ### 🔥 Firebase Setup
 
@@ -174,7 +174,7 @@ We welcome contributions to this project! Here's how you can help:
 
 ### Phase 1: Core Functionality (Sprint 1)
 
-- ✅ Set up React project with Vite.
+- ✅ Set up a React project with Vite.
 - ✅ Initialize Firebase project.
 - ✅ Implement Firebase Authentication (Email/Password).
 - ✅ Design Firestore data structure for posts.
@@ -184,19 +184,19 @@ We welcome contributions to this project! Here's how you can help:
 ### Phase 2: Enhanced Features (Sprint 2)
 
 - ✅ Filtering posts by category and neighborhood.
-- ✅ Implement pagination or infinite scrolling for post display.
+- ✅ Implement pagination or infinite scrolling for post-display.
 - ✅ Implement user profile management (basic).
 
 ### Phase 3: Community Engagement (Sprint 3)
 
-- ✅ Firebase Cloud Function - New Post Notification (using SendGrid free tier or similar).
+- ✅ Firebase Cloud Function—New Post Notification (using SendGrid free tier or similar).
 - ✅ Report Post Functionality.
 - ✅ Basic search functionality.
 
 ### Phase 4: Refinement and Automation (Sprint 4)
 
-- ✅ Cloud Function - Expire Old Posts.
-- ✅ Admin dashboard for user and post management.
+- ✅ Cloud Function—Expire Old Posts.
+- ✅ Admin dashboard for user and post-management.
 - ✅ Improved UI/UX design.
 
 ### Phase 5: Deployment and Optimization (Sprint 5)
