@@ -1,0 +1,190 @@
+.post-detail-page {
+    padding: $spacing-lg 0;
+  
+    .post-detail {
+      background: white;
+      border-radius: $border-radius-md;
+      box-shadow: $shadow-sm;
+      overflow: hidden;
+      margin-bottom: $spacing-xl;
+    }
+  
+    .post-image {
+      width: 100%;
+      height: 400px;
+      overflow: hidden;
+  
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  
+    .post-header {
+      padding: $spacing-lg;
+  
+      h1 {
+        margin-bottom: $spacing-sm;
+        color: $dark-color;
+      }
+    }
+  
+    .post-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $spacing-md;
+      margin-bottom: $spacing-md;
+      font-size: 0.9rem;
+      color: $gray-color;
+  
+      .post-category {
+        background-color: rgba($primary-color, 0.1);
+        color: $primary-color;
+        padding: 0.2rem $spacing-xs;
+        border-radius: $border-radius-sm;
+        font-weight: 600;
+        text-transform: capitalize;
+      }
+    }
+  
+    .post-content {
+      padding: 0 $spacing-lg $spacing-lg;
+      white-space: pre-line;
+  
+      p {
+        margin-bottom: $spacing-md;
+        line-height: 1.7;
+      }
+    }
+  
+    .post-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: $spacing-sm;
+      padding: 0 $spacing-lg $spacing-lg;
+  
+      .btn-danger {
+        background-color: $accent-color;
+        color: white;
+  
+        &:hover {
+          background-color: darken($accent-color, 10%);
+        }
+      }
+    }
+  }
+  
+  .comment-section {
+    background: white;
+    border-radius: $border-radius-md;
+    box-shadow: $shadow-sm;
+    padding: $spacing-lg;
+  
+    h3 {
+      margin-bottom: $spacing-lg;
+      color: $dark-color;
+    }
+  
+    .comment-form {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-sm;
+      margin-bottom: $spacing-lg;
+  
+      textarea {
+        padding: $spacing-sm;
+        border: 1px solid rgba($gray-color, 0.3);
+        border-radius: $border-radius-sm;
+        font-family: inherit;
+        resize: vertical;
+        min-height: 100px;
+  
+        &:focus {
+          outline: none;
+          border-color: $primary-color;
+        }
+      }
+  
+      button {
+        align-self: flex-end;
+      }
+    }
+  
+    .login-prompt {
+      text-align: center;
+      margin-bottom: $spacing-lg;
+      color: $gray-color;
+  
+      a {
+        color: $primary-color;
+        text-decoration: underline;
+      }
+    }
+  
+    .no-comments {
+      text-align: center;
+      color: $gray-color;
+      font-style: italic;
+      padding: $spacing-lg 0;
+    }
+  
+    .comments-list {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-md;
+    }
+  
+    .comment {
+      position: relative;
+      padding: $spacing-md;
+      border-radius: $border-radius-sm;
+      background-color: rgba($light-color, 0.5);
+  
+      &-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: $spacing-xs;
+        font-size: 0.9rem;
+      }
+  
+      &-author {
+        display: flex;
+        align-items: center;
+        gap: $spacing-xs;
+        color: $dark-color;
+        font-weight: 600;
+  
+        .user-icon {
+          color: $gray-color;
+        }
+      }
+  
+      &-date {
+        color: $gray-color;
+      }
+  
+      &-content {
+        p {
+          margin: 0;
+          line-height: 1.6;
+        }
+      }
+  
+      .btn-delete-comment {
+        position: absolute;
+        top: $spacing-sm;
+        right: $spacing-sm;
+        padding: 0.2rem;
+        background: none;
+        border: none;
+        color: $gray-color;
+        cursor: pointer;
+  
+        &:hover {
+          color: $accent-color;
+        }
+      }
+    }
+  }

@@ -1,0 +1,26 @@
+.home-page {
+    .page-title {
+      font-size: 2rem;
+      margin-bottom: $spacing-xs;
+      color: $dark-color;
+    }
+  
+    .page-subtitle {
+      color: $gray-color;
+      margin-bottom: $spacing-lg;
+    }
+  
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: $spacing-md;
+    }
+  
+    .no-posts {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: $spacing-xl;
+      color: $gray-color;
+      font-style: italic;
+    }
+  }
