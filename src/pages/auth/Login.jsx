@@ -69,8 +69,8 @@ const Login = () => {
 
         <div className="login-form-container">
           <div className="login-header">
-            <h1>WELCOME BACK</h1>
-            <p>Sign in to continue keeping your community safe.</p>
+            <h1>WELCOME TO NEIGHBORHOOD LOOKOUT</h1>
+            <p>We're glad to see you again! Sign in to continue keeping your community safe.</p>
           </div>
 
           <form onSubmit={handleSubmit} className="login-form">

@@ -4,17 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9402c50b-973b-4364-81de-a8e229ecd4c6" name="Changes" comment="Fixed the events page now it openes the events">
-      <change afterPath="$PROJECT_DIR$/qodana.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/layouts/AuthLayout.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/styles/pages/_backButton.scss" afterDir="false" />
+    <list default="true" id="9402c50b-973b-4364-81de-a8e229ecd4c6" name="Changes" comment="Add .idea/.gitignore to exclude IDE-specific files&#10;&#10;This commit adds a .gitignore file under the .idea directory to prevent committing IDE-specific files. The ignored files include workspace settings, HTTP requests, and datasource configurations, ensuring a cleaner and more portable repository.">
       <change afterPath="$PROJECT_DIR$/src/styles/pages/_login.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/MainLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/MainLayout.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/auth/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/auth/Login.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/AppRoutes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/AppRoutes.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/styles/_variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/_variables.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/pages/_auth.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/pages/_auth.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,6 +72,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Attach to Node.js/Chrome.Unnamed.executor": "Debug",
     "Node.js.EditPost.jsx.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -87,29 +84,11 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "settings.qodana",
+    "settings.editor.selected.configurable": "watcher.settings",
     "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2024.3.5\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="QodanaHighlightedReportService">
-    <option name="localRunNotPublishedPersistedInfo">
-      <LocalReportPersistedInfo>
-        <option name="path" value="C:\Users\Ergis\AppData\Local\Temp\qodana_output1\qodana.sarif.json" />
-        <option name="reportGuid" value="75719445-60a5-481c-b893-1f8087f5b7cc" />
-        <option name="reportName" value="Neighborhood-Bulletin/qodana/2025-04-24" />
-      </LocalReportPersistedInfo>
-    </option>
-  </component>
-  <component name="QodanaIsSelectedPersistenceService">
-    <option name="selectedOrLoading" value="true" />
-  </component>
-  <component name="QodanaReportsService">
-    <option name="descriptions">
-      <ReportDescription localRun="true" path="C:\Users\Ergis\AppData\Local\Temp\qodana_output\qodana.sarif.json" reportGuid="e747c2b5-7ecc-4ac5-a3ee-afce595101d6" reportId="Neighborhood-Bulletin/qodana/2025-04-24" />
-      <ReportDescription localRun="true" path="C:\Users\Ergis\AppData\Local\Temp\qodana_output1\qodana.sarif.json" reportGuid="75719445-60a5-481c-b893-1f8087f5b7cc" reportId="Neighborhood-Bulletin/qodana/2025-04-24" />
-    </option>
-  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -136,6 +115,7 @@
       <workItem from="1745335846847" duration="184000" />
       <workItem from="1745336045643" duration="917000" />
       <workItem from="1745506852953" duration="3459000" />
+      <workItem from="1745591570493" duration="1926000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed the bug for blank page on the main page">
       <option name="closed" value="true" />
