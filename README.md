@@ -13,8 +13,8 @@ A free and open-source web application designed to connect communities by provid
   - Image uploads to Firebase Storage (free tier supported).
   - Comprehensive form validation to maintain data integrity and consistency.
 - **🖼️ Post Display:**
-  - Flexible post display in list or grid format to suit different user preferences.
-  - ℹ Clear display of post title, description, image, category, neighborhood, and user information.
+  - Flexible post-display in list or grid format to suit different user preferences.
+  - ℹ Clear display of post-title, description, image, category, neighborhood, and user information.
   - Efficient loading of posts using pagination or infinite scrolling for optimal performance.
 - **🔍 Post Filtering:**
   - Filter posts by category (e.g., Events, Lost Pets, Garage Sales, Announcements) for targeted searches.
@@ -46,36 +46,99 @@ A free and open-source web application designed to connect communities by provid
 ## 📂 Project Structure
 
 ```
-neighborhood-bulletin/
+neighborhood-bulletin-board/
+│
+├── public/
+│   └── index.html
+│
 ├── src/
-│   ├── components/       # Reusable React components
-│   │   ├── Post/         # Components related to displaying individual posts
-│   │   │   ├── PostItem.jsx  # Individual post display component
-│   │   ├── Auth/         # Authentication-related components
-│   │   │   ├── Login.jsx     # Login component
-│   │   │   ├── Register.jsx  # Registration component
-│   │   ├── UI/           # General UI components (buttons, inputs, etc.)
-│   ├── pages/          # React pages (routes)
-│   │   ├── Home.jsx        # Home page with post display
-│   │   ├── CreatePost.jsx  # Page for creating new posts
-│   │   ├── Login.jsx       # Login page
-│   │   ├── Register.jsx    # Registration page
-│   ├── services/       # Firebase service functions
-│   │   ├── firebase.js     # Firebase initialization
-│   │   ├── authService.js  # Authentication functions
-│   │   ├── firestoreService.js # Firestore data access functions
-│   │   ├── storageService.js  # Firebase Storage functions
-│   ├── App.jsx         # Main App component (using .jsx for consistency)
-│   ├── index.js        # Entry point of the application
-│   ├── index.css       # Global styles (or relevant CSS files)
-├── functions/        # Firebase Cloud Functions
-│   ├── index.js        # Cloud Functions code
-│   ├── package.json    # Cloud Functions dependencies
-├── .firebaserc       # Firebase project configuration
-├── firebase.json       # Firebase hosting configuration
-├── .env            # Environment variables (API keys, etc.)
-├── README.md         # This file
-├── package.json      # Project dependencies
+│
+│   ├── assets/                    # Static assets like images & logos
+│
+│   ├── components/                # Reusable UI components
+│   │   ├── Navbar.jsx
+│   │   ├── Footer.jsx
+│   │   ├── PostCard.jsx
+│   │   ├── PostForm.jsx
+│   │   ├── CommentSection.jsx
+│   │   ├── Loader.jsx
+│   │   └── OnboardingSlides.jsx
+│
+│   ├── context/                   # Context Providers (e.g., AuthContext)
+│
+│   ├── firebase/                  # Firebase logic
+│   │   ├── config.js
+│   │   ├── auth.js
+│   │   ├── firestore.js
+│   │   ├── storage.js
+│
+│   ├── hooks/                     # Custom hooks (e.g., useAuth)
+│
+│   ├── layouts/                   # Page wrappers/layouts
+│   │   └── MainLayout.jsx
+│
+│   ├── pages/
+│   │
+│   │   ├── onboarding/
+│   │   │   └── Onboarding.jsx
+│   │
+│   │   ├── auth/
+│   │   │   ├── Login.jsx
+│   │   │   ├── Register.jsx
+│   │   │   └── ForgotPassword.jsx
+│   │
+│   │   ├── home/
+│   │   │   └── Home.jsx
+│   │
+│   │   ├── posts/
+│   │   │   ├── CreatePost.jsx
+│   │   │   ├── EditPost.jsx
+│   │   │   ├── PostDetail.jsx
+│   │   │   └── SearchResults.jsx
+│   │
+│   │   ├── categories/
+│   │   │   ├── Events.jsx
+│   │   │   ├── LostAndFound.jsx
+│   │   │   └── GarageSales.jsx
+│   │
+│   │   ├── user/
+│   │   │   ├── Profile.jsx
+│   │   │   ├── EditProfile.jsx
+│   │   │   └── MyPosts.jsx
+│   │
+│   │   ├── admin/
+│   │   │   ├── Dashboard.jsx
+│   │   │   ├── ManagePosts.jsx
+│   │   │   ├── Reports.jsx
+│   │   │   └── UserManagement.jsx
+│   │
+│   │   ├── misc/
+│   │   │   ├── Terms.jsx
+│   │   │   └── NotFound.jsx
+│
+│   ├── routes/                    # React Router setup
+│   │   └── AppRoutes.jsx
+│
+│   ├── styles/                    # SASS styles
+│   │   ├── main.scss              # Entry SCSS file
+│   │   ├── _variables.scss
+│   │   ├── _mixins.scss
+│   │   ├── _globals.scss
+│   │   ├── components/
+│   │   │   └── _navbar.scss
+│   │   ├── pages/
+│   │   │   └── _home.scss
+│   │   └── layouts/
+│   │       └── _mainLayout.scss
+│
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── index.js
+│
+├── .env                          # Firebase environment keys
+├── package.json
+└── README.md
+
 ```
 
 ## 🚀 Setup Instructions
@@ -83,7 +146,7 @@ neighborhood-bulletin/
 ### ⚙️ Prerequisites
 
 - Node.js and npm installed (`node -v` >= 16)
-- Firebase account and project created (Firebase free tier is sufficient)
+- Firebase account and project created (Firebase free tier is enough)
 
 ### 🔥 Firebase Setup
 
@@ -108,6 +171,10 @@ neighborhood-bulletin/
 
     ```bash
     npm install
+    ```
+
+    ```bash
+    npm install firebase react-router-dom sass react-hook-form react-icons @tailwindcss/postcss7-autoprefixer @tailwindcss/forms autoprefixer postcss
     ```
 
 3.  **Configure environment variables:**
@@ -179,7 +246,7 @@ We welcome contributions to this project! Here's how you can help:
 
 ### Phase 1: Core Functionality (Sprint 1)
 
-- ✅ Set up React project with Vite.
+- ✅ Set up a React project with Vite.
 - ✅ Initialize Firebase project.
 - ✅ Implement Firebase Authentication (Email/Password).
 - ✅ Design Firestore data structure for posts.
@@ -189,19 +256,19 @@ We welcome contributions to this project! Here's how you can help:
 ### Phase 2: Enhanced Features (Sprint 2)
 
 - ✅ Filtering posts by category and neighborhood.
-- ✅ Implement pagination or infinite scrolling for post display.
+- ✅ Implement pagination or infinite scrolling for post-display.
 - ✅ Implement user profile management (basic).
 
 ### Phase 3: Community Engagement (Sprint 3)
 
-- ✅ Firebase Cloud Function - New Post Notification (using SendGrid free tier or similar).
+- ✅ Firebase Cloud Function—New Post Notification (using SendGrid free tier or similar).
 - ✅ Report Post Functionality.
 - ✅ Basic search functionality.
 
 ### Phase 4: Refinement and Automation (Sprint 4)
 
-- ✅ Cloud Function - Expire Old Posts.
-- ✅ Admin dashboard for user and post management.
+- ✅ Cloud Function—Expire Old Posts.
+- ✅ Admin dashboard for user and post-management.
 - ✅ Improved UI/UX design.
 
 ### Phase 5: Deployment and Optimization (Sprint 5)

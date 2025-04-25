@@ -1,0 +1,224 @@
+.admin-dashboard {
+    padding: $spacing-lg 0;
+  
+    h1 {
+      margin-bottom: $spacing-xl;
+      color: $dark-color;
+    }
+  
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: $spacing-md;
+      margin-bottom: $spacing-xl;
+    }
+  
+    .stat-card {
+      background: white;
+      padding: $spacing-lg;
+      border-radius: $border-radius-md;
+      box-shadow: $shadow-sm;
+      text-align: center;
+  
+      h3 {
+        color: $gray-color;
+        margin-bottom: $spacing-sm;
+        font-size: 1.1rem;
+      }
+  
+      .stat-value {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: $primary-color;
+        margin-bottom: $spacing-sm;
+      }
+  
+      .stat-link {
+        color: $primary-color;
+        text-decoration: underline;
+        font-size: 0.9rem;
+  
+        &:hover {
+          color: darken($primary-color, 10%);
+        }
+      }
+    }
+  
+    .recent-section {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: $spacing-xl;
+  
+      @include responsive($breakpoint-lg) {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  
+    .recent-posts,
+    .recent-users {
+      background: white;
+      padding: $spacing-lg;
+      border-radius: $border-radius-md;
+      box-shadow: $shadow-sm;
+  
+      h2 {
+        margin-bottom: $spacing-lg;
+        color: $dark-color;
+        font-size: 1.3rem;
+      }
+    }
+  
+    .recent-list {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-md;
+    }
+  
+    .recent-item {
+      display: flex;
+      flex-direction: column;
+      padding-bottom: $spacing-md;
+      border-bottom: 1px solid rgba($gray-color, 0.2);
+  
+      &:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+    }
+  
+    .recent-title {
+      font-weight: 600;
+      color: $dark-color;
+      margin-bottom: $spacing-xs;
+  
+      &:hover {
+        color: $primary-color;
+      }
+    }
+  
+    .recent-meta {
+      font-size: 0.8rem;
+      color: $gray-color;
+    }
+  
+    .no-items {
+      color: $gray-color;
+      font-style: italic;
+      text-align: center;
+      padding: $spacing-lg 0;
+    }
+  }
+  
+  .manage-posts,
+  .user-management {
+    padding: $spacing-lg 0;
+  
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: $spacing-xl;
+  
+      h1 {
+        color: $dark-color;
+      }
+    }
+  
+    .posts-table,
+    .users-table {
+      background: white;
+      padding: $spacing-lg;
+      border-radius: $border-radius-md;
+      box-shadow: $shadow-sm;
+      overflow-x: auto;
+    }
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+  
+    th {
+      text-align: left;
+      padding: $spacing-sm;
+      border-bottom: 2px solid rgba($gray-color, 0.3);
+      color: $dark-color;
+    }
+  
+    td {
+      padding: $spacing-sm;
+      border-bottom: 1px solid rgba($gray-color, 0.1);
+      vertical-align: middle;
+    }
+  
+    .post-link,
+    .author-link,
+    .user-link {
+      color: $dark-color;
+      font-weight: 500;
+  
+      &:hover {
+        color: $primary-color;
+        text-decoration: underline;
+      }
+    }
+  
+    .category-badge {
+      display: inline-block;
+      padding: 0.2rem $spacing-sm;
+      border-radius: $border-radius-sm;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: capitalize;
+  
+      &.event {
+        background-color: rgba($primary-color, 0.1);
+        color: $primary-color;
+      }
+  
+      &.lost-and-found {
+        background-color: rgba(#f39c12, 0.1);
+        color: #f39c12;
+      }
+  
+      &.garage-sale {
+        background-color: rgba(#2ecc71, 0.1);
+        color: #2ecc71;
+      }
+    }
+  
+    .role-badge {
+      display: inline-block;
+      padding: 0.2rem $spacing-sm;
+      border-radius: $border-radius-sm;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: capitalize;
+  
+      &.admin {
+        background-color: rgba($primary-color, 0.1);
+        color: $primary-color;
+      }
+  
+      &.user {
+        background-color: rgba($gray-color, 0.1);
+        color: $gray-color;
+      }
+    }
+  
+    .btn-sm {
+      padding: 0.3rem $spacing-sm;
+      font-size: 0.8rem;
+      margin-right: $spacing-xs;
+    }
+  
+    .no-posts,
+    .no-users {
+      text-align: center;
+      padding: $spacing-xl;
+      background: white;
+      border-radius: $border-radius-md;
+      box-shadow: $shadow-sm;
+      color: $gray-color;
+    }
+  }

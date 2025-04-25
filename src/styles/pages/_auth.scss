@@ -1,0 +1,126 @@
+.auth-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 200px);
+    padding: $spacing-lg 0;
+  }
+
+  .auth-container {
+    width: 100%;
+    max-width: 400px;
+    background: white;
+    padding: $spacing-lg;
+    border-radius: $border-radius-md;
+    box-shadow: $shadow-md;
+
+    h2 {
+      text-align: center;
+      margin-bottom: $spacing-lg;
+      color: $dark-color;
+    }
+  }
+
+  .auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+
+    label {
+      font-weight: 600;
+      color: $dark-color;
+    }
+
+    input {
+      padding: $spacing-sm;
+      border: 1px solid rgba($gray-color, 0.3);
+      border-radius: $border-radius-sm;
+      font-family: inherit;
+      transition: border-color 0.2s;
+
+      &:focus {
+        outline: none;
+        border-color: $primary-color;
+      }
+    }
+  }
+
+  .auth-divider {
+    text-align: center;
+    margin: $spacing-md 0;
+    position: relative;
+    color: $gray-color;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 45%;
+      height: 1px;
+      background-color: rgba($gray-color, 0.3);
+    }
+
+    &::before {
+      left: 0;
+    }
+
+    &::after {
+      right: 0;
+    }
+  }
+
+  .btn-google {
+    width: 100%;
+    background-color: #4285f4;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-xs;
+
+    &:hover {
+      background-color: darken(#4285f4, 10%);
+    }
+  }
+
+  .auth-links {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+    margin-top: $spacing-md;
+    text-align: center;
+
+    a {
+      color: $primary-color;
+      text-decoration: underline;
+
+      &:hover {
+        color: darken($primary-color, 10%);
+      }
+    }
+  }
+
+  .auth-error {
+    background-color: rgba($accent-color, 0.1);
+    color: $accent-color;
+    padding: $spacing-sm;
+    border-radius: $border-radius-sm;
+    margin-bottom: $spacing-md;
+    text-align: center;
+  }
+
+  .auth-message {
+    background-color: rgba($secondary-color, 0.1);
+    color: darken($secondary-color, 20%);
+    padding: $spacing-sm;
+    border-radius: $border-radius-sm;
+    margin-bottom: $spacing-md;
+    text-align: center;
+  }
