@@ -1,0 +1,185 @@
+.profile-page {
+    padding: $spacing-lg 0;
+  
+    .profile-header {
+      display: flex;
+      gap: $spacing-xl;
+      margin-bottom: $spacing-xl;
+      background: white;
+      padding: $spacing-xl;
+      border-radius: $border-radius-md;
+      box-shadow: $shadow-sm;
+      align-items: center;
+  
+      @include responsive($breakpoint-md) {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  
+    .profile-avatar {
+      .avatar-placeholder {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background-color: $primary-color;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 4rem;
+        font-weight: bold;
+      }
+    }
+  
+    .profile-info {
+      flex: 1;
+  
+      h1 {
+        margin-bottom: $spacing-xs;
+        color: $dark-color;
+      }
+  
+      .profile-email {
+        color: $gray-color;
+        margin-bottom: $spacing-sm;
+      }
+  
+      .profile-joined {
+        color: $gray-color;
+        font-size: 0.9rem;
+        margin-bottom: $spacing-md;
+      }
+    }
+  
+    .profile-content {
+      background: white;
+      padding: $spacing-xl;
+      border-radius: $border-radius-md;
+      box-shadow: $shadow-sm;
+  
+      h2 {
+        margin-bottom: $spacing-lg;
+        color: $dark-color;
+      }
+    }
+  
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: $spacing-md;
+    }
+  
+    .no-posts {
+      text-align: center;
+      padding: $spacing-xl;
+      color: $gray-color;
+  
+      a {
+        margin-top: $spacing-md;
+        display: inline-block;
+      }
+    }
+  }
+  
+  .edit-profile-page {
+    padding: $spacing-lg 0;
+  
+    h1 {
+      margin-bottom: $spacing-lg;
+      color: $dark-color;
+    }
+  
+    .error-message {
+      background-color: rgba($accent-color, 0.1);
+      color: $accent-color;
+      padding: $spacing-sm;
+      border-radius: $border-radius-sm;
+      margin-bottom: $spacing-md;
+    }
+  
+    .profile-form {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      padding: $spacing-xl;
+      border-radius: $border-radius-md;
+      box-shadow: $shadow-sm;
+  
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-xs;
+        margin-bottom: $spacing-md;
+  
+        label {
+          font-weight: 600;
+          color: $dark-color;
+        }
+  
+        input,
+        textarea {
+          padding: $spacing-sm;
+          border: 1px solid rgba($gray-color, 0.3);
+          border-radius: $border-radius-sm;
+          font-family: inherit;
+  
+          &:focus {
+            outline: none;
+            border-color: $primary-color;
+          }
+        }
+  
+        textarea {
+          resize: vertical;
+          min-height: 100px;
+        }
+  
+        input:disabled {
+          background-color: rgba($gray-color, 0.1);
+          color: $gray-color;
+        }
+      }
+  
+      .form-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: $spacing-sm;
+        margin-top: $spacing-md;
+      }
+    }
+  }
+  
+  .my-posts-page {
+    padding: $spacing-lg 0;
+  
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: $spacing-xl;
+  
+      h1 {
+        color: $dark-color;
+      }
+    }
+  
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: $spacing-md;
+    }
+  
+    .no-posts {
+      text-align: center;
+      padding: $spacing-xl;
+      background: white;
+      border-radius: $border-radius-md;
+      box-shadow: $shadow-sm;
+  
+      p {
+        margin-bottom: $spacing-md;
+        color: $gray-color;
+      }
+    }
+  }

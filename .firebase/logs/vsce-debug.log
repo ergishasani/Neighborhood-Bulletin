@@ -1,0 +1,5 @@
+[debug] [2025-04-22T15:56:11.163Z] [Firebase Plugin] Activating Firebase extension.
+[debug] [2025-04-22T15:56:53.177Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2025-04-22T15:56:53.183Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-04-22T15:56:53.256Z] [Firebase Plugin] VSCode notification server listening on port 40001
+[error] [Firebase Plugin] requireAuth error: Could not load the default credentials. Browse to https://cloud.google.com/docs/authentication/getting-started for more information.

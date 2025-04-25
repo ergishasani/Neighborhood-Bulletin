@@ -1,0 +1,23 @@
+.search-results {
+    padding: $spacing-lg 0;
+  
+    h1 {
+      margin-bottom: $spacing-xl;
+      color: $dark-color;
+    }
+  
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: $spacing-md;
+    }
+  
+    .no-results {
+      text-align: center;
+      padding: $spacing-xl;
+      background: white;
+      border-radius: $border-radius-md;
+      box-shadow: $shadow-sm;
+      color: $gray-color;
+    }
+  }
