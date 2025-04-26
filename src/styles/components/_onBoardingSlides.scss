@@ -1,0 +1,78 @@
+.onboarding {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+
+  &__skip {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: transparent;
+    border: none;
+    color: #555;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+
+  &__image {
+    max-width: 220px;
+    margin-bottom: 1.5rem;
+  }
+
+  &__title {
+    font-size: 1.75rem;
+    margin-bottom: 0.75rem;
+    text-align: center;
+  }
+
+  &__text {
+    font-size: 1rem;
+    color: #555;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    max-width: 400px;
+  }
+
+  &__controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  &__dots {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  &__dot {
+    width: 10px;
+    height: 10px;
+    background: #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+
+    &--active {
+      background: #1da1f2;
+    }
+  }
+}
+
+/* Reuse your global button styles, e.g. */
+.btn-primary {
+  background: #1da1f2;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn-outline {
+  background: transparent;
+  color: #1da1f2;
+  border: 1px solid #1da1f2;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}

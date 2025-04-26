@@ -43,3 +43,19 @@
       @content;
     }
   }
+.btn-primary {
+  background: #1da1f2;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn-outline {
+  background: transparent;
+  color: #1da1f2;
+  border: 1px solid #1da1f2;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}

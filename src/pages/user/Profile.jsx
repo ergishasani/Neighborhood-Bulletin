@@ -1,100 +1,175 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getUserById, getPosts } from "../../firebase/firestore";
-import { useAuth } from '../../context/AuthContext';
+import { getUserByUid, getPosts } from "../../firebase/firestore";
+import { useAuth } from "../../context/AuthContext";
+import Avatar from "../../components/Avatar";
 import PostCard from "../../components/PostCard";
 import Loader from "../../components/Loader";
+import "../../styles/pages/_profile.scss";
 
-function Profile() {
-  const { id } = useParams();
-  const [user, setUser] = useState(null);
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+export default function Profile() {
+  const { id } = useParams();           // user’s UID from URL
   const { currentUser } = useAuth();
+  const isMe = currentUser?.uid === id;
+
+  const [user, setUser]       = useState(null);
+  const [posts, setPosts]     = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError]     = useState("");
+  const [lastVisible, setLastVisible] = useState(null);
+  const [hasMore, setHasMore] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchProfile = async () => {
+      setLoading(true);
+      setError("");
       try {
-        setLoading(true);
+        // 1) Load user data
+        const resUser = await getUserByUid(id);
+        if (!resUser.success) throw new Error(resUser.error);
+        setUser(resUser.data);
 
-        // Fetch user data
-        const userResult = await getUserById(id);
-        if (!userResult.success) {
-          throw new Error(userResult.error);
-        }
-        setUser(userResult.data);
-
-        // Fetch user's posts
-        const postsResult = await getPosts(null, 10, null, id);
-        if (!postsResult.success) {
-          throw new Error(postsResult.error);
-        }
-        setPosts(postsResult.data);
-
+        // 2) Load first page of posts
+        const resPosts = await getPosts({ authorId: id, limitCount: 6 });
+        if (!resPosts.success) throw new Error(resPosts.error);
+        setPosts(resPosts.data);
+        setLastVisible(resPosts.lastVisible);
+        setHasMore(Boolean(resPosts.lastVisible));
       } catch (err) {
         setError(err.message);
       } finally {
         setLoading(false);
       }
     };
-
-    fetchData();
+    fetchProfile();
   }, [id]);
 
-  if (loading) return <Loader />;
-  if (error) return <div className="error-message">{error}</div>;
-  if (!user) return <div>User not found</div>;
+  const loadMore = async () => {
+    if (!lastVisible) return;
+    setLoading(true);
+    try {
+      const res = await getPosts({
+        authorId: id,
+        limitCount: 6,
+        lastVisible
+      });
+      if (!res.success) throw new Error(res.error);
+      setPosts(prev => [...prev, ...res.data]);
+      setLastVisible(res.lastVisible);
+      setHasMore(Boolean(res.lastVisible));
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  const isCurrentUser = currentUser && currentUser.uid === id;
+  if (loading) return <Loader />;
+  if (error)   return <div className="error-message">{error}</div>;
+
+  // Format join date
+  const joinedDate = user.createdAt
+      ? new Date(user.createdAt.seconds * 1000).toLocaleDateString()
+      : "N/A";
 
   return (
       <div className="profile-page">
         <div className="container">
           <div className="profile-header">
-            <div className="profile-avatar">
-              <div className="avatar-placeholder">
-                {user.displayName ? user.displayName.charAt(0).toUpperCase() : "U"}
+            <Avatar
+                src={user.photoURL || "/default-avatar.png"}
+                alt={user.displayName}
+                size={120}
+            />
+            <div className="profile-details">
+              <h1 className="profile-name">
+                {user.displayName || "Anonymous"}
+              </h1>
+              {user.bio && <p className="profile-bio">{user.bio}</p>}
+
+              <div className="profile-stats">
+                <div>
+                  <strong>{posts.length}</strong>
+                  <span>Posts</span>
+                </div>
+                <div>
+                  <strong>123</strong> {/* stub */}
+                  <span>Followers</span>
+                </div>
+                <div>
+                  <strong>45</strong> {/* stub */}
+                  <span>Following</span>
+                </div>
               </div>
-            </div>
 
-            <div className="profile-info">
-              <h1>{user.displayName || "Anonymous"}</h1>
-              <p className="profile-email">{user.email}</p>
-              <p className="profile-joined">
-                Member since {user.createdAt ? new Date(user.createdAt.seconds * 1000).toLocaleDateString() : "N/A"}
-              </p>
+              <p className="profile-joined">Joined {joinedDate}</p>
 
-              {isCurrentUser && (
+              {isMe ? (
                   <Link to="/edit-profile" className="btn btn-outline">
                     Edit Profile
                   </Link>
+              ) : (
+                  <button className="btn btn-primary">
+                    {/* TODO: wire up follow/unfollow */}
+                    Follow
+                  </button>
               )}
             </div>
           </div>
 
-          <div className="profile-content">
-            <h2>Recent Posts</h2>
+          <div className="profile-about">
+            <h2>About</h2>
+            <ul>
+              {user.email && (
+                  <li>
+                    <strong>Email:</strong> {user.email}
+                  </li>
+              )}
+              {user.location && (
+                  <li>
+                    <strong>Location:</strong> {user.location}
+                  </li>
+              )}
+              {user.website && (
+                  <li>
+                    <strong>Website:</strong>{" "}
+                    <a href={user.website} target="_blank" rel="noopener noreferrer">
+                      {user.website}
+                    </a>
+                  </li>
+              )}
+            </ul>
+          </div>
 
+          <div className="profile-posts">
+            <h2>Recent Posts</h2>
             {posts.length > 0 ? (
-                <div className="posts-grid">
-                  {posts.map((post) => (
-                      <PostCard key={post.id} post={post} />
-                  ))}
-                </div>
-            ) : (
-                <div className="no-posts">
-                  {isCurrentUser ? (
-                      <p>You haven't posted anything yet. <Link to="/create-post">Create your first post</Link></p>
-                  ) : (
-                      <p>This user hasn't posted anything yet.</p>
+                <>
+                  <div className="posts-grid">
+                    {posts.map(post => (
+                        <PostCard key={post.id} post={post} />
+                    ))}
+                  </div>
+                  {hasMore && (
+                      <button onClick={loadMore} className="btn btn-secondary">
+                        {loading ? "Loading…" : "Load More"}
+                      </button>
                   )}
-                </div>
+                </>
+            ) : (
+                <p className="no-posts">
+                  {isMe
+                      ? (
+                          <>
+                            You haven’t posted yet.{" "}
+                            <Link to="/create-post">Create your first post</Link>.
+                          </>
+                      )
+                      : "No posts to show."}
+                </p>
             )}
           </div>
         </div>
       </div>
   );
 }
-
-export default Profile;

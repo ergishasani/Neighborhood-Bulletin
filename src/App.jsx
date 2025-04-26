@@ -1,12 +1,17 @@
+// src/App.jsx
+
 import { BrowserRouter as Router } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
-import AppRoutes from "./routes/AppRoutes"; // use your proper routing system
+import { OnboardingProvider } from "./context/OnboardingContext";
+import AppRoutes from "./routes/AppRoutes";
 
 function App() {
     return (
         <Router>
             <AuthProvider>
-                <AppRoutes /> {/* This handles ALL routes and layout logic */}
+                <OnboardingProvider>
+                    <AppRoutes />
+                </OnboardingProvider>
             </AuthProvider>
         </Router>
     );
