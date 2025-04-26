@@ -4,9 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9402c50b-973b-4364-81de-a8e229ecd4c6" name="Changes" comment="Add .idea/.gitignore to exclude IDE-specific files&#10;&#10;This commit adds a .gitignore file under the .idea directory to prevent committing IDE-specific files. The ignored files include workspace settings, HTTP requests, and datasource configurations, ensuring a cleaner and more portable repository.">
+    <list default="true" id="9402c50b-973b-4364-81de-a8e229ecd4c6" name="Changes" comment="Refactor Profile.jsx and update IDE-specific settings&#10;&#10;Refactored Profile.jsx to improve readability and handle edge cases for user data (e.g., missing fields). Updated .idea configurations to reflect recent changes, ensuring smoother local development without affecting project functionality.">
+      <change afterPath="$PROJECT_DIR$/src/components/Avatar.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/styles/components/_Avatar.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/styles/components/_postForm.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/user/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/user/Profile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/posts/SearchResults.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/posts/SearchResults.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/pages/_search.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/pages/_search.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,7 +124,7 @@
       <workItem from="1745506852953" duration="3459000" />
       <workItem from="1745591570493" duration="1926000" />
       <workItem from="1745606267475" duration="145000" />
-      <workItem from="1745664626313" duration="1137000" />
+      <workItem from="1745664626313" duration="6067000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed the bug for blank page on the main page">
       <option name="closed" value="true" />
@@ -145,7 +150,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745506786423</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Refactor Profile.jsx and update IDE-specific settings&#10;&#10;Refactored Profile.jsx to improve readability and handle edge cases for user data (e.g., missing fields). Updated .idea configurations to reflect recent changes, ensuring smoother local development without affecting project functionality.">
+      <option name="closed" value="true" />
+      <created>1745666126506</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1745666126506</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -177,6 +190,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Fixed the bug for blank page on the main page" />
     <MESSAGE value="Fixed the events page now it openes the events" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed the events page now it openes the events" />
+    <MESSAGE value="Add .idea/.gitignore to exclude IDE-specific files&#10;&#10;This commit adds a .gitignore file under the .idea directory to prevent committing IDE-specific files. The ignored files include workspace settings, HTTP requests, and datasource configurations, ensuring a cleaner and more portable repository." />
+    <MESSAGE value="Refactor Profile.jsx and update IDE-specific settings&#10;&#10;Refactored Profile.jsx to improve readability and handle edge cases for user data (e.g., missing fields). Updated .idea configurations to reflect recent changes, ensuring smoother local development without affecting project functionality." />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor Profile.jsx and update IDE-specific settings&#10;&#10;Refactored Profile.jsx to improve readability and handle edge cases for user data (e.g., missing fields). Updated .idea configurations to reflect recent changes, ensuring smoother local development without affecting project functionality." />
   </component>
 </project>
