@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9402c50b-973b-4364-81de-a8e229ecd4c6" name="Changes" comment="Add .idea/.gitignore to exclude IDE-specific files&#10;&#10;This commit adds a .gitignore file under the .idea directory to prevent committing IDE-specific files. The ignored files include workspace settings, HTTP requests, and datasource configurations, ensuring a cleaner and more portable repository.">
-      <change afterPath="$PROJECT_DIR$/src/styles/pages/_signUp.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/auth/Register.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/auth/Register.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/user/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/user/Profile.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +29,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Project-Structure" />
+        <entry key="$PROJECT_DIR$" value="Registration" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -76,8 +73,9 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Registration",
+    "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/Ergis/Documents/Web/Neighborhood-Bulletin",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -88,6 +86,11 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="QodanaReportsService">
+    <option name="descriptions">
+      <ReportDescription localRun="true" path="C:\Users\Ergis\AppData\Local\Temp\qodana_output\qodana.sarif.json" reportGuid="62944ff5-3f68-4898-ac07-849b6740fb67" reportId="Neighborhood-Bulletin/qodana/2025-04-25" />
+    </option>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -115,6 +118,8 @@
       <workItem from="1745336045643" duration="917000" />
       <workItem from="1745506852953" duration="3459000" />
       <workItem from="1745591570493" duration="1926000" />
+      <workItem from="1745606267475" duration="145000" />
+      <workItem from="1745664626313" duration="1137000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed the bug for blank page on the main page">
       <option name="closed" value="true" />
