@@ -6,13 +6,15 @@ import { uploadImage } from "../firebase/imgbb";         // imgbb helper
 import { addPost } from "../firebase/firestore";         // Firestore addPost
 import Loader from "./Loader";
 import {
-    Calendar,
-    MapPin,
-    ShoppingCart,
+    // Calendar,
+    // MapPin,
+    // ShoppingCart,
     Tag as TagIcon,
     Crosshair
 } from "lucide-react";
+
 import "../styles/components/_quickPostForm.scss";
+
 
 export default function QuickPostForm({ onPostCreated }) {
     const { currentUser } = useAuth();

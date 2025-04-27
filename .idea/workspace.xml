@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9402c50b-973b-4364-81de-a8e229ecd4c6" name="Changes" comment="Refactor CreatePost page and integrate Leaflet map support.&#10;&#10;Enhanced the CreatePost page with improved form structure, live preview functionality, tag handling, and better form validation. Added Leaflet and React-Leaflet libraries for map integration, updated styles for consistency, and revised dependencies in package.json. Adjusted global styling and included external Leaflet CSS in index.html for map display.">
+    <list default="true" id="9402c50b-973b-4364-81de-a8e229ecd4c6" name="Changes" comment="Refactor PostDetail page and improve UX.&#10;&#10;Enhanced the PostDetail page with features like likes, bookmarks, and tag display. Updated comments handling and added new interactions including toggle like/bookmark functionality. Refined styling for improved responsiveness and consistency across components.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase/firestore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/firestore.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/posts/PostDetail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/posts/PostDetail.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/_variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/_variables.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/pages/_post-detail.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/pages/_post-detail.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/QuickPostForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/QuickPostForm.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,18 +86,6 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="QodanaHighlightedReportService">
-    <option name="localRunNotPublishedPersistedInfo">
-      <LocalReportPersistedInfo>
-        <option name="path" value="C:\Users\Ergis\AppData\Local\Temp\qodana_output\qodana.sarif.json" />
-        <option name="reportGuid" value="1ff5bd74-0afc-41e0-ba8d-dbf2e30bd6d3" />
-        <option name="reportName" value="Neighborhood-Bulletin/qodana/2025-04-27" />
-      </LocalReportPersistedInfo>
-    </option>
-  </component>
-  <component name="QodanaIsSelectedPersistenceService">
-    <option name="selectedOrLoading" value="true" />
-  </component>
   <component name="QodanaReportsService">
     <option name="descriptions">
       <ReportDescription localRun="true" path="C:\Users\Ergis\AppData\Local\Temp\qodana_output\qodana.sarif.json" reportGuid="1ff5bd74-0afc-41e0-ba8d-dbf2e30bd6d3" reportId="Neighborhood-Bulletin/qodana/2025-04-27" />
@@ -137,7 +122,8 @@
       <workItem from="1745664626313" duration="6339000" />
       <workItem from="1745674320232" duration="4631000" />
       <workItem from="1745755775650" duration="8189000" />
-      <workItem from="1745764369001" duration="4343000" />
+      <workItem from="1745764369001" duration="4432000" />
+      <workItem from="1745769256141" duration="306000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed the bug for blank page on the main page">
       <option name="closed" value="true" />
@@ -211,7 +197,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745767216459</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Refactor PostDetail page and improve UX.&#10;&#10;Enhanced the PostDetail page with features like likes, bookmarks, and tag display. Updated comments handling and added new interactions including toggle like/bookmark functionality. Refined styling for improved responsiveness and consistency across components.">
+      <option name="closed" value="true" />
+      <created>1745768812623</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1745768812623</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -250,6 +244,7 @@
     <MESSAGE value="Refactor Profile page for improved UX and readability&#10;&#10;Simplified state handling, improved data fetching logic, and enhanced layout for the Profile page. Removed unused functionalities, streamlined error handling, and improved design consistency by updating spacing and styles. Enhanced fallback mechanisms to ensure seamless user experience for incomplete data cases." />
     <MESSAGE value="Refactor Profile page and improve UX across components&#10;&#10;Refactored Profile page for enhanced user experience by adding modular components such as CoverPhoto, AvatarUploader, Tabs, and ThemeToggle. Streamlined loading, image upload functionality, and state handling, while introducing CSS variables for dynamic theming. Updated global and component-specific styles for better design consistency and responsiveness." />
     <MESSAGE value="Refactor CreatePost page and integrate Leaflet map support.&#10;&#10;Enhanced the CreatePost page with improved form structure, live preview functionality, tag handling, and better form validation. Added Leaflet and React-Leaflet libraries for map integration, updated styles for consistency, and revised dependencies in package.json. Adjusted global styling and included external Leaflet CSS in index.html for map display." />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor CreatePost page and integrate Leaflet map support.&#10;&#10;Enhanced the CreatePost page with improved form structure, live preview functionality, tag handling, and better form validation. Added Leaflet and React-Leaflet libraries for map integration, updated styles for consistency, and revised dependencies in package.json. Adjusted global styling and included external Leaflet CSS in index.html for map display." />
+    <MESSAGE value="Refactor PostDetail page and improve UX.&#10;&#10;Enhanced the PostDetail page with features like likes, bookmarks, and tag display. Updated comments handling and added new interactions including toggle like/bookmark functionality. Refined styling for improved responsiveness and consistency across components." />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor PostDetail page and improve UX.&#10;&#10;Enhanced the PostDetail page with features like likes, bookmarks, and tag display. Updated comments handling and added new interactions including toggle like/bookmark functionality. Refined styling for improved responsiveness and consistency across components." />
   </component>
 </project>
