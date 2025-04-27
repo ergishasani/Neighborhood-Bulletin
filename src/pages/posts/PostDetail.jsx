@@ -160,7 +160,6 @@ export default function PostDetail() {
     title,
     content,
     imageUrl,
-    category,
     location,
     authorName,
     authorId,

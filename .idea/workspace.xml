@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9402c50b-973b-4364-81de-a8e229ecd4c6" name="Changes" comment="Add .nvmrc and update dependencies to latest versions&#10;&#10;Added a .nvmrc file to specify Node.js version 18. Updated various dependencies in the project, including `@mui`, `@firebase`, and `react-router`, to their latest stable releases. These changes ensure compatibility, improved performance, and inclusion of security patches." />
+    <list default="true" id="9402c50b-973b-4364-81de-a8e229ecd4c6" name="Changes" comment="Add .nvmrc and update dependencies to latest versions&#10;&#10;Included .nvmrc file to define Node.js version 18, ensuring development consistency. Updated various dependencies such as `@mui`, `@firebase`, and `react-router` to their latest releases for improved performance, compatibility, and security. Also added comments to address linter warnings in multiple files." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -48,7 +48,7 @@
   &quot;isMigrated&quot;: true
 }</component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="QODANA_PROBLEMS_VIEW_TAB" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -83,11 +83,6 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="QodanaReportsService">
-    <option name="descriptions">
-      <ReportDescription localRun="true" path="C:\Users\Ergis\AppData\Local\Temp\qodana_output\qodana.sarif.json" reportGuid="1ff5bd74-0afc-41e0-ba8d-dbf2e30bd6d3" reportId="Neighborhood-Bulletin/qodana/2025-04-27" />
-    </option>
-  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -120,7 +115,7 @@
       <workItem from="1745674320232" duration="4631000" />
       <workItem from="1745755775650" duration="8189000" />
       <workItem from="1745764369001" duration="4432000" />
-      <workItem from="1745769256141" duration="1668000" />
+      <workItem from="1745769256141" duration="1972000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed the bug for blank page on the main page">
       <option name="closed" value="true" />
@@ -226,7 +221,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745770710592</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Add .nvmrc and update dependencies to latest versions&#10;&#10;Included .nvmrc file to define Node.js version 18, ensuring development consistency. Updated various dependencies such as `@mui`, `@firebase`, and `react-router` to their latest releases for improved performance, compatibility, and security. Also added comments to address linter warnings in multiple files.">
+      <option name="closed" value="true" />
+      <created>1745771255910</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1745771255910</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -269,6 +272,7 @@
     <MESSAGE value="Refactor PostDetail page and update QuickPostForm.&#10;&#10;Enhanced PostDetail page with features like likes, bookmarks, and improved UX, including refined styling and interactions. Updated QuickPostForm by cleaning up unused imports and maintaining code consistency." />
     <MESSAGE value="Update dependencies to latest versions&#10;&#10;Upgraded multiple dependencies in `package-lock.json`, including `@mui`, `@firebase`, `react-router`, and others to their latest stable versions. This ensures the project stays up to date with performance improvements, new features, and security patches." />
     <MESSAGE value="Add .nvmrc and update dependencies to latest versions&#10;&#10;Added a .nvmrc file to specify Node.js version 18. Updated various dependencies in the project, including `@mui`, `@firebase`, and `react-router`, to their latest stable releases. These changes ensure compatibility, improved performance, and inclusion of security patches." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add .nvmrc and update dependencies to latest versions&#10;&#10;Added a .nvmrc file to specify Node.js version 18. Updated various dependencies in the project, including `@mui`, `@firebase`, and `react-router`, to their latest stable releases. These changes ensure compatibility, improved performance, and inclusion of security patches." />
+    <MESSAGE value="Add .nvmrc and update dependencies to latest versions&#10;&#10;Included .nvmrc file to define Node.js version 18, ensuring development consistency. Updated various dependencies such as `@mui`, `@firebase`, and `react-router` to their latest releases for improved performance, compatibility, and security. Also added comments to address linter warnings in multiple files." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add .nvmrc and update dependencies to latest versions&#10;&#10;Included .nvmrc file to define Node.js version 18, ensuring development consistency. Updated various dependencies such as `@mui`, `@firebase`, and `react-router` to their latest releases for improved performance, compatibility, and security. Also added comments to address linter warnings in multiple files." />
   </component>
 </project>
