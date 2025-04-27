@@ -4,24 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9402c50b-973b-4364-81de-a8e229ecd4c6" name="Changes" comment="Refactor Profile page and improve UX across components&#10;&#10;Refactored Profile page for enhanced user experience by adding modular components such as CoverPhoto, AvatarUploader, Tabs, and ThemeToggle. Streamlined loading, image upload functionality, and state handling, while introducing CSS variables for dynamic theming. Updated global and component-specific styles for better design consistency and responsiveness.">
-      <change afterPath="$PROJECT_DIR$/src/components/PostsMap.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/QuickPostForm.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/styles/components/_postsMap.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/styles/components/_quickPostForm.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/styles/pages/_createPost.scss" afterDir="false" />
+    <list default="true" id="9402c50b-973b-4364-81de-a8e229ecd4c6" name="Changes" comment="Refactor CreatePost page and integrate Leaflet map support.&#10;&#10;Enhanced the CreatePost page with improved form structure, live preview functionality, tag handling, and better form validation. Added Leaflet and React-Leaflet libraries for map integration, updated styles for consistency, and revised dependencies in package.json. Adjusted global styling and included external Leaflet CSS in index.html for map display.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/CommentSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CommentSection.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PostCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PostCard.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/firebase/firestore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/firestore.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase/imgbb.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/imgbb.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/home/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/home/Home.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/posts/CreatePost.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/posts/CreatePost.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/components/_post-card.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/components/_post-card.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/pages/_home.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/pages/_home.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/posts/PostDetail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/posts/PostDetail.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/_variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/_variables.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/pages/_post-detail.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/pages/_post-detail.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,7 +137,7 @@
       <workItem from="1745664626313" duration="6339000" />
       <workItem from="1745674320232" duration="4631000" />
       <workItem from="1745755775650" duration="8189000" />
-      <workItem from="1745764369001" duration="2643000" />
+      <workItem from="1745764369001" duration="4343000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed the bug for blank page on the main page">
       <option name="closed" value="true" />
@@ -215,7 +203,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745760855164</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Refactor CreatePost page and integrate Leaflet map support.&#10;&#10;Enhanced the CreatePost page with improved form structure, live preview functionality, tag handling, and better form validation. Added Leaflet and React-Leaflet libraries for map integration, updated styles for consistency, and revised dependencies in package.json. Adjusted global styling and included external Leaflet CSS in index.html for map display.">
+      <option name="closed" value="true" />
+      <created>1745767216459</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1745767216459</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -253,6 +249,7 @@
     <MESSAGE value="Refactor Profile page and enhance onboarding flow&#10;&#10;Refactored `Profile.jsx` for improved readability, better state handling, and added new features like follow button and user stats. Introduced an onboarding flow with slides, updated `AppRoutes` for onboarding guard, and enhanced the design with new button styles. Minor improvements include better file upload logic in `EditPost.jsx`." />
     <MESSAGE value="Refactor Profile page for improved UX and readability&#10;&#10;Simplified state handling, improved data fetching logic, and enhanced layout for the Profile page. Removed unused functionalities, streamlined error handling, and improved design consistency by updating spacing and styles. Enhanced fallback mechanisms to ensure seamless user experience for incomplete data cases." />
     <MESSAGE value="Refactor Profile page and improve UX across components&#10;&#10;Refactored Profile page for enhanced user experience by adding modular components such as CoverPhoto, AvatarUploader, Tabs, and ThemeToggle. Streamlined loading, image upload functionality, and state handling, while introducing CSS variables for dynamic theming. Updated global and component-specific styles for better design consistency and responsiveness." />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor Profile page and improve UX across components&#10;&#10;Refactored Profile page for enhanced user experience by adding modular components such as CoverPhoto, AvatarUploader, Tabs, and ThemeToggle. Streamlined loading, image upload functionality, and state handling, while introducing CSS variables for dynamic theming. Updated global and component-specific styles for better design consistency and responsiveness." />
+    <MESSAGE value="Refactor CreatePost page and integrate Leaflet map support.&#10;&#10;Enhanced the CreatePost page with improved form structure, live preview functionality, tag handling, and better form validation. Added Leaflet and React-Leaflet libraries for map integration, updated styles for consistency, and revised dependencies in package.json. Adjusted global styling and included external Leaflet CSS in index.html for map display." />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor CreatePost page and integrate Leaflet map support.&#10;&#10;Enhanced the CreatePost page with improved form structure, live preview functionality, tag handling, and better form validation. Added Leaflet and React-Leaflet libraries for map integration, updated styles for consistency, and revised dependencies in package.json. Adjusted global styling and included external Leaflet CSS in index.html for map display." />
   </component>
 </project>

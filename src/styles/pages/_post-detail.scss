@@ -1,190 +1,221 @@
+@import "../variables";
+@import "../mixins";
+
 .post-detail-page {
+  .container {
+    @include container;
     padding: $spacing-lg 0;
-  
-    .post-detail {
-      background: white;
-      border-radius: $border-radius-md;
-      box-shadow: $shadow-sm;
-      overflow: hidden;
-      margin-bottom: $spacing-xl;
-    }
-  
+  }
+
+  .post-detail {
+    background: $light-color;
+    border-radius: $border-radius-md;
+    box-shadow: 0 2px 8px rgba($dark-color, 0.1);
+    overflow: hidden;
+    margin-bottom: $spacing-lg;
+
     .post-image {
       width: 100%;
-      height: 400px;
-      overflow: hidden;
-  
+      height: 18rem;
+      background: $light-color;
+
       img {
         width: 100%;
         height: 100%;
         object-fit: cover;
       }
     }
-  
+
     .post-header {
-      padding: $spacing-lg;
-  
-      h1 {
-        margin-bottom: $spacing-sm;
+      padding: $spacing-md;
+
+      .post-title {
+        margin: 0 0 $spacing-sm;
+        font-size: 2rem;
+        line-height: 1.2;
         color: $dark-color;
       }
-    }
-  
-    .post-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: $spacing-md;
-      margin-bottom: $spacing-md;
-      font-size: 0.9rem;
-      color: $gray-color;
-  
-      .post-category {
-        background-color: rgba($primary-color, 0.1);
-        color: $primary-color;
-        padding: 0.2rem $spacing-xs;
-        border-radius: $border-radius-sm;
-        font-weight: 600;
-        text-transform: capitalize;
+
+      .post-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $spacing-xs;           // replaced
+        margin-bottom: $spacing-sm;
+
+        .tag-badge {
+          @include flex-center;
+          gap: $spacing-xs;         // replaced
+          background: lighten($primary-color, 45%);
+          color: $primary-color;
+          padding: $spacing-xs $spacing-xs; // replaced
+          border-radius: $border-radius-sm;
+          font-size: 0.875rem;
+        }
       }
-    }
-  
-    .post-content {
-      padding: 0 $spacing-lg $spacing-lg;
-      white-space: pre-line;
-  
-      p {
+
+      .post-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $spacing-md;
+        font-size: 0.9rem;
+        color: $dark-color;
         margin-bottom: $spacing-md;
-        line-height: 1.7;
+
+        .meta-item {
+          @include flex-center;
+          gap: $spacing-xs;         // replaced
+        }
       }
-    }
-  
-    .post-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: $spacing-sm;
-      padding: 0 $spacing-lg $spacing-lg;
-  
-      .btn-danger {
-        background-color: $accent-color;
-        color: white;
-  
-        &:hover {
-          background-color: darken($accent-color, 10%);
+
+      .post-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $spacing-sm;
+
+        .btn {
+          @include flex-center;
+          gap: $spacing-xs;         // replaced
+          padding: $spacing-xs $spacing-sm; // if you still have xxs, otherwise use xs
+          border-radius: $border-radius-sm;
+          font-size: 0.9rem;
+        }
+
+        .like-btn {
+          background: lighten($secondary-color, 45%);
+          color: $secondary-color;
+          border: 1px solid darken($secondary-color, 10%);
+          transition: background 0.2s;
+
+          &.liked {
+            background: $secondary-color;
+            color: white;
+          }
+
+          &:hover {
+            background: darken($secondary-color, 5%);
+            color: white;
+          }
+        }
+
+        .bookmark-btn {
+          background: lighten($primary-color, 45%);
+          color: $primary-color;
+          border: 1px solid darken($primary-color, 10%);
+          transition: background 0.2s;
+
+          &.bookmarked {
+            background: $primary-color;
+            color: white;
+          }
+
+          &:hover {
+            background: darken($primary-color, 5%);
+            color: white;
+          }
+        }
+
+        .btn-outline {
+          background: transparent;
+          border: 1px solid $dark-color;
+          color: $dark-color;
+
+          &:hover {
+            background: $dark-color;
+            color: white;
+          }
+        }
+
+        .btn-danger {
+          background: $danger-color;
+          color: white;
+          border: 1px solid darken($danger-color, 10%);
+
+          &:hover {
+            background: darken($danger-color, 5%);
+          }
         }
       }
     }
-  }
-  
-  .comment-section {
-    background: white;
-    border-radius: $border-radius-md;
-    box-shadow: $shadow-sm;
-    padding: $spacing-lg;
-  
-    h3 {
-      margin-bottom: $spacing-lg;
+
+    .post-content {
+      padding: $spacing-md;
+      font-size: 1.1rem;
+      line-height: 1.6;
       color: $dark-color;
     }
-  
+  }
+
+  .comments-section {
+    background: $light-color;
+    border-radius: $border-radius-md;
+    box-shadow: 0 2px 8px rgba($dark-color, 0.1);
+    padding: $spacing-md;
+
+    h2 {
+      margin-top: 0;
+      margin-bottom: $spacing-md;
+      font-size: 1.5rem;
+      color: $dark-color;
+    }
+
     .comment-form {
       display: flex;
       flex-direction: column;
       gap: $spacing-sm;
       margin-bottom: $spacing-lg;
-  
+
       textarea {
+        width: 100%;
         padding: $spacing-sm;
-        border: 1px solid rgba($gray-color, 0.3);
+        border: 1px solid $dark-color;
         border-radius: $border-radius-sm;
         font-family: inherit;
         resize: vertical;
-        min-height: 100px;
-  
-        &:focus {
-          outline: none;
-          border-color: $primary-color;
-        }
       }
-  
-      button {
+
+      .error-message {
+        color: $danger-color;
+      }
+
+      .btn-primary {
         align-self: flex-end;
       }
     }
-  
-    .login-prompt {
-      text-align: center;
-      margin-bottom: $spacing-lg;
-      color: $gray-color;
-  
-      a {
-        color: $primary-color;
-        text-decoration: underline;
-      }
-    }
-  
-    .no-comments {
-      text-align: center;
-      color: $gray-color;
-      font-style: italic;
-      padding: $spacing-lg 0;
-    }
-  
+
     .comments-list {
       display: flex;
       flex-direction: column;
       gap: $spacing-md;
-    }
-  
-    .comment {
-      position: relative;
-      padding: $spacing-md;
-      border-radius: $border-radius-sm;
-      background-color: rgba($light-color, 0.5);
-  
-      &-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: $spacing-xs;
-        font-size: 0.9rem;
-      }
-  
-      &-author {
-        display: flex;
-        align-items: center;
-        gap: $spacing-xs;
-        color: $dark-color;
-        font-weight: 600;
-  
-        .user-icon {
-          color: $gray-color;
+
+      .comment-item {
+        border-top: 1px solid lighten($dark-color, 80%);
+        padding-top: $spacing-md;
+
+        .comment-meta {
+          display: flex;
+          justify-content: space-between;
+          font-size: 0.875rem;
+          color: lighten($dark-color, 20%);
+          margin-bottom: $spacing-xs; // if undefined, replace with xs
+
+          .comment-date {
+            font-style: italic;
+          }
         }
-      }
-  
-      &-date {
-        color: $gray-color;
-      }
-  
-      &-content {
-        p {
+
+        .comment-body {
           margin: 0;
-          line-height: 1.6;
-        }
-      }
-  
-      .btn-delete-comment {
-        position: absolute;
-        top: $spacing-sm;
-        right: $spacing-sm;
-        padding: 0.2rem;
-        background: none;
-        border: none;
-        color: $gray-color;
-        cursor: pointer;
-  
-        &:hover {
-          color: $accent-color;
+          font-size: 1rem;
+          line-height: 1.5;
+          color: $dark-color;
         }
       }
     }
   }
+
+  .error-message {
+    text-align: center;
+    color: $danger-color;
+    margin: $spacing-lg 0;
+  }
+}

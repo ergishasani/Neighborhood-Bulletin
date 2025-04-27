@@ -196,7 +196,6 @@ export async function getUsers() {
 
 /**
  * Toggle a postId in the user's bookmarks array.
- * If `isBookmarked === true`, removes it; otherwise adds it.
  */
 export async function toggleBookmark(userId, postId, isBookmarked) {
   try {
@@ -219,6 +218,37 @@ export async function isBookmarked(userId, postId) {
     if (!res.success) return false;
     const bks = res.data.bookmarks;
     return Array.isArray(bks) && bks.includes(postId);
+  } catch {
+    return false;
+  }
+}
+
+// ————— LIKES —————
+
+/**
+ * Toggle a postId in the post's likes array.
+ */
+export async function toggleLike(postId, userId, isLiked) {
+  try {
+    const postRef = doc(firestore, "posts", postId);
+    await updateDoc(postRef, {
+      likes: isLiked
+          ? arrayRemove(userId)
+          : arrayUnion(userId),
+    });
+    return { success: true };
+  } catch (err) {
+    return { success: false, error: err.message };
+  }
+}
+
+/** Check if a userId is in the post's likes */
+export async function isLiked(postId, userId) {
+  try {
+    const res = await getPostById(postId);
+    if (!res.success) return false;
+    const likes = res.data.likes;
+    return Array.isArray(likes) && likes.includes(userId);
   } catch {
     return false;
   }
