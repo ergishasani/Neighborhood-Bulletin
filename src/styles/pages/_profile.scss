@@ -1,18 +1,18 @@
 .profile-page {
   .container {
-    max-width: 900px;
+    max-width: 800px;
     margin: 0 auto;
     padding: 2rem 1rem;
   }
 
   .profile-header {
     display: flex;
-    gap: 1.5rem;
     align-items: center;
+    gap: 1.5rem;
     margin-bottom: 2rem;
 
     .avatar {
-      border: 3px solid #ddd; // if using Avatar component
+      border: 2px solid #ddd;
     }
 
     .profile-details {
@@ -30,7 +30,7 @@
 
       .profile-stats {
         display: flex;
-        gap: 2rem;
+        gap: 1.5rem;
         margin-bottom: 0.75rem;
 
         div {
@@ -51,23 +51,26 @@
       }
 
       .btn {
-        margin-top: 0.75rem;
+        margin-top: 1rem;
       }
     }
   }
 
   .profile-about {
-    background: #f9f9f9;
+    background: #f7f9fa;
     padding: 1rem 1.5rem;
     border-radius: 6px;
     margin-bottom: 2rem;
+
     h2 {
       margin-top: 0;
     }
+
     ul {
       list-style: none;
-      padding: 0;
       margin: 0.5rem 0 0;
+      padding: 0;
+
       li {
         margin-bottom: 0.5rem;
         strong {
@@ -84,26 +87,13 @@
 
     .posts-grid {
       display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
       gap: 1rem;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     }
 
     .no-posts {
       color: #666;
       text-align: center;
-    }
-
-    .btn-secondary {
-      display: block;
-      margin: 1.5rem auto 0;
-      background: #eee;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-      &:hover {
-        background: #ddd;
-      }
     }
   }
 }

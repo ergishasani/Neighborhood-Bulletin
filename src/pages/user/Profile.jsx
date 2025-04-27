@@ -1,3 +1,5 @@
+// src/pages/user/Profile.jsx
+
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getUserByUid, getPosts } from "../../firebase/firestore";
@@ -8,7 +10,7 @@ import Loader from "../../components/Loader";
 import "../../styles/pages/_profile.scss";
 
 export default function Profile() {
-  const { id } = useParams();           // user’s UID from URL
+  const { id } = useParams();
   const { currentUser } = useAuth();
   const isMe = currentUser?.uid === id;
 
@@ -16,53 +18,47 @@ export default function Profile() {
   const [posts, setPosts]     = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError]     = useState("");
-  const [lastVisible, setLastVisible] = useState(null);
-  const [hasMore, setHasMore] = useState(false);
 
   useEffect(() => {
     const fetchProfile = async () => {
       setLoading(true);
       setError("");
-      try {
-        // 1) Load user data
-        const resUser = await getUserByUid(id);
-        if (!resUser.success) throw new Error(resUser.error);
-        setUser(resUser.data);
 
-        // 2) Load first page of posts
-        const resPosts = await getPosts({ authorId: id, limitCount: 6 });
+      try {
+        // 1) Try Firestore first
+        const resUser = await getUserByUid(id);
+        if (resUser.success) {
+          setUser(resUser.data);
+        } else if (isMe) {
+          // 2) Fallback to AuthContext for your own Google account
+          setUser({
+            displayName: currentUser.displayName || "Anonymous",
+            email:       currentUser.email,
+            photoURL:    currentUser.photoURL,
+            createdAt: {
+              seconds: Math.floor(
+                  new Date(currentUser.metadata.creationTime).getTime() / 1000
+              )
+            }
+          });
+        } else {
+          throw new Error("User not found");
+        }
+
+        // 3) Fetch their posts
+        const resPosts = await getPosts({ authorId: id, limitCount: 10 });
         if (!resPosts.success) throw new Error(resPosts.error);
         setPosts(resPosts.data);
-        setLastVisible(resPosts.lastVisible);
-        setHasMore(Boolean(resPosts.lastVisible));
+
       } catch (err) {
         setError(err.message);
       } finally {
         setLoading(false);
       }
     };
-    fetchProfile();
-  }, [id]);
 
-  const loadMore = async () => {
-    if (!lastVisible) return;
-    setLoading(true);
-    try {
-      const res = await getPosts({
-        authorId: id,
-        limitCount: 6,
-        lastVisible
-      });
-      if (!res.success) throw new Error(res.error);
-      setPosts(prev => [...prev, ...res.data]);
-      setLastVisible(res.lastVisible);
-      setHasMore(Boolean(res.lastVisible));
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+    fetchProfile();
+  }, [id, currentUser, isMe]);
 
   if (loading) return <Loader />;
   if (error)   return <div className="error-message">{error}</div>;
@@ -82,9 +78,7 @@ export default function Profile() {
                 size={120}
             />
             <div className="profile-details">
-              <h1 className="profile-name">
-                {user.displayName || "Anonymous"}
-              </h1>
+              <h1 className="profile-name">{user.displayName}</h1>
               {user.bio && <p className="profile-bio">{user.bio}</p>}
 
               <div className="profile-stats">
@@ -92,27 +86,14 @@ export default function Profile() {
                   <strong>{posts.length}</strong>
                   <span>Posts</span>
                 </div>
-                <div>
-                  <strong>123</strong> {/* stub */}
-                  <span>Followers</span>
-                </div>
-                <div>
-                  <strong>45</strong> {/* stub */}
-                  <span>Following</span>
-                </div>
               </div>
 
               <p className="profile-joined">Joined {joinedDate}</p>
 
-              {isMe ? (
+              {isMe && (
                   <Link to="/edit-profile" className="btn btn-outline">
                     Edit Profile
                   </Link>
-              ) : (
-                  <button className="btn btn-primary">
-                    {/* TODO: wire up follow/unfollow */}
-                    Follow
-                  </button>
               )}
             </div>
           </div>
@@ -133,7 +114,11 @@ export default function Profile() {
               {user.website && (
                   <li>
                     <strong>Website:</strong>{" "}
-                    <a href={user.website} target="_blank" rel="noopener noreferrer">
+                    <a
+                        href={user.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
                       {user.website}
                     </a>
                   </li>
@@ -144,28 +129,22 @@ export default function Profile() {
           <div className="profile-posts">
             <h2>Recent Posts</h2>
             {posts.length > 0 ? (
-                <>
-                  <div className="posts-grid">
-                    {posts.map(post => (
-                        <PostCard key={post.id} post={post} />
-                    ))}
-                  </div>
-                  {hasMore && (
-                      <button onClick={loadMore} className="btn btn-secondary">
-                        {loading ? "Loading…" : "Load More"}
-                      </button>
-                  )}
-                </>
+                <div className="posts-grid">
+                  {posts.map(post => (
+                      <PostCard key={post.id} post={post} />
+                  ))}
+                </div>
             ) : (
                 <p className="no-posts">
                   {isMe
                       ? (
                           <>
-                            You haven’t posted yet.{" "}
+                            You haven’t posted anything yet.{" "}
                             <Link to="/create-post">Create your first post</Link>.
                           </>
                       )
-                      : "No posts to show."}
+                      : "No posts to show."
+                  }
                 </p>
             )}
           </div>

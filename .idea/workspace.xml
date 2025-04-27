@@ -4,19 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9402c50b-973b-4364-81de-a8e229ecd4c6" name="Changes" comment="Add Avatar component and enhance SearchResults UX&#10;&#10;Introduced a reusable Avatar component with styling for consistent user avatars. Refactored SearchResults to improve search functionality, user feedback, and inline form handling. Additionally, updated styles for better responsiveness and alignment with design standards.">
-      <change afterPath="$PROJECT_DIR$/src/context/OnboardingContext.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Onboarding.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/styles/components/_onBoardingSlides.scss" afterDir="false" />
+    <list default="true" id="9402c50b-973b-4364-81de-a8e229ecd4c6" name="Changes" comment="Refactor Profile page for improved UX and readability&#10;&#10;Simplified state handling, improved data fetching logic, and enhanced layout for the Profile page. Removed unused functionalities, streamlined error handling, and improved design consistency by updating spacing and styles. Enhanced fallback mechanisms to ensure seamless user experience for incomplete data cases.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/OnboardingSlides.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/OnboardingSlides.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase/firestore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/firestore.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/posts/EditPost.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/posts/EditPost.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/user/EditProfile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/user/EditProfile.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/user/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/user/Profile.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/AppRoutes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/AppRoutes.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/_mixins.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/_mixins.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/pages/_profile.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/pages/_profile.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +121,8 @@
       <workItem from="1745591570493" duration="1926000" />
       <workItem from="1745606267475" duration="145000" />
       <workItem from="1745664626313" duration="6339000" />
-      <workItem from="1745674320232" duration="4252000" />
+      <workItem from="1745674320232" duration="4631000" />
+      <workItem from="1745755775650" duration="1081000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed the bug for blank page on the main page">
       <option name="closed" value="true" />
@@ -172,7 +164,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745671885470</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Refactor Profile page and enhance onboarding flow&#10;&#10;Refactored `Profile.jsx` for improved readability, better state handling, and added new features like follow button and user stats. Introduced an onboarding flow with slides, updated `AppRoutes` for onboarding guard, and enhanced the design with new button styles. Minor improvements include better file upload logic in `EditPost.jsx`.">
+      <option name="closed" value="true" />
+      <created>1745680054152</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1745680054152</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -207,6 +207,8 @@
     <MESSAGE value="Add .idea/.gitignore to exclude IDE-specific files&#10;&#10;This commit adds a .gitignore file under the .idea directory to prevent committing IDE-specific files. The ignored files include workspace settings, HTTP requests, and datasource configurations, ensuring a cleaner and more portable repository." />
     <MESSAGE value="Refactor Profile.jsx and update IDE-specific settings&#10;&#10;Refactored Profile.jsx to improve readability and handle edge cases for user data (e.g., missing fields). Updated .idea configurations to reflect recent changes, ensuring smoother local development without affecting project functionality." />
     <MESSAGE value="Add Avatar component and enhance SearchResults UX&#10;&#10;Introduced a reusable Avatar component with styling for consistent user avatars. Refactored SearchResults to improve search functionality, user feedback, and inline form handling. Additionally, updated styles for better responsiveness and alignment with design standards." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Avatar component and enhance SearchResults UX&#10;&#10;Introduced a reusable Avatar component with styling for consistent user avatars. Refactored SearchResults to improve search functionality, user feedback, and inline form handling. Additionally, updated styles for better responsiveness and alignment with design standards." />
+    <MESSAGE value="Refactor Profile page and enhance onboarding flow&#10;&#10;Refactored `Profile.jsx` for improved readability, better state handling, and added new features like follow button and user stats. Introduced an onboarding flow with slides, updated `AppRoutes` for onboarding guard, and enhanced the design with new button styles. Minor improvements include better file upload logic in `EditPost.jsx`." />
+    <MESSAGE value="Refactor Profile page for improved UX and readability&#10;&#10;Simplified state handling, improved data fetching logic, and enhanced layout for the Profile page. Removed unused functionalities, streamlined error handling, and improved design consistency by updating spacing and styles. Enhanced fallback mechanisms to ensure seamless user experience for incomplete data cases." />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor Profile page for improved UX and readability&#10;&#10;Simplified state handling, improved data fetching logic, and enhanced layout for the Profile page. Removed unused functionalities, streamlined error handling, and improved design consistency by updating spacing and styles. Enhanced fallback mechanisms to ensure seamless user experience for incomplete data cases." />
   </component>
 </project>
