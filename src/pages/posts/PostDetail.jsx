@@ -156,17 +156,7 @@ export default function PostDetail() {
   if (!post) return <div className="error-message">Post not found</div>;
 
   // eslint-disable-next-line no-unused-vars
-  const {
-    title,
-    content,
-    imageUrl,
-    location,
-    authorName,
-    authorId,
-    tags = [],
-    createdAt,
-    likes = [],
-  } = post;
+  const { title, content, imageUrl, category, location, authorName, authorId, tags = [], createdAt, likes = [],} = post;
 
   const isAuthor = currentUser?.uid === authorId;
   const postDate = parseDate(createdAt);
