@@ -15,7 +15,9 @@ import {
   orderBy,
   limit,
   startAfter,
-  serverTimestamp
+  serverTimestamp,
+  arrayUnion,
+  arrayRemove
 } from "firebase/firestore";
 import {
   getStorage,
@@ -33,6 +35,7 @@ const storage = getStorage();
 
 const postsColl = collection(firestore, "posts");
 
+/** Add a post, returns { success, id } */
 export async function addPost(postData) {
   try {
     const docRef = await addDoc(postsColl, {
@@ -46,6 +49,7 @@ export async function addPost(postData) {
   }
 }
 
+/** Get a single post by ID */
 export async function getPostById(id) {
   try {
     const snap = await getDoc(doc(firestore, "posts", id));
@@ -58,6 +62,7 @@ export async function getPostById(id) {
   }
 }
 
+/** Update a post */
 export async function updatePost(id, postData) {
   try {
     await updateDoc(doc(firestore, "posts", id), {
@@ -70,6 +75,7 @@ export async function updatePost(id, postData) {
   }
 }
 
+/** Delete a post */
 export async function deletePost(id) {
   try {
     await deleteDoc(doc(firestore, "posts", id));
@@ -79,6 +85,14 @@ export async function deletePost(id) {
   }
 }
 
+/**
+ * Fetch posts with optional filtering and pagination.
+ * @param {Object} options
+ * @param {string|null} options.category
+ * @param {string|null} options.authorId
+ * @param {number} options.limitCount
+ * @param {QueryDocumentSnapshot|null} options.lastVisible
+ */
 export async function getPosts({
                                  category = null,
                                  authorId = null,
@@ -95,6 +109,7 @@ export async function getPosts({
 
     const q = query(postsColl, ...constraints);
     const snap = await getDocs(q);
+
     const posts = snap.docs.map(d => ({ id: d.id, ...d.data() }));
     const newLastVisible = snap.docs[snap.docs.length - 1] || null;
 
@@ -137,8 +152,8 @@ export async function getUserByUid(uid) {
 }
 
 /**
- * Create or update a user document at users/{uid},
- * merging fields so existing docs aren’t overwritten.
+ * Merge-update a user document (users/{uid}).
+ * Returns { success }.
  */
 export async function updateUser(uid, userData) {
   try {
@@ -156,6 +171,7 @@ export async function updateUser(uid, userData) {
   }
 }
 
+/** Delete a user document */
 export async function deleteUser(uid) {
   try {
     await deleteDoc(doc(firestore, "users", uid));
@@ -165,6 +181,7 @@ export async function deleteUser(uid) {
   }
 }
 
+/** List all users (admin purpose) */
 export async function getUsers() {
   try {
     const snap = await getDocs(usersColl);
@@ -172,6 +189,38 @@ export async function getUsers() {
     return { success: true, data: users };
   } catch (err) {
     return { success: false, error: err.message };
+  }
+}
+
+// ————— BOOKMARKS —————
+
+/**
+ * Toggle a postId in the user's bookmarks array.
+ * If `isBookmarked === true`, removes it; otherwise adds it.
+ */
+export async function toggleBookmark(userId, postId, isBookmarked) {
+  try {
+    const userRef = doc(firestore, "users", userId);
+    await updateDoc(userRef, {
+      bookmarks: isBookmarked
+          ? arrayRemove(postId)
+          : arrayUnion(postId),
+    });
+    return { success: true };
+  } catch (err) {
+    return { success: false, error: err.message };
+  }
+}
+
+/** Check if a postId is in the user's bookmarks */
+export async function isBookmarked(userId, postId) {
+  try {
+    const res = await getUserByUid(userId);
+    if (!res.success) return false;
+    const bks = res.data.bookmarks;
+    return Array.isArray(bks) && bks.includes(postId);
+  } catch {
+    return false;
   }
 }
 

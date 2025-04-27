@@ -1,0 +1,155 @@
+.post-form-page {
+  .container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  h1 {
+    margin-bottom: 1rem;
+  }
+
+  .error-message {
+    color: #d32f2d;
+    margin-bottom: 1rem;
+  }
+
+  .post-form {
+    background: #fff;
+    border-radius: 6px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+
+    .form-group {
+      margin-bottom: 1.25rem;
+
+      label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+      }
+
+      input[type="text"],
+      input[list],
+      textarea {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-family: inherit;
+      }
+    }
+
+    .category-select {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+
+      span {
+        font-weight: 600;
+        margin-right: 0.5rem;
+      }
+
+      label {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        padding: 0.4rem 0.8rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background 0.2s;
+
+        &.active,
+        &:hover {
+          background: #e6f7ff;
+          border-color: #91d5ff;
+        }
+
+        input {
+          display: none;
+        }
+      }
+    }
+
+    .char-counter {
+      text-align: right;
+      font-size: 0.85rem;
+      color: #666;
+      margin-top: 0.25rem;
+    }
+
+    .tags-input {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      svg {
+        flex-shrink: 0;
+      }
+
+      input {
+        flex: 1;
+        border: none;
+        outline: none;
+      }
+    }
+
+    .tags-list {
+      margin-top: 0.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+
+      .tag-item {
+        background: #f0f5ff;
+        color: #1a73e8;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+
+        button {
+          background: transparent;
+          border: none;
+          cursor: pointer;
+          font-size: 1rem;
+          line-height: 1;
+        }
+      }
+    }
+
+    .image-upload button {
+      background: #fafafa;
+      border: 1px dashed #ccc;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .image-preview {
+      margin-top: 0.5rem;
+      img {
+        display: block;
+        max-width: 200px;
+        border-radius: 4px;
+      }
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+  }
+
+  .preview-section {
+    margin-top: 2rem;
+
+    h2 {
+      margin-bottom: 1rem;
+    }
+  }
+}
