@@ -155,6 +155,7 @@ export default function PostDetail() {
   if (errorPost) return <div className="error-message">{errorPost}</div>;
   if (!post) return <div className="error-message">Post not found</div>;
 
+  // eslint-disable-next-line no-unused-vars
   const {
     title,
     content,

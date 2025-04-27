@@ -26,6 +26,8 @@ import {
   getDownloadURL,
   deleteObject
 } from "firebase/storage";
+
+// eslint-disable-next-line no-unused-vars
 import { db } from "./config";
 
 const firestore = getFirestore();
@@ -243,6 +245,7 @@ export async function toggleLike(postId, userId, isLiked) {
 }
 
 /** Check if a userId is in the post's likes */
+// eslint-disable-next-line no-unused-vars
 export async function isLiked(postId, userId) {
   try {
     const res = await getPostById(postId);

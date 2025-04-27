@@ -8,6 +8,7 @@ function ForgotPassword() {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
