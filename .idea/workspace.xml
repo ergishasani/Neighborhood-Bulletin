@@ -5,8 +5,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9402c50b-973b-4364-81de-a8e229ecd4c6" name="Changes" comment="Refactor Profile page for improved UX and readability&#10;&#10;Simplified state handling, improved data fetching logic, and enhanced layout for the Profile page. Removed unused functionalities, streamlined error handling, and improved design consistency by updating spacing and styles. Enhanced fallback mechanisms to ensure seamless user experience for incomplete data cases.">
+      <change afterPath="$PROJECT_DIR$/src/components/ActivityFeed.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/ActivityMap.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/ActivityStats.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/AvatarUploader.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/BadgesList.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Bookmarks.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/CoverPhoto.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/FollowButton.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/GroupsAndEvents.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/InterestsCloud.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/ProfileSettings.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Tabs.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/ThemeToggle.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/styles/components/_activityFeed.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/styles/components/_activityMap.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/styles/components/_activityStats.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/styles/components/_avatarUploader.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/styles/components/_badgesList.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/styles/components/_bookmarks.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/styles/components/_coverPhoto.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/styles/components/_followButton.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/styles/components/_groupsAndEvents.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/styles/components/_interestsCloud.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/styles/components/_profileSettings.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/styles/components/_tabs.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/styles/components/_themeToggle.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/context/AuthContext.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/context/AuthContext.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/firebase/imgbb.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/imgbb.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/user/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/user/Profile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/_globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/_globals.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/styles/pages/_profile.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/pages/_profile.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -30,7 +59,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Registration" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -66,27 +95,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Attach to Node.js/Chrome.Unnamed.executor&quot;: &quot;Debug&quot;,
-    &quot;Node.js.EditPost.jsx.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Ergis/Documents/Web/Neighborhood-Bulletin&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;watcher.settings&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\WebStorm 2024.3.5\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Attach to Node.js/Chrome.Unnamed.executor": "Debug",
+    "Node.js.EditPost.jsx.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "Enhancments",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/Ergis/Documents/Web/Neighborhood-Bulletin",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "watcher.settings",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2024.3.5\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="QodanaReportsService">
     <option name="descriptions">
       <ReportDescription localRun="true" path="C:\Users\Ergis\AppData\Local\Temp\qodana_output\qodana.sarif.json" reportGuid="62944ff5-3f68-4898-ac07-849b6740fb67" reportId="Neighborhood-Bulletin/qodana/2025-04-25" />
@@ -122,7 +151,7 @@
       <workItem from="1745606267475" duration="145000" />
       <workItem from="1745664626313" duration="6339000" />
       <workItem from="1745674320232" duration="4631000" />
-      <workItem from="1745755775650" duration="1081000" />
+      <workItem from="1745755775650" duration="4367000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed the bug for blank page on the main page">
       <option name="closed" value="true" />
@@ -172,7 +201,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745680054152</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Refactor Profile page for improved UX and readability&#10;&#10;Simplified state handling, improved data fetching logic, and enhanced layout for the Profile page. Removed unused functionalities, streamlined error handling, and improved design consistency by updating spacing and styles. Enhanced fallback mechanisms to ensure seamless user experience for incomplete data cases.">
+      <option name="closed" value="true" />
+      <created>1745757119862</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1745757119862</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

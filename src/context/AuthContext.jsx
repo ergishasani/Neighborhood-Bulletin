@@ -1,41 +1,48 @@
 // src/context/AuthContext.jsx
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { auth } from "../firebase/config"; // Ensure this path is correct
+import { auth } from "../firebase/config";
 import { onAuthStateChanged } from "firebase/auth";
+import { setUser } from "../firebase/firestore"; // ← import our helper
 
-// Define and Export the Context (only ONCE)
+// Create the AuthContext
 export const AuthContext = createContext(undefined);
 
-// Define and Export the AuthProvider Component
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
-  const [loading, setLoading] = useState(true); // Start loading
+  const [loading, setLoading]         = useState(true);
 
   useEffect(() => {
-    // Listen for authentication state changes from Firebase
+    // Subscribe to Firebase Auth state
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user); // Update state with the user object or null
-      setLoading(false);    // Set loading to false once the check is complete
+      setCurrentUser(user);
+
+      if (user) {
+        // Ensure we have a Firestore user doc (creates or merges)
+        setUser(user.uid, {
+          displayName: user.displayName || "",
+          email:       user.email || "",
+          photoURL:    user.photoURL || "",
+        }).catch((err) => {
+          console.error("Error writing user doc:", err);
+        }).finally(() => {
+          setLoading(false);
+        });
+      } else {
+        // No user signed in
+        setLoading(false);
+      }
     });
 
-    // Cleanup subscription when the component unmounts
     return unsubscribe;
-  }, []); // Empty dependency array ensures this effect runs only once on mount
-
-  // The value object to be provided by the context
-  const value = {
-    currentUser,
-    loading, // Components can use this to show loading indicators
-  };
+  }, []);
 
   return (
-      <AuthContext.Provider value={value}>
+      <AuthContext.Provider value={{ currentUser, loading }}>
         {children}
       </AuthContext.Provider>
   );
 }
 
-// Define and Export the useAuth Hook
 export function useAuth() {
   const context = useContext(AuthContext);
   if (context === undefined) {

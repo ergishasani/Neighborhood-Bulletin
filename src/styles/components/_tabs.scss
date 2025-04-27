@@ -1,0 +1,31 @@
+.tabs {
+  &__headers {
+    display: flex;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 1rem;
+
+    .tabs__header {
+      background: none;
+      border: none;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-weight: 600;
+      color: #555;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+
+      &--active {
+        color: #000;
+        border-color: #1da1f2;
+      }
+
+      &:hover {
+        color: #000;
+      }
+    }
+  }
+
+  &__content {
+    // Your panel content renders here
+  }
+}

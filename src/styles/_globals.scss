@@ -1,88 +1,103 @@
+// Resets & box-sizing
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+// CSS Variables for theming
+:root {
+  --color-bg: #{$light-color};
+  --color-text: #{$dark-color};
+  --primary-color: #{$primary-color};
+  --secondary-color: #{$secondary-color};
+}
+
+[data-theme="dark"] {
+  --color-bg: #{$dark-color};
+  --color-text: #{$light-color};
+}
+
+body {
+  font-family: $font-primary;
+  line-height: 1.6;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  transition: background-color 0.2s, color 0.2s;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  padding: $spacing-lg 0;
+}
+
+.container {
+  @include container;
+}
+
+.btn {
+  display: inline-block;
+  padding: $spacing-xs $spacing-md;
+  border-radius: $border-radius-sm;
+  font-weight: 600;
+  transition: all 0.2s;
+
+  &-primary {
+    background-color: var(--primary-color);
+    color: white;
+
+    &:hover {
+      filter: brightness(90%);
+    }
   }
-  
-  html {
-    font-size: 16px;
-    scroll-behavior: smooth;
+
+  &-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+
+    &:hover {
+      filter: brightness(90%);
+    }
   }
-  
-  body {
-    font-family: $font-primary;
-    line-height: 1.6;
-    color: $dark-color;
-    background-color: $light-color;
-  }
-  
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
-  
-  ul {
-    list-style: none;
-  }
-  
-  img {
-    max-width: 100%;
-    height: auto;
-  }
-  
-  button {
-    cursor: pointer;
-    font-family: inherit;
-  }
-  
-  .app-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-  
-  .main-content {
-    flex: 1;
-    padding: $spacing-lg 0;
-  }
-  
-  .container {
-    @include container;
-  }
-  
-  .btn {
-    display: inline-block;
-    padding: $spacing-xs $spacing-md;
-    border-radius: $border-radius-sm;
-    font-weight: 600;
-    transition: all 0.2s;
-  
-    &-primary {
-      background-color: $primary-color;
+
+  &-outline {
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    background: transparent;
+
+    &:hover {
+      background-color: var(--primary-color);
       color: white;
-  
-      &:hover {
-        background-color: darken($primary-color, 10%);
-      }
-    }
-  
-    &-secondary {
-      background-color: $secondary-color;
-      color: white;
-  
-      &:hover {
-        background-color: darken($secondary-color, 10%);
-      }
-    }
-  
-    &-outline {
-      border: 1px solid $primary-color;
-      color: $primary-color;
-      background: transparent;
-  
-      &:hover {
-        background-color: $primary-color;
-        color: white;
-      }
     }
   }
+}
