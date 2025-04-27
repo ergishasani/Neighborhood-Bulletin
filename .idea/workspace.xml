@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9402c50b-973b-4364-81de-a8e229ecd4c6" name="Changes" comment="Refactor PostDetail page and improve UX.&#10;&#10;Enhanced the PostDetail page with features like likes, bookmarks, and tag display. Updated comments handling and added new interactions including toggle like/bookmark functionality. Refined styling for improved responsiveness and consistency across components.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/QuickPostForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/QuickPostForm.jsx" afterDir="false" />
-    </list>
+    <list default="true" id="9402c50b-973b-4364-81de-a8e229ecd4c6" name="Changes" comment="Refactor PostDetail page and update QuickPostForm.&#10;&#10;Enhanced PostDetail page with features like likes, bookmarks, and improved UX, including refined styling and interactions. Updated QuickPostForm by cleaning up unused imports and maintaining code consistency." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -123,7 +120,7 @@
       <workItem from="1745674320232" duration="4631000" />
       <workItem from="1745755775650" duration="8189000" />
       <workItem from="1745764369001" duration="4432000" />
-      <workItem from="1745769256141" duration="306000" />
+      <workItem from="1745769256141" duration="923000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed the bug for blank page on the main page">
       <option name="closed" value="true" />
@@ -205,7 +202,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745768812623</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Refactor PostDetail page and update QuickPostForm.&#10;&#10;Enhanced PostDetail page with features like likes, bookmarks, and improved UX, including refined styling and interactions. Updated QuickPostForm by cleaning up unused imports and maintaining code consistency.">
+      <option name="closed" value="true" />
+      <created>1745769824910</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1745769824910</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -245,6 +250,7 @@
     <MESSAGE value="Refactor Profile page and improve UX across components&#10;&#10;Refactored Profile page for enhanced user experience by adding modular components such as CoverPhoto, AvatarUploader, Tabs, and ThemeToggle. Streamlined loading, image upload functionality, and state handling, while introducing CSS variables for dynamic theming. Updated global and component-specific styles for better design consistency and responsiveness." />
     <MESSAGE value="Refactor CreatePost page and integrate Leaflet map support.&#10;&#10;Enhanced the CreatePost page with improved form structure, live preview functionality, tag handling, and better form validation. Added Leaflet and React-Leaflet libraries for map integration, updated styles for consistency, and revised dependencies in package.json. Adjusted global styling and included external Leaflet CSS in index.html for map display." />
     <MESSAGE value="Refactor PostDetail page and improve UX.&#10;&#10;Enhanced the PostDetail page with features like likes, bookmarks, and tag display. Updated comments handling and added new interactions including toggle like/bookmark functionality. Refined styling for improved responsiveness and consistency across components." />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor PostDetail page and improve UX.&#10;&#10;Enhanced the PostDetail page with features like likes, bookmarks, and tag display. Updated comments handling and added new interactions including toggle like/bookmark functionality. Refined styling for improved responsiveness and consistency across components." />
+    <MESSAGE value="Refactor PostDetail page and update QuickPostForm.&#10;&#10;Enhanced PostDetail page with features like likes, bookmarks, and improved UX, including refined styling and interactions. Updated QuickPostForm by cleaning up unused imports and maintaining code consistency." />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor PostDetail page and update QuickPostForm.&#10;&#10;Enhanced PostDetail page with features like likes, bookmarks, and improved UX, including refined styling and interactions. Updated QuickPostForm by cleaning up unused imports and maintaining code consistency." />
   </component>
 </project>
