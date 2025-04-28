@@ -1,34 +1,75 @@
 // src/context/AuthContext.jsx
+
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../firebase/config";
 import { onAuthStateChanged } from "firebase/auth";
-import { setUser } from "../firebase/firestore"; // ← import our helper
 
-// Create the AuthContext
-export const AuthContext = createContext(undefined);
+// Firestore helpers
+import {
+  getUserByUid,
+  setUser,     // creates new doc with admin:false
+  updateUser   // merges fields into existing doc
+} from "../firebase/firestore";
+
+export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading]         = useState(true);
 
   useEffect(() => {
-    // Subscribe to Firebase Auth state
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user);
+    const unsubscribe = onAuthStateChanged(auth, async (fbUser) => {
+      if (!fbUser) {
+        setCurrentUser(null);
+        setLoading(false);
+        return;
+      }
 
-      if (user) {
-        // Ensure we have a Firestore user doc (creates or merges)
-        setUser(user.uid, {
-          displayName: user.displayName || "",
-          email:       user.email || "",
-          photoURL:    user.photoURL || "",
-        }).catch((err) => {
-          console.error("Error writing user doc:", err);
-        }).finally(() => {
-          setLoading(false);
+      setLoading(true);
+
+      const basic = {
+        displayName: fbUser.displayName || "",
+        email:       fbUser.email       || "",
+        photoURL:    fbUser.photoURL    || ""
+      };
+
+      try {
+        // 1) Check if a Firestore profile exists
+        const res = await getUserByUid(fbUser.uid);
+
+        if (res.success) {
+          // 2a) Existing user: merge new basic fields, keep their admin/role
+          await updateUser(fbUser.uid, basic);
+
+          // support both admin boolean and legacy role string
+          const rawAdmin = res.data.admin === true || res.data.role === "admin";
+          const { admin, role, ...rest } = res.data;
+
+          setCurrentUser({
+            uid:   fbUser.uid,
+            admin: Boolean(rawAdmin),
+            ...rest,
+            ...basic
+          });
+        } else {
+          // 2b) New user: create doc with admin:false
+          await setUser(fbUser.uid, { ...basic, admin: false });
+
+          setCurrentUser({
+            uid:   fbUser.uid,
+            admin: false,
+            ...basic
+          });
+        }
+      } catch (err) {
+        console.error("AuthContext sync error:", err);
+        // fallback to non-admin
+        setCurrentUser({
+          uid:   fbUser.uid,
+          admin: false,
+          ...basic
         });
-      } else {
-        // No user signed in
+      } finally {
         setLoading(false);
       }
     });
@@ -44,9 +85,7 @@ export function AuthProvider({ children }) {
 }
 
 export function useAuth() {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-  return context;
+  const ctx = useContext(AuthContext);
+  if (!ctx) throw new Error("useAuth must be used within AuthProvider");
+  return ctx;
 }

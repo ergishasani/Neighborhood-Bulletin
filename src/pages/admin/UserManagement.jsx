@@ -1,69 +1,66 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { getUsers, deleteUser, updateUser } from "../../firebase/firestore";
+import React, { useState, useEffect } from "react";
+import {
+  getUsers,
+  updateUser,
+  deleteUser
+} from "../../firebase/firestore";
 import Loader from "../../components/Loader";
-import { useAuth } from '../../context/AuthContext';
-import formatDate from "../../utils/formatDate";
+import {
+  FaTrash,
+  FaSave,
+  FaTimes,
+  FaEdit
+} from "react-icons/fa";
+import "../../styles/pages/_userManagement.scss";
 
-function UserManagement() {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  const { currentUser } = useAuth();
+export default function UserManagement() {
+  const [loading, setLoading]       = useState(true);
+  const [error, setError]           = useState("");
+  const [users, setUsers]           = useState([]);
+  const [editingId, setEditingId]   = useState(null);
+  const [editData, setEditData]     = useState({});
 
+  // Fetch users on mount
   useEffect(() => {
-    const fetchUsers = async () => {
+    (async () => {
       try {
-        setLoading(true);
-        const result = await getUsers();
-        
-        if (result.success) {
-          setUsers(result.data);
-        } else {
-          setError(result.error);
-        }
+        const res = await getUsers();
+        if (!res.success) throw new Error(res.error);
+        setUsers(res.data);
       } catch (err) {
         setError(err.message);
       } finally {
         setLoading(false);
       }
-    };
-    
-    fetchUsers();
+    })();
   }, []);
 
-  const handleDeleteUser = async (userId) => {
-    if (window.confirm("Are you sure you want to delete this user?")) {
-      try {
-        setLoading(true);
-        const result = await deleteUser(userId);
-        
-        if (result.success) {
-          setUsers(users.filter(user => user.id !== userId));
-        } else {
-          setError(result.error);
-        }
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    }
+  const startEditing = (user) => {
+    setEditingId(user.id);
+    setEditData({
+      displayName: user.displayName || "",
+      email:       user.email || "",
+      role:        user.role || "user"
+    });
   };
 
-  const handleToggleAdmin = async (userId, currentRole) => {
+  const cancelEditing = () => {
+    setEditingId(null);
+    setEditData({});
+  };
+
+  const saveChanges = async (uid) => {
+    setLoading(true);
     try {
-      setLoading(true);
-      const newRole = currentRole === "admin" ? "user" : "admin";
-      const result = await updateUser(userId, { role: newRole });
-      
-      if (result.success) {
-        setUsers(users.map(user => 
-          user.id === userId ? { ...user, role: newRole } : user
-        ));
-      } else {
-        setError(result.error);
-      }
+      const res = await updateUser(uid, editData);
+      if (!res.success) throw new Error(res.error);
+      // apply locally
+      setUsers((prev) =>
+          prev.map((u) =>
+              u.id === uid ? { ...u, ...editData } : u
+          )
+      );
+      cancelEditing();
     } catch (err) {
       setError(err.message);
     } finally {
@@ -71,77 +68,134 @@ function UserManagement() {
     }
   };
 
-  if (!currentUser || currentUser.role !== "admin") {
-    return <div>Unauthorized access</div>;
-  }
+  const handleDelete = async (uid) => {
+    if (!window.confirm("Delete this user?")) return;
+    setLoading(true);
+    try {
+      const res = await deleteUser(uid);
+      if (!res.success) throw new Error(res.error);
+      setUsers((prev) => prev.filter((u) => u.id !== uid));
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   if (loading) return <Loader />;
-  if (error) return <div className="error-message">{error}</div>;
+  if (error)   return <div className="error-message">{error}</div>;
 
   return (
-    <div className="user-management">
-      <div className="container">
-        <div className="page-header">
+      <div className="user-management-page">
+        <div className="container">
           <h1>User Management</h1>
-          <Link to="/admin" className="btn btn-outline">
-            Back to Dashboard
-          </Link>
-        </div>
-        
-        {users.length > 0 ? (
-          <div className="users-table">
-            <table>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Role</th>
-                  <th>Joined</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {users.map((user) => (
-                  <tr key={user.id}>
+          <table className="user-table">
+            <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th className="actions-col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {users.map((u) => {
+              const isEditing = editingId === u.id;
+              return (
+                  <tr key={u.id}>
                     <td>
-                      <Link to={`/profile/${user.id}`} className="user-link">
-                        {user.displayName || "Anonymous"}
-                      </Link>
+                      {isEditing ? (
+                          <input
+                              type="text"
+                              value={editData.displayName}
+                              onChange={(e) =>
+                                  setEditData((d) => ({
+                                    ...d,
+                                    displayName: e.target.value
+                                  }))
+                              }
+                          />
+                      ) : (
+                          u.displayName || "—"
+                      )}
                     </td>
-                    <td>{user.email}</td>
                     <td>
-                      <span className={`role-badge ${user.role}`}>
-                        {user.role}
-                      </span>
+                      {isEditing ? (
+                          <input
+                              type="email"
+                              value={editData.email}
+                              onChange={(e) =>
+                                  setEditData((d) => ({
+                                    ...d,
+                                    email: e.target.value
+                                  }))
+                              }
+                          />
+                      ) : (
+                          u.email || "—"
+                      )}
                     </td>
-                    <td>{formatDate(user.createdAt?.toDate())}</td>
                     <td>
-                      <button
-                        onClick={() => handleToggleAdmin(user.id, user.role)}
-                        className="btn btn-outline btn-sm"
-                      >
-                        {user.role === "admin" ? "Remove Admin" : "Make Admin"}
-                      </button>
-                      {user.id !== currentUser.uid && (
-                        <button
-                          onClick={() => handleDeleteUser(user.id)}
-                          className="btn btn-danger btn-sm"
-                        >
-                          Delete
-                        </button>
+                      {isEditing ? (
+                          <select
+                              value={editData.role}
+                              onChange={(e) =>
+                                  setEditData((d) => ({
+                                    ...d,
+                                    role: e.target.value
+                                  }))
+                              }
+                          >
+                            <option value="user">User</option>
+                            <option value="admin">Admin</option>
+                          </select>
+                      ) : (
+                          u.role || "user"
+                      )}
+                    </td>
+                    <td className="actions-col">
+                      {isEditing ? (
+                          <>
+                            <button
+                                className="btn-save"
+                                onClick={() => saveChanges(u.id)}
+                                title="Save"
+                            >
+                              <FaSave />
+                            </button>
+                            <button
+                                className="btn-cancel"
+                                onClick={cancelEditing}
+                                title="Cancel"
+                            >
+                              <FaTimes />
+                            </button>
+                          </>
+                      ) : (
+                          <>
+                            <button
+                                className="btn-edit"
+                                onClick={() => startEditing(u)}
+                                title="Edit"
+                            >
+                              <FaEdit />
+                            </button>
+                            <button
+                                className="btn-delete"
+                                onClick={() => handleDelete(u.id)}
+                                title="Delete"
+                            >
+                              <FaTrash />
+                            </button>
+                          </>
                       )}
                     </td>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        ) : (
-          <div className="no-users">No users found</div>
-        )}
+              );
+            })}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
   );
 }
-
-export default UserManagement;

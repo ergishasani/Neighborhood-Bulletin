@@ -17,27 +17,23 @@ import {
   startAfter,
   serverTimestamp,
   arrayUnion,
-  arrayRemove
+  arrayRemove,
 } from "firebase/firestore";
 import {
   getStorage,
   ref as storageRef,
   uploadBytes,
   getDownloadURL,
-  deleteObject
+  deleteObject,
 } from "firebase/storage";
-
-// eslint-disable-next-line no-unused-vars
-import { db } from "./config";
-
+import { db as _db } from "./config";    // ensure you export `db = getFirestore()` from config
 const firestore = getFirestore();
-const storage = getStorage();
+const storage   = getStorage();
 
 // ————— POSTS —————
 
 const postsColl = collection(firestore, "posts");
 
-/** Add a post, returns { success, id } */
 export async function addPost(postData) {
   try {
     const docRef = await addDoc(postsColl, {
@@ -51,20 +47,16 @@ export async function addPost(postData) {
   }
 }
 
-/** Get a single post by ID */
 export async function getPostById(id) {
   try {
     const snap = await getDoc(doc(firestore, "posts", id));
-    if (!snap.exists()) {
-      return { success: false, error: "Post not found" };
-    }
+    if (!snap.exists()) return { success: false, error: "Post not found" };
     return { success: true, data: { id: snap.id, ...snap.data() } };
   } catch (err) {
     return { success: false, error: err.message };
   }
 }
 
-/** Update a post */
 export async function updatePost(id, postData) {
   try {
     await updateDoc(doc(firestore, "posts", id), {
@@ -77,7 +69,6 @@ export async function updatePost(id, postData) {
   }
 }
 
-/** Delete a post */
 export async function deletePost(id) {
   try {
     await deleteDoc(doc(firestore, "posts", id));
@@ -87,18 +78,10 @@ export async function deletePost(id) {
   }
 }
 
-/**
- * Fetch posts with optional filtering and pagination.
- * @param {Object} options
- * @param {string|null} options.category
- * @param {string|null} options.authorId
- * @param {number} options.limitCount
- * @param {QueryDocumentSnapshot|null} options.lastVisible
- */
 export async function getPosts({
-                                 category = null,
-                                 authorId = null,
-                                 limitCount = 10,
+                                 category    = null,
+                                 authorId    = null,
+                                 limitCount  = 10,
                                  lastVisible = null,
                                } = {}) {
   try {
@@ -109,12 +92,11 @@ export async function getPosts({
     if (lastVisible) constraints.push(startAfter(lastVisible));
     constraints.push(limit(limitCount));
 
-    const q = query(postsColl, ...constraints);
+    const q    = query(postsColl, ...constraints);
     const snap = await getDocs(q);
 
-    const posts = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    const posts         = snap.docs.map(d => ({ id: d.id, ...d.data() }));
     const newLastVisible = snap.docs[snap.docs.length - 1] || null;
-
     return { success: true, data: posts, lastVisible: newLastVisible };
   } catch (err) {
     return { success: false, error: err.message };
@@ -125,55 +107,61 @@ export async function getPosts({
 
 const usersColl = collection(firestore, "users");
 
-/** Create or overwrite a user document at users/{uid} */
+/**
+ * Create or upsert a user document at /users/{uid}.
+ * On first creation, sets admin:false and createdAt.
+ * On subsequent calls, merges only updated fields.
+ */
 export async function setUser(uid, userData) {
   try {
-    await setDoc(doc(firestore, "users", uid), {
-      uid,
-      ...userData,
-      createdAt: serverTimestamp(),
-      role: "user",
-    });
+    const userRef = doc(firestore, "users", uid);
+    const snap    = await getDoc(userRef);
+
+    if (!snap.exists()) {
+      // first-time
+      await setDoc(userRef, {
+        uid,
+        ...userData,
+        admin: false,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+      });
+    } else {
+      // existing: merge
+      await updateDoc(userRef, {
+        ...userData,
+        updatedAt: serverTimestamp(),
+      });
+    }
+
     return { success: true, id: uid };
   } catch (err) {
     return { success: false, error: err.message };
   }
 }
 
-/** Get a user by their Auth UID (doc ID) */
 export async function getUserByUid(uid) {
   try {
     const snap = await getDoc(doc(firestore, "users", uid));
-    if (!snap.exists()) {
-      return { success: false, error: "User not found" };
-    }
+    if (!snap.exists()) return { success: false, error: "User not found" };
     return { success: true, data: { id: snap.id, ...snap.data() } };
   } catch (err) {
     return { success: false, error: err.message };
   }
 }
 
-/**
- * Merge-update a user document (users/{uid}).
- * Returns { success }.
- */
 export async function updateUser(uid, userData) {
   try {
-    await setDoc(
-        doc(firestore, "users", uid),
-        {
-          ...userData,
-          updatedAt: serverTimestamp(),
-        },
-        { merge: true }
-    );
+    await updateDoc(doc(firestore, "users", uid), {
+      ...userData,
+      updatedAt: serverTimestamp(),
+    });
     return { success: true };
   } catch (err) {
     return { success: false, error: err.message };
   }
 }
 
-/** Delete a user document */
 export async function deleteUser(uid) {
   try {
     await deleteDoc(doc(firestore, "users", uid));
@@ -183,10 +171,9 @@ export async function deleteUser(uid) {
   }
 }
 
-/** List all users (admin purpose) */
 export async function getUsers() {
   try {
-    const snap = await getDocs(usersColl);
+    const snap  = await getDocs(usersColl);
     const users = snap.docs.map(d => ({ id: d.id, ...d.data() }));
     return { success: true, data: users };
   } catch (err) {
@@ -196,9 +183,6 @@ export async function getUsers() {
 
 // ————— BOOKMARKS —————
 
-/**
- * Toggle a postId in the user's bookmarks array.
- */
 export async function toggleBookmark(userId, postId, isBookmarked) {
   try {
     const userRef = doc(firestore, "users", userId);
@@ -213,13 +197,12 @@ export async function toggleBookmark(userId, postId, isBookmarked) {
   }
 }
 
-/** Check if a postId is in the user's bookmarks */
 export async function isBookmarked(userId, postId) {
   try {
     const res = await getUserByUid(userId);
     if (!res.success) return false;
-    const bks = res.data.bookmarks;
-    return Array.isArray(bks) && bks.includes(postId);
+    return Array.isArray(res.data.bookmarks)
+        && res.data.bookmarks.includes(postId);
   } catch {
     return false;
   }
@@ -227,9 +210,6 @@ export async function isBookmarked(userId, postId) {
 
 // ————— LIKES —————
 
-/**
- * Toggle a postId in the post's likes array.
- */
 export async function toggleLike(postId, userId, isLiked) {
   try {
     const postRef = doc(firestore, "posts", postId);
@@ -244,14 +224,12 @@ export async function toggleLike(postId, userId, isLiked) {
   }
 }
 
-/** Check if a userId is in the post's likes */
-// eslint-disable-next-line no-unused-vars
 export async function isLiked(postId, userId) {
   try {
     const res = await getPostById(postId);
     if (!res.success) return false;
-    const likes = res.data.likes;
-    return Array.isArray(likes) && likes.includes(userId);
+    return Array.isArray(res.data.likes)
+        && res.data.likes.includes(userId);
   } catch {
     return false;
   }
@@ -262,7 +240,7 @@ export async function isLiked(postId, userId) {
 export async function addComment(postId, commentData) {
   try {
     const commentsColl = collection(firestore, "posts", postId, "comments");
-    const docRef = await addDoc(commentsColl, {
+    const docRef       = await addDoc(commentsColl, {
       ...commentData,
       createdAt: serverTimestamp(),
     });
@@ -275,10 +253,79 @@ export async function addComment(postId, commentData) {
 export async function getComments(postId) {
   try {
     const commentsColl = collection(firestore, "posts", postId, "comments");
-    const q = query(commentsColl, orderBy("createdAt", "asc"));
-    const snap = await getDocs(q);
-    const comments = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    const q            = query(commentsColl, orderBy("createdAt", "asc"));
+    const snap         = await getDocs(q);
+    const comments     = snap.docs.map(d => ({ id: d.id, ...d.data() }));
     return { success: true, data: comments };
+  } catch (err) {
+    return { success: false, error: err.message };
+  }
+}
+
+// ————— REPORTS —————
+
+export async function getReports({ limitCount = 50 } = {}) {
+  try {
+    const q    = query(
+        collection(firestore, "reports"),
+        orderBy("createdAt", "desc"),
+        limit(limitCount)
+    );
+    const snap = await getDocs(q);
+    const data = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    return { success: true, data };
+  } catch (err) {
+    return { success: false, error: err.message };
+  }
+}
+
+// ————— AUDIT LOGS —————
+
+export async function fetchAuditLogs({ limitCount = 50 } = {}) {
+  try {
+    const q    = query(
+        collection(firestore, "auditLogs"),
+        orderBy("timestamp", "desc"),
+        limit(limitCount)
+    );
+    const snap = await getDocs(q);
+    const data = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    return { success: true, data };
+  } catch (err) {
+    return { success: false, error: err.message };
+  }
+}
+
+// ————— SYSTEM HEALTH —————
+
+export async function fetchSystemHealth() {
+  try {
+    const snap = await getDoc(doc(firestore, "systemHealth", "status"));
+    if (!snap.exists()) throw new Error("Health status not found");
+    return { success: true, data: snap.data() };
+  } catch (err) {
+    return { success: false, error: err.message };
+  }
+}
+
+// ————— ROLE MANAGEMENT —————
+
+/**
+ * Flip the `admin` flag on a user doc and log the action.
+ */
+export async function toggleUserRole(uid, makeAdmin) {
+  try {
+    const userRef = doc(firestore, "users", uid);
+    await updateDoc(userRef, { admin: makeAdmin });
+
+    // write an audit log entry
+    await addDoc(collection(firestore, "auditLogs"), {
+      action:    makeAdmin ? "GRANT_ADMIN" : "REVOKE_ADMIN",
+      targetUid: uid,
+      timestamp: serverTimestamp(),
+    });
+
+    return { success: true };
   } catch (err) {
     return { success: false, error: err.message };
   }

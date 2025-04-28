@@ -1,26 +1,32 @@
+// src/layouts/MainLayout.jsx
+
 import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
-function MainLayout() {
-    const location = useLocation();
+export default function MainLayout() {
+    const { pathname } = useLocation();
 
-    // Define an array of routes where Navbar and Footer should not be shown
-    const noLayoutPages = ['/login', '/register', '/forgot-password'];
+    // List any route prefixes where you don't want the nav/footer:
+    const hiddenLayoutPrefixes = [
+        "/login",
+        "/register",
+        "/forgot-password",
+        "/onboarding",
+    ];
 
-    // Check if the current route is one of the routes where Navbar/Footer should be hidden
-    const isNoLayoutPage = noLayoutPages.includes(location.pathname);
+    // If the current path starts with any of those, hide the layout:
+    const hideLayout = hiddenLayoutPrefixes.some((prefix) =>
+        pathname.startsWith(prefix)
+    );
 
     return (
         <div className="app-container">
-            {/* Conditionally render Navbar and Footer */}
-            {!isNoLayoutPage && <Navbar />}
+            {!hideLayout && <Navbar />}
             <main className="main-content">
                 <Outlet />
             </main>
-            {!isNoLayoutPage && <Footer />}
+            {!hideLayout && <Footer />}
         </div>
     );
 }
-
-export default MainLayout;

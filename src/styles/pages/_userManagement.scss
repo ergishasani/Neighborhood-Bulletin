@@ -1,0 +1,97 @@
+@import "../variables";
+@import "../mixins";
+
+.user-management-page {
+  .container {
+    @include container;
+    padding: $spacing-lg 0;
+  }
+
+  h1 {
+    font-size: 1.75rem;
+    margin-bottom: $spacing-md;
+    color: $dark-color;
+  }
+
+  .user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: $spacing-xl;
+
+    thead {
+      background: $primary-light;
+    }
+
+    th,
+    td {
+      padding: $spacing-sm $spacing-md;
+      border: 1px solid $gray-border;
+      text-align: left;
+      vertical-align: middle;
+    }
+
+    .actions-col {
+      width: 120px;
+      text-align: center;
+    }
+
+    tbody tr:nth-child(even) {
+      background: $gray-50;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: $spacing-xs;
+      border: 1px solid $gray-border;
+      border-radius: $border-radius-sm;
+      font-family: inherit;
+    }
+
+    button {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      margin: 0 $spacing-xxs;
+
+      &.btn-edit {
+        color: $info-color;
+        font-size: 1rem;
+
+        &:hover {
+          color: darken($info-color, 10%);
+        }
+      }
+
+      &.btn-save {
+        color: $success-color;
+
+        &:hover {
+          color: darken($success-color, 10%);
+        }
+      }
+
+      &.btn-cancel {
+        color: $warning-color;
+
+        &:hover {
+          color: darken($warning-color, 10%);
+        }
+      }
+
+      &.btn-delete {
+        color: $danger-color;
+
+        &:hover {
+          color: darken($danger-color, 10%);
+        }
+      }
+    }
+  }
+
+  .error-message {
+    text-align: center;
+    color: $danger-color;
+    margin: $spacing-lg 0;
+  }
+}

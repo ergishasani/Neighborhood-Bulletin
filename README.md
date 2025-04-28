@@ -107,7 +107,7 @@ neighborhood-bulletin-board/
 │   │   │   └── MyPosts.jsx
 │   │
 │   │   ├── admin/
-│   │   │   ├── Dashboard.jsx
+│   │   │   ├── AdminDashboard.jsx
 │   │   │   ├── ManagePosts.jsx
 │   │   │   ├── Reports.jsx
 │   │   │   └── UserManagement.jsx
