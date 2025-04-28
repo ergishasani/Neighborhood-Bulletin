@@ -1,0 +1,18 @@
+.cover-photo {
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+
+  .cover-upload-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(29, 161, 242, 0.8);
+    color: #fff;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+}

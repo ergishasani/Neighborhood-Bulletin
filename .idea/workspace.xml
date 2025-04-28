@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9402c50b-973b-4364-81de-a8e229ecd4c6" name="Changes" comment="Refactor Profile page for improved UX and readability&#10;&#10;Simplified state handling, improved data fetching logic, and enhanced layout for the Profile page. Removed unused functionalities, streamlined error handling, and improved design consistency by updating spacing and styles. Enhanced fallback mechanisms to ensure seamless user experience for incomplete data cases.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/user/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/user/Profile.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/pages/_profile.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/pages/_profile.scss" afterDir="false" />
-    </list>
+    <list default="true" id="9402c50b-973b-4364-81de-a8e229ecd4c6" name="Changes" comment="Update .nvmrc, dependencies, and code improvements&#10;&#10;Added .nvmrc to define Node.js version 18 for consistent development. Updated dependencies like `@mui`, `@firebase`, and `react-router` to their latest versions for better performance and security. Improved code by addressing linter warnings and simplifying unused variables in components." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,7 +26,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Registration" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -52,7 +48,7 @@
   &quot;isMigrated&quot;: true
 }</component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="QODANA_PROBLEMS_VIEW_TAB" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -74,7 +70,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Enhancments&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Ergis/Documents/Web/Neighborhood-Bulletin&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -87,11 +83,6 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="QodanaReportsService">
-    <option name="descriptions">
-      <ReportDescription localRun="true" path="C:\Users\Ergis\AppData\Local\Temp\qodana_output\qodana.sarif.json" reportGuid="62944ff5-3f68-4898-ac07-849b6740fb67" reportId="Neighborhood-Bulletin/qodana/2025-04-25" />
-    </option>
-  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -122,7 +113,9 @@
       <workItem from="1745606267475" duration="145000" />
       <workItem from="1745664626313" duration="6339000" />
       <workItem from="1745674320232" duration="4631000" />
-      <workItem from="1745755775650" duration="1081000" />
+      <workItem from="1745755775650" duration="8189000" />
+      <workItem from="1745764369001" duration="4432000" />
+      <workItem from="1745769256141" duration="2336000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed the bug for blank page on the main page">
       <option name="closed" value="true" />
@@ -172,7 +165,79 @@
       <option name="project" value="LOCAL" />
       <updated>1745680054152</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Refactor Profile page for improved UX and readability&#10;&#10;Simplified state handling, improved data fetching logic, and enhanced layout for the Profile page. Removed unused functionalities, streamlined error handling, and improved design consistency by updating spacing and styles. Enhanced fallback mechanisms to ensure seamless user experience for incomplete data cases.">
+      <option name="closed" value="true" />
+      <created>1745757119862</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1745757119862</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Refactor Profile page and improve UX across components&#10;&#10;Refactored Profile page for enhanced user experience by adding modular components such as CoverPhoto, AvatarUploader, Tabs, and ThemeToggle. Streamlined loading, image upload functionality, and state handling, while introducing CSS variables for dynamic theming. Updated global and component-specific styles for better design consistency and responsiveness.">
+      <option name="closed" value="true" />
+      <created>1745760855164</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1745760855164</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Refactor CreatePost page and integrate Leaflet map support.&#10;&#10;Enhanced the CreatePost page with improved form structure, live preview functionality, tag handling, and better form validation. Added Leaflet and React-Leaflet libraries for map integration, updated styles for consistency, and revised dependencies in package.json. Adjusted global styling and included external Leaflet CSS in index.html for map display.">
+      <option name="closed" value="true" />
+      <created>1745767216459</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1745767216459</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Refactor PostDetail page and improve UX.&#10;&#10;Enhanced the PostDetail page with features like likes, bookmarks, and tag display. Updated comments handling and added new interactions including toggle like/bookmark functionality. Refined styling for improved responsiveness and consistency across components.">
+      <option name="closed" value="true" />
+      <created>1745768812623</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1745768812623</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Refactor PostDetail page and update QuickPostForm.&#10;&#10;Enhanced PostDetail page with features like likes, bookmarks, and improved UX, including refined styling and interactions. Updated QuickPostForm by cleaning up unused imports and maintaining code consistency.">
+      <option name="closed" value="true" />
+      <created>1745769824910</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1745769824910</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Update dependencies to latest versions&#10;&#10;Upgraded multiple dependencies in `package-lock.json`, including `@mui`, `@firebase`, `react-router`, and others to their latest stable versions. This ensures the project stays up to date with performance improvements, new features, and security patches.">
+      <option name="closed" value="true" />
+      <created>1745770357465</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1745770357465</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Add .nvmrc and update dependencies to latest versions&#10;&#10;Added a .nvmrc file to specify Node.js version 18. Updated various dependencies in the project, including `@mui`, `@firebase`, and `react-router`, to their latest stable releases. These changes ensure compatibility, improved performance, and inclusion of security patches.">
+      <option name="closed" value="true" />
+      <created>1745770710592</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1745770710592</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Add .nvmrc and update dependencies to latest versions&#10;&#10;Included .nvmrc file to define Node.js version 18, ensuring development consistency. Updated various dependencies such as `@mui`, `@firebase`, and `react-router` to their latest releases for improved performance, compatibility, and security. Also added comments to address linter warnings in multiple files.">
+      <option name="closed" value="true" />
+      <created>1745771255910</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1745771255910</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Update .nvmrc, dependencies, and code improvements&#10;&#10;Added .nvmrc to define Node.js version 18 for consistent development. Updated dependencies like `@mui`, `@firebase`, and `react-router` to their latest versions for better performance and security. Improved code by addressing linter warnings and simplifying unused variables in components.">
+      <option name="closed" value="true" />
+      <created>1745771577854</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1745771577854</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -209,6 +274,14 @@
     <MESSAGE value="Add Avatar component and enhance SearchResults UX&#10;&#10;Introduced a reusable Avatar component with styling for consistent user avatars. Refactored SearchResults to improve search functionality, user feedback, and inline form handling. Additionally, updated styles for better responsiveness and alignment with design standards." />
     <MESSAGE value="Refactor Profile page and enhance onboarding flow&#10;&#10;Refactored `Profile.jsx` for improved readability, better state handling, and added new features like follow button and user stats. Introduced an onboarding flow with slides, updated `AppRoutes` for onboarding guard, and enhanced the design with new button styles. Minor improvements include better file upload logic in `EditPost.jsx`." />
     <MESSAGE value="Refactor Profile page for improved UX and readability&#10;&#10;Simplified state handling, improved data fetching logic, and enhanced layout for the Profile page. Removed unused functionalities, streamlined error handling, and improved design consistency by updating spacing and styles. Enhanced fallback mechanisms to ensure seamless user experience for incomplete data cases." />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor Profile page for improved UX and readability&#10;&#10;Simplified state handling, improved data fetching logic, and enhanced layout for the Profile page. Removed unused functionalities, streamlined error handling, and improved design consistency by updating spacing and styles. Enhanced fallback mechanisms to ensure seamless user experience for incomplete data cases." />
+    <MESSAGE value="Refactor Profile page and improve UX across components&#10;&#10;Refactored Profile page for enhanced user experience by adding modular components such as CoverPhoto, AvatarUploader, Tabs, and ThemeToggle. Streamlined loading, image upload functionality, and state handling, while introducing CSS variables for dynamic theming. Updated global and component-specific styles for better design consistency and responsiveness." />
+    <MESSAGE value="Refactor CreatePost page and integrate Leaflet map support.&#10;&#10;Enhanced the CreatePost page with improved form structure, live preview functionality, tag handling, and better form validation. Added Leaflet and React-Leaflet libraries for map integration, updated styles for consistency, and revised dependencies in package.json. Adjusted global styling and included external Leaflet CSS in index.html for map display." />
+    <MESSAGE value="Refactor PostDetail page and improve UX.&#10;&#10;Enhanced the PostDetail page with features like likes, bookmarks, and tag display. Updated comments handling and added new interactions including toggle like/bookmark functionality. Refined styling for improved responsiveness and consistency across components." />
+    <MESSAGE value="Refactor PostDetail page and update QuickPostForm.&#10;&#10;Enhanced PostDetail page with features like likes, bookmarks, and improved UX, including refined styling and interactions. Updated QuickPostForm by cleaning up unused imports and maintaining code consistency." />
+    <MESSAGE value="Update dependencies to latest versions&#10;&#10;Upgraded multiple dependencies in `package-lock.json`, including `@mui`, `@firebase`, `react-router`, and others to their latest stable versions. This ensures the project stays up to date with performance improvements, new features, and security patches." />
+    <MESSAGE value="Add .nvmrc and update dependencies to latest versions&#10;&#10;Added a .nvmrc file to specify Node.js version 18. Updated various dependencies in the project, including `@mui`, `@firebase`, and `react-router`, to their latest stable releases. These changes ensure compatibility, improved performance, and inclusion of security patches." />
+    <MESSAGE value="Add .nvmrc and update dependencies to latest versions&#10;&#10;Included .nvmrc file to define Node.js version 18, ensuring development consistency. Updated various dependencies such as `@mui`, `@firebase`, and `react-router` to their latest releases for improved performance, compatibility, and security. Also added comments to address linter warnings in multiple files." />
+    <MESSAGE value="Update .nvmrc, dependencies, and code improvements&#10;&#10;Added .nvmrc to define Node.js version 18 for consistent development. Updated dependencies like `@mui`, `@firebase`, and `react-router` to their latest versions for better performance and security. Improved code by addressing linter warnings and simplifying unused variables in components." />
+    <option name="LAST_COMMIT_MESSAGE" value="Update .nvmrc, dependencies, and code improvements&#10;&#10;Added .nvmrc to define Node.js version 18 for consistent development. Updated dependencies like `@mui`, `@firebase`, and `react-router` to their latest versions for better performance and security. Improved code by addressing linter warnings and simplifying unused variables in components." />
   </component>
 </project>

@@ -1,44 +1,125 @@
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { FaHeart, FaComment, FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
+import {
+  FaHeart,
+  FaComment,
+  FaCalendarAlt,
+  FaMapMarkerAlt,
+  FaBookmark,
+  FaRegBookmark,
+} from "react-icons/fa";
 import formatDate from "../utils/formatDate";
+import { useAuth } from "../context/AuthContext";
+import { toggleBookmark, isBookmarked } from "../firebase/firestore";
+import "../styles/components/_post-card.scss";
 
-function PostCard({ post }) {
-  if (!post) return null; // extra safety
+export default function PostCard({ post }) {
+  // ─────── HOOKS ───────
+  const { currentUser }                      = useAuth();
+  const [bookmarked, setBookmarked] = useState(false);
 
+  useEffect(() => {
+    if (currentUser && post?.id) {
+      isBookmarked(currentUser.uid, post.id).then(setBookmarked);
+    }
+  }, [currentUser, post]);
+
+  // ─────── EARLY RETURN (POST REQUIRED) ───────
+  if (!post) return null;
+
+  // ─────── DESTRUCTURE FIELDS ───────
+  const {
+    id,
+    title,
+    content,
+    imageUrl,
+    category,
+    location,
+    createdAt,
+    likes = [],
+    commentCount = 0,
+  } = post;
+
+  // ─────── DATE PARSING ───────
+  let dateObj;
+  if (createdAt && typeof createdAt.toDate === "function") {
+    dateObj = createdAt.toDate();
+  } else if (createdAt instanceof Date) {
+    dateObj = createdAt;
+  } else if (createdAt?.seconds) {
+    dateObj = new Date(createdAt.seconds * 1000);
+  } else {
+    dateObj = new Date(createdAt);
+  }
+  const dateStr = isNaN(dateObj) ? "" : formatDate(dateObj);
+
+  // ─────── EXCERPT + CATEGORY LABEL ───────
+  const excerpt = content
+      ? content.length > 100
+          ? content.slice(0, 100) + "…"
+          : content
+      : "No content available";
+
+  const displayCategory = category
+      ? category.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
+      : "";
+
+  // ─────── BOOKMARK TOGGLE ───────
+  const onToggleBookmark = async (e) => {
+    e.preventDefault();
+    if (!currentUser) return;
+    await toggleBookmark(currentUser.uid, id, bookmarked);
+    setBookmarked((b) => !b);
+  };
+
+  // ─────── RENDER ───────
   return (
       <div className="post-card">
-        <Link to={`/posts/${post.id}`} className="post-link">
-          {post.imageUrl && (
+        <Link to={`/posts/${id}`} className="post-link">
+          {imageUrl && (
               <div className="post-image">
-                <img src={post.imageUrl} alt={post.title || "Post Image"} />
+                <img src={imageUrl} alt={title || "Post Image"} />
               </div>
           )}
+
           <div className="post-content">
-            <h3 className="post-title">{post.title || "Untitled"}</h3>
-            <p className="post-excerpt">
-              {post.content?.substring(0, 100) || "No content available"}...
-            </p>
-            <div className="post-meta">
-              {post.category && (
-                  <span className="post-category">{post.category}</span>
+            <div className="post-header">
+              <h3 className="post-title">{title || "Untitled"}</h3>
+              {currentUser && (
+                  <button
+                      className="bookmark-btn"
+                      onClick={onToggleBookmark}
+                      aria-label="Toggle Bookmark"
+                  >
+                    {bookmarked ? <FaBookmark /> : <FaRegBookmark />}
+                  </button>
               )}
-              {post.createdAt && (
+            </div>
+
+            <p className="post-excerpt">{excerpt}</p>
+
+            <div className="post-meta">
+              {displayCategory && (
+                  <span className="post-category">{displayCategory}</span>
+              )}
+              {dateStr && (
                   <span className="post-date">
-                <FaCalendarAlt /> {formatDate(post.createdAt?.toDate())}
+                <FaCalendarAlt /> {dateStr}
               </span>
               )}
-              {post.location && (
+              {location && (
                   <span className="post-location">
-                <FaMapMarkerAlt /> {post.location}
+                <FaMapMarkerAlt /> {location}
               </span>
               )}
             </div>
+
             <div className="post-stats">
             <span className="post-likes">
-              <FaHeart /> {post.likes?.length || 0}
+              <FaHeart /> {likes.length}
             </span>
               <span className="post-comments">
-              <FaComment /> {post.commentCount || 0}
+              <FaComment /> {commentCount}
             </span>
             </div>
           </div>
@@ -46,5 +127,3 @@ function PostCard({ post }) {
       </div>
   );
 }
-
-export default PostCard;

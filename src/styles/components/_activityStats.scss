@@ -1,0 +1,12 @@
+.activity-stats {
+  background: #fff;
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+
+  canvas {
+    max-width: 100%;
+  }
+}

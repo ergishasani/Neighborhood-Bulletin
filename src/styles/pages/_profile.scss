@@ -1,99 +1,66 @@
 .profile-page {
   .container {
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
     padding: 2rem 1rem;
   }
 
   .profile-header {
     display: flex;
+    gap: 2rem;
     align-items: center;
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-
-    .avatar {
-      border: 2px solid #ddd;
+    margin-top: -60px; // if cover overlaps
+    .avatar-uploader {
+      flex-shrink: 0;
     }
-
-    .profile-details {
+    .header-info {
       flex: 1;
-
-      .profile-name {
-        font-size: 2rem;
+      h1 {
         margin: 0;
+        font-size: 2rem;
       }
-
-      .profile-bio {
-        margin: 0.5rem 0 1rem;
+      .bio {
+        font-style: italic;
         color: #555;
+        margin: 0.5rem 0;
       }
-
-      .profile-stats {
+      .meta {
         display: flex;
-        gap: 1.5rem;
-        margin-bottom: 0.75rem;
-
-        div {
-          text-align: center;
-          strong {
-            display: block;
-            font-size: 1.25rem;
-          }
-          span {
-            color: #666;
-          }
-        }
-      }
-
-      .profile-joined {
+        gap: 1rem;
+        color: #666;
         font-size: 0.9rem;
-        color: #888;
-      }
-
-      .btn {
-        margin-top: 1rem;
-      }
-    }
-  }
-
-  .profile-about {
-    background: #f7f9fa;
-    padding: 1rem 1.5rem;
-    border-radius: 6px;
-    margin-bottom: 2rem;
-
-    h2 {
-      margin-top: 0;
-    }
-
-    ul {
-      list-style: none;
-      margin: 0.5rem 0 0;
-      padding: 0;
-
-      li {
-        margin-bottom: 0.5rem;
-        strong {
-          margin-right: 0.5rem;
+        margin-bottom: 1rem;
+        span {
+          display: flex;
+          align-items: center;
+          gap: 0.25rem;
         }
       }
+      .header-actions {
+        display: flex;
+        gap: 0.5rem;
+      }
     }
   }
 
-  .profile-posts {
-    h2 {
-      margin-bottom: 1rem;
-    }
+  .profile-summary {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
 
-    .posts-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 1rem;
-    }
+  .profile-map {
+    margin-bottom: 2rem;
+  }
 
-    .no-posts {
-      color: #666;
-      text-align: center;
-    }
+  .profile-tabs {
+    margin-bottom: 2rem;
+  }
+
+  .error-message {
+    color: #d32f2d;
+    text-align: center;
+    margin: 2rem 0;
   }
 }

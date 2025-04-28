@@ -1,26 +1,138 @@
-.home-page {
-    .page-title {
-      font-size: 2rem;
-      margin-bottom: $spacing-xs;
-      color: $dark-color;
+.home-container {
+  display: grid;
+  grid-template-columns: 240px 1fr 280px;
+  gap: 1rem;
+  padding: 1rem;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    background: #fff;
+    border-radius: 6px;
+    padding: 1rem;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+
+    &.left {
+      .profile-summary {
+        text-align: center;
+
+        .avatar {
+          width: 80px; height: 80px;
+          border-radius: 50%;
+          object-fit: cover;
+          margin: 0.5rem 0;
+        }
+
+        .name {
+          font-size: 1.1rem; margin-bottom: 0.5rem;
+        }
+
+        .nav-links {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+          margin-top: 1rem;
+
+          a {
+            color: #333;
+            &:hover { color: #1da1f2; }
+          }
+        }
+      }
     }
-  
-    .page-subtitle {
-      color: $gray-color;
-      margin-bottom: $spacing-lg;
-    }
-  
-    .posts-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: $spacing-md;
-    }
-  
-    .no-posts {
-      grid-column: 1 / -1;
-      text-align: center;
-      padding: $spacing-xl;
-      color: $gray-color;
-      font-style: italic;
+
+    &.right {
+      section {
+        &:not(:last-child) { margin-bottom: 2rem; }
+        h3 {
+          margin-bottom: 0.5rem;
+          font-size: 1.1rem;
+          border-bottom: 1px solid #eee;
+          padding-bottom: 0.25rem;
+        }
+        ul {
+          list-style: none;
+          padding: 0;
+
+          li {
+            margin-bottom: 0.75rem;
+
+            button, a {
+              background: none;
+              border: none;
+              color: #1da1f2;
+              cursor: pointer;
+              font: inherit;
+              text-align: left;
+
+              &:hover,
+              &.active {
+                text-decoration: underline;
+              }
+            }
+
+            small { color: #666; }
+          }
+        }
+      }
     }
   }
+
+  .main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    .controls-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+
+      input {
+        flex: 2;
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      select {
+        flex: 1;
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background: white;
+      }
+
+      .clear-tag {
+        background: #f5f5f5;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 0.3rem 0.6rem;
+        cursor: pointer;
+        font: inherit;
+      }
+    }
+
+    .feed-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      .no-posts {
+        text-align: center;
+        color: #666;
+        margin: 2rem 0;
+      }
+    }
+  }
+
+  .error-message {
+    grid-column: 1 / -1;
+    color: #d32f2d;
+    text-align: center;
+    margin: 1rem;
+  }
+}

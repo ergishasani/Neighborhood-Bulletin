@@ -1,12 +1,20 @@
-// src/pages/user/Profile.jsx
-
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getUserByUid, getPosts } from "../../firebase/firestore";
+import { getUserByUid, getPosts, updateUser, uploadImage } from "../../firebase/firestore";
 import { useAuth } from "../../context/AuthContext";
-import Avatar from "../../components/Avatar";
-import PostCard from "../../components/PostCard";
 import Loader from "../../components/Loader";
+import CoverPhoto from "../../components/CoverPhoto";
+import AvatarUploader from "../../components/AvatarUploader";
+import FollowButton from "../../components/FollowButton";
+import ThemeToggle from "../../components/ThemeToggle";
+import Tabs from "../../components/Tabs";
+import ActivityStats from "../../components/ActivityStats";
+import ActivityMap from "../../components/ActivityMap";
+import ActivityFeed from "../../components/ActivityFeed";
+import GroupsAndEvents from "../../components/GroupsAndEvents";
+import Bookmarks from "../../components/Bookmarks";
+import BadgesList from "../../components/BadgesList";
+import InterestsCloud from "../../components/InterestsCloud";
 import "../../styles/pages/_profile.scss";
 
 export default function Profile() {
@@ -19,135 +27,141 @@ export default function Profile() {
   const [loading, setLoading] = useState(true);
   const [error, setError]     = useState("");
 
+  // Load user + posts
   useEffect(() => {
-    const fetchProfile = async () => {
+    async function loadData() {
       setLoading(true);
       setError("");
-
       try {
-        // 1) Try Firestore first
-        const resUser = await getUserByUid(id);
-        if (resUser.success) {
-          setUser(resUser.data);
-        } else if (isMe) {
-          // 2) Fallback to AuthContext for your own Google account
-          setUser({
-            displayName: currentUser.displayName || "Anonymous",
-            email:       currentUser.email,
-            photoURL:    currentUser.photoURL,
-            createdAt: {
-              seconds: Math.floor(
-                  new Date(currentUser.metadata.creationTime).getTime() / 1000
-              )
-            }
-          });
-        } else {
-          throw new Error("User not found");
-        }
+        const r1 = await getUserByUid(id);
+        if (!r1.success) throw new Error(r1.error);
+        setUser(r1.data);
 
-        // 3) Fetch their posts
-        const resPosts = await getPosts({ authorId: id, limitCount: 10 });
-        if (!resPosts.success) throw new Error(resPosts.error);
-        setPosts(resPosts.data);
-
+        const r2 = await getPosts({ authorId: id, limitCount: 100 });
+        if (!r2.success) throw new Error(r2.error);
+        setPosts(r2.data);
       } catch (err) {
         setError(err.message);
       } finally {
         setLoading(false);
       }
-    };
+    }
+    loadData();
+  }, [id]);
 
-    fetchProfile();
-  }, [id, currentUser, isMe]);
+  // Unified image upload handler
+  const handleImageUpload = async (file, field) => {
+    const res = await uploadImage(file);
+    if (res.success) {
+      await updateUser(id, { [field]: res.url });
+      setUser((u) => ({ ...u, [field]: res.url }));
+    }
+  };
 
   if (loading) return <Loader />;
   if (error)   return <div className="error-message">{error}</div>;
+  if (!user)   return <div className="error-message">User not found</div>;
 
-  // Format join date
+  // Category counts
+  const counts = {
+    all: posts.length,
+    events: posts.filter(p => p.category === "event").length,
+    lost: posts.filter(p => p.category === "lost-and-found").length,
+    garage: posts.filter(p => p.category === "garage-sale").length,
+  };
+
+  // Tabs without Settings
+  const tabs = [
+    {
+      label: `Feed (${counts.all})`,
+      Component: <ActivityFeed posts={posts} />,
+    },
+    {
+      label: `Events (${counts.events})`,
+      Component: <ActivityFeed posts={posts.filter(p => p.category==="event")} />,
+    },
+    {
+      label: `Lost & Found (${counts.lost})`,
+      Component: <ActivityFeed posts={posts.filter(p => p.category==="lost-and-found")} />,
+    },
+    {
+      label: `Garage Sales (${counts.garage})`,
+      Component: <ActivityFeed posts={posts.filter(p => p.category==="garage-sale")} />,
+    },
+    {
+      label: "Groups",
+      Component: <GroupsAndEvents userId={id} />,
+    },
+    {
+      label: "Bookmarks",
+      Component: <Bookmarks userId={id} />,
+    },
+    {
+      label: "Stats",
+      Component: <ActivityStats posts={posts} />,
+    },
+  ];
+
   const joinedDate = user.createdAt
       ? new Date(user.createdAt.seconds * 1000).toLocaleDateString()
       : "N/A";
 
   return (
       <div className="profile-page">
-        <div className="container">
-          <div className="profile-header">
-            <Avatar
-                src={user.photoURL || "/default-avatar.png"}
-                alt={user.displayName}
-                size={120}
-            />
-            <div className="profile-details">
-              <h1 className="profile-name">{user.displayName}</h1>
-              {user.bio && <p className="profile-bio">{user.bio}</p>}
+        {/* Cover Photo */}
+        <CoverPhoto
+            src={user.coverPhotoURL}
+            editable={isMe}
+            onUpload={file => handleImageUpload(file, "coverPhotoURL")}
+        />
 
-              <div className="profile-stats">
-                <div>
-                  <strong>{posts.length}</strong>
-                  <span>Posts</span>
-                </div>
-              </div>
+        <div className="profile-header container">
+          {/* Avatar */}
+          <AvatarUploader
+              src={user.photoURL}
+              size={120}
+              editable={isMe}
+              onUpload={file => handleImageUpload(file, "photoURL")}
+          />
 
-              <p className="profile-joined">Joined {joinedDate}</p>
+          <div className="header-info">
+            <h1>{user.displayName || "Anonymous"}</h1>
+            {user.bio && <p className="bio">{user.bio}</p>}
 
-              {isMe && (
-                  <Link to="/edit-profile" className="btn btn-outline">
-                    Edit Profile
-                  </Link>
+            <div className="meta">
+              {user.neighborhood && <span>🏘 {user.neighborhood}</span>}
+              <span>📅 Joined {joinedDate}</span>
+              {user.email && (
+                  <span>
+                ✉ <Link to={`mailto:${user.email}`}>{user.email}</Link>
+              </span>
               )}
             </div>
-          </div>
 
-          <div className="profile-about">
-            <h2>About</h2>
-            <ul>
-              {user.email && (
-                  <li>
-                    <strong>Email:</strong> {user.email}
-                  </li>
-              )}
-              {user.location && (
-                  <li>
-                    <strong>Location:</strong> {user.location}
-                  </li>
-              )}
-              {user.website && (
-                  <li>
-                    <strong>Website:</strong>{" "}
-                    <a
-                        href={user.website}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                      {user.website}
-                    </a>
-                  </li>
-              )}
-            </ul>
+            <div className="header-actions">
+              {isMe
+                  ? <Link to="/edit-profile" className="btn btn-outline">Settings</Link>
+                  : <FollowButton userId={id} />
+              }
+              <ThemeToggle />
+            </div>
           </div>
+        </div>
 
-          <div className="profile-posts">
-            <h2>Recent Posts</h2>
-            {posts.length > 0 ? (
-                <div className="posts-grid">
-                  {posts.map(post => (
-                      <PostCard key={post.id} post={post} />
-                  ))}
-                </div>
-            ) : (
-                <p className="no-posts">
-                  {isMe
-                      ? (
-                          <>
-                            You haven’t posted anything yet.{" "}
-                            <Link to="/create-post">Create your first post</Link>.
-                          </>
-                      )
-                      : "No posts to show."
-                  }
-                </p>
-            )}
-          </div>
+        {/* Badges & Interests */}
+        <div className="profile-summary container">
+          <BadgesList badges={user.badges} />
+          <InterestsCloud interests={user.interests} />
+        </div>
+
+        {/* Map */}
+        <div className="profile-map container">
+          <ActivityMap posts={posts} />
+        </div>
+
+        {/* Tabbed content */}
+        <div className="profile-tabs container">
+          <Tabs tabs={tabs} />
         </div>
       </div>
   );
