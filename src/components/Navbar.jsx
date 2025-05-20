@@ -42,13 +42,13 @@ export default function Navbar() {
           </button>
 
           <div className={`navbar-links ${mobileOpen ? "open" : ""}`}>
-            <NavLink to="/"            className="nav-link" onClick={() => setMobileOpen(false)}>
+            <NavLink to="/" className="nav-link" onClick={() => setMobileOpen(false)}>
               <FaHome /> Home
             </NavLink>
-            <NavLink to="/events"      className="nav-link" onClick={() => setMobileOpen(false)}>
+            <NavLink to="/events" className="nav-link" onClick={() => setMobileOpen(false)}>
               <FaCalendarAlt /> Events
             </NavLink>
-            <NavLink to="/search"      className="nav-link" onClick={() => setMobileOpen(false)}>
+            <NavLink to="/search" className="nav-link" onClick={() => setMobileOpen(false)}>
               <FaSearch /> Search
             </NavLink>
 
@@ -77,7 +77,7 @@ export default function Navbar() {
                 </button>
             ) : (
                 <>
-                  <Link to="/login"    className="btn btn-login">
+                  <Link to="/login" className="btn btn-login">
                     Login
                   </Link>
                   <Link to="/register" className="btn btn-register">

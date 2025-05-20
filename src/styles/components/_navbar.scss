@@ -1,11 +1,13 @@
+// src/styles/components/_navbar.scss
 
 @import "../variables";
 @import "../mixins";
 
-
 .navbar {
+  position: relative;
   background: $white;
   border-bottom: 1px solid $gray-border;
+
   .navbar-container {
     display: flex;
     align-items: center;
@@ -24,26 +26,13 @@
     background: none;
     border: none;
     font-size: 1.25rem;
-    @media (max-width: $breakpoint-md) {
-      display: block;
-    }
+    cursor: pointer;
   }
 
   .navbar-links {
     display: flex;
     gap: $spacing-sm;
     align-items: center;
-
-    &.open {
-      display: block;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      background: $white;
-      padding: $spacing-sm 0;
-      border-bottom: 1px solid $gray-border;
-    }
 
     .nav-link {
       display: inline-flex;
@@ -59,15 +48,14 @@
         color: $primary-color;
         border-radius: $border-radius-sm;
       }
-
       &:hover {
         background: $gray-light;
         border-radius: $border-radius-sm;
       }
-
       &.admin-link {
         color: $danger-color;
-        &:hover, &.active {
+        &:hover,
+        &.active {
           background: rgba($danger-color, 0.1);
         }
       }
@@ -78,41 +66,53 @@
     display: flex;
     gap: $spacing-xs;
 
-    .btn {
-      &-login, &-register {
-        background: transparent;
-        border: 1px solid $primary-color;
-        color: $primary-color;
-        padding: $spacing-xs $spacing-md;
-        border-radius: $border-radius-sm;
-        transition: background $transition-fast;
-
-        &:hover {
-          background: $primary-color;
-          color: $white;
-        }
-      }
-
-      &-logout {
-        background: $danger-color;
+    .btn-login,
+    .btn-register {
+      background: transparent;
+      border: 1px solid $primary-color;
+      color: $primary-color;
+      padding: $spacing-xs $spacing-md;
+      border-radius: $border-radius-sm;
+      transition: background $transition-fast;
+      &:hover {
+        background: $primary-color;
         color: $white;
-        padding: $spacing-xs $spacing-md;
-        border: none;
-        border-radius: $border-radius-sm;
-        transition: background $transition-fast;
+      }
+    }
 
-        &:hover {
-          background: darken($danger-color, 10%);
-        }
+    .btn-logout {
+      background: $danger-color;
+      color: $white;
+      padding: $spacing-xs $spacing-md;
+      border: none;
+      border-radius: $border-radius-sm;
+      transition: background $transition-fast;
+      &:hover {
+        background: darken($danger-color, 10%);
       }
     }
   }
 
   @media (max-width: $breakpoint-md) {
+    .navbar-burger {
+      display: block;
+    }
+
     .navbar-links {
       display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
       flex-direction: column;
-      gap: 0;
+      background: $white;
+      border-bottom: 1px solid $gray-border;
+      z-index: 10;
+
+      &.open {
+        display: flex;
+      }
+
       .nav-link {
         width: 100%;
         padding: $spacing-sm;
