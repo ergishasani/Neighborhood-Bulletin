@@ -26,13 +26,12 @@ import {
   getDownloadURL,
   deleteObject,
 } from "firebase/storage";
-import { db as _db } from "./config";    // ensure you export `db = getFirestore()` from config
-const firestore = getFirestore();
-const storage   = getStorage();
+import { db } from "./config";    // ensure you export `db = getFirestore()` from config
+const storage = getStorage();
 
 // ————— POSTS —————
 
-const postsColl = collection(firestore, "posts");
+const postsColl = collection(db, "posts");
 
 export async function addPost(postData) {
   try {
@@ -49,7 +48,7 @@ export async function addPost(postData) {
 
 export async function getPostById(id) {
   try {
-    const snap = await getDoc(doc(firestore, "posts", id));
+    const snap = await getDoc(doc(db, "posts", id));
     if (!snap.exists()) return { success: false, error: "Post not found" };
     return { success: true, data: { id: snap.id, ...snap.data() } };
   } catch (err) {
@@ -59,7 +58,7 @@ export async function getPostById(id) {
 
 export async function updatePost(id, postData) {
   try {
-    await updateDoc(doc(firestore, "posts", id), {
+    await updateDoc(doc(db, "posts", id), {
       ...postData,
       updatedAt: serverTimestamp(),
     });
@@ -71,7 +70,7 @@ export async function updatePost(id, postData) {
 
 export async function deletePost(id) {
   try {
-    await deleteDoc(doc(firestore, "posts", id));
+    await deleteDoc(doc(db, "posts", id));
     return { success: true };
   } catch (err) {
     return { success: false, error: err.message };
@@ -105,7 +104,7 @@ export async function getPosts({
 
 // ————— USERS —————
 
-const usersColl = collection(firestore, "users");
+const usersColl = collection(db, "users");
 
 /**
  * Create or upsert a user document at /users/{uid}.
@@ -114,7 +113,7 @@ const usersColl = collection(firestore, "users");
  */
 export async function setUser(uid, userData) {
   try {
-    const userRef = doc(firestore, "users", uid);
+    const userRef = doc(db, "users", uid);
     const snap    = await getDoc(userRef);
 
     if (!snap.exists()) {
