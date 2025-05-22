@@ -1,5 +1,6 @@
+// src/pages/Home.jsx
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { getPosts } from "../../firebase/firestore";
 import Loader from "../../components/Loader";
@@ -8,15 +9,14 @@ import PostCard from "../../components/PostCard";
 import "../../styles/pages/_home.scss";
 
 const CATEGORIES = [
-  { key: "all", label: "All" },
-  { key: "event", label: "Events" },
+  { key: "all",            label: "All" },
+  { key: "event",          label: "Events" },
   { key: "lost-and-found", label: "Lost & Found" },
-  { key: "garage-sale", label: "Garage Sales" },
+  { key: "garage-sale",    label: "Garage Sales" },
 ];
 
 export default function Home() {
-  // ─────── State & Hooks ───────
-  const { currentUser }            = useAuth();
+  const { currentUser } = useAuth();
   const [posts, setPosts]          = useState([]);
   const [loading, setLoading]      = useState(true);
   const [error, setError]          = useState(null);
@@ -24,7 +24,7 @@ export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedTag, setSelectedTag]           = useState("");
 
-  // ─────── Fetch Posts ───────
+  // Fetch posts on mount
   useEffect(() => {
     (async () => {
       setLoading(true);
@@ -41,42 +41,28 @@ export default function Home() {
     })();
   }, []);
 
-  // ─────── Add New Post Handler ───────
-  const handleNewPost = (post) => {
-    setPosts((prev) => [post, ...prev]);
-  };
+  // Prepend new post to feed
+  const handleNewPost = post => setPosts(prev => [post, ...prev]);
 
-  // ─────── Compute Trending Tags & Upcoming Events ───────
+  // Compute trending tags
   const tagCounts = {};
-  posts.forEach((p) => (p.tags || []).forEach((t) => (tagCounts[t] = (tagCounts[t]||0)+1)));
+  posts.forEach(p => (p.tags || []).forEach(t => tagCounts[t] = (tagCounts[t]||0)+1));
   const trending = Object.entries(tagCounts)
-      .sort((a, b) => b[1] - a[1])
+      .sort((a,b) => b[1] - a[1])
       .slice(0, 6);
 
+  // Upcoming events
   const upcoming = posts
-      .filter((p) => p.category === "event")
-      .sort((a,b) => {
-        const da = a.createdAt.seconds*1000;
-        const db = b.createdAt.seconds*1000;
-        return da - db;
-      })
-      .slice(0,5);
+      .filter(p => p.category === "event")
+      .sort((a,b) => a.createdAt.seconds - b.createdAt.seconds)
+      .slice(0, 5);
 
-  // ─────── Filtering Logic ───────
-  const filtered = posts.filter((p) => {
-    // category
-    if (selectedCategory !== "all" && p.category !== selectedCategory) {
-      return false;
-    }
-    // search
+  // Filter logic
+  const filtered = posts.filter(p => {
+    if (selectedCategory !== "all" && p.category !== selectedCategory) return false;
     const text = `${p.title} ${p.content}`.toLowerCase();
-    if (!text.includes(searchQuery.toLowerCase())) {
-      return false;
-    }
-    // tag
-    if (selectedTag && !(p.tags || []).includes(selectedTag)) {
-      return false;
-    }
+    if (!text.includes(searchQuery.toLowerCase())) return false;
+    if (selectedTag && !(p.tags || []).includes(selectedTag)) return false;
     return true;
   });
 
@@ -94,15 +80,44 @@ export default function Home() {
                 alt="Avatar"
                 className="avatar"
             />
-            <p className="name">{currentUser?.displayName}</p>
-            <Link to="/profile" className="btn btn-outline">
-              View Profile
-            </Link>
+            <p className="name">{currentUser?.displayName || "Guest"}</p>
+
+            {/* only show “View Profile” if logged in */}
+            {currentUser ? (
+                <NavLink
+                    to={`/profile/${currentUser.uid}`}
+                    className="btn btn-outline"
+                >
+                  View Profile
+                </NavLink>
+            ) : (
+                <Link to="/login" className="btn btn-outline">
+                  Login
+                </Link>
+            )}
+
             <nav className="nav-links">
-              <Link to="/">Home</Link>
-              <Link to="/my-posts">My Posts</Link>
-              <Link to="/create-post">New Post</Link>
-              <Link to="/events">Events</Link>
+              <NavLink exact to="/" activeClassName="active">
+                Home
+              </NavLink>
+
+              {/* only show “My Posts” if logged in */}
+              {currentUser && (
+                  <NavLink
+                      to={`/profile/${currentUser.uid}`}
+                      activeClassName="active"
+                  >
+                    My Posts
+                  </NavLink>
+              )}
+
+              <NavLink to="/create-post" activeClassName="active">
+                New Post
+              </NavLink>
+
+              <NavLink to="/events" activeClassName="active">
+                Events
+              </NavLink>
             </nav>
           </div>
         </aside>
@@ -116,11 +131,11 @@ export default function Home() {
                 type="text"
                 placeholder="Search posts..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={e => setSearchQuery(e.target.value)}
             />
             <select
                 value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
+                onChange={e => setSelectedCategory(e.target.value)}
             >
               {CATEGORIES.map(({ key, label }) => (
                   <option key={key} value={key}>{label}</option>
@@ -138,9 +153,7 @@ export default function Home() {
 
           <div className="feed-list">
             {filtered.length > 0 ? (
-                filtered.map((post) => (
-                    <PostCard key={post.id} post={post} />
-                ))
+                filtered.map(post => <PostCard key={post.id} post={post} />)
             ) : (
                 <div className="no-posts">No posts match your filters.</div>
             )}
@@ -168,7 +181,7 @@ export default function Home() {
           <section className="upcoming-events">
             <h3>Upcoming Events</h3>
             <ul>
-              {upcoming.map((e) => (
+              {upcoming.map(e => (
                   <li key={e.id}>
                     <Link to={`/posts/${e.id}`}>
                       <strong>{e.title}</strong>

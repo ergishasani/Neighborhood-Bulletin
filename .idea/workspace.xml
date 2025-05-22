@@ -4,8 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9402c50b-973b-4364-81de-a8e229ecd4c6" name="Changes" comment="Update Firestore reference usage for clarity and consistency.&#10;&#10;Replaced direct `db` imports with explicitly aliased `firestore` references to improve code readability and alignment with naming conventions. Adjusted all Firestore function calls to use the updated `firestore` alias without changing functionality. Minor indentation fixes were applied for better code formatting.">
-      <change beforePath="$PROJECT_DIR$/src/firebase/firestore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/firestore.js" afterDir="false" />
+    <list default="true" id="9402c50b-973b-4364-81de-a8e229ecd4c6" name="Changes" comment="firebase">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/user/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/user/Profile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/components/_navbar.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/components/_navbar.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/components/_post-card.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/components/_post-card.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/components/_tabs.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/components/_tabs.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/pages/_createPost.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/pages/_createPost.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/pages/_login.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/pages/_login.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/pages/_profile.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/pages/_profile.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/pages/_register.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/pages/_register.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,7 +134,7 @@
       <workItem from="1747762149458" duration="89000" />
       <workItem from="1747768445857" duration="539000" />
       <workItem from="1747922542812" duration="454000" />
-      <workItem from="1747923465536" duration="3889000" />
+      <workItem from="1747923465536" duration="5947000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed the bug for blank page on the main page">
       <option name="closed" value="true" />
@@ -272,7 +280,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747927055722</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="firebase">
+      <option name="closed" value="true" />
+      <created>1747927588937</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1747927588937</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -320,6 +336,7 @@
     <MESSAGE value="Add admin dashboard components and enhance styling&#10;&#10;Introduced new components for the admin dashboard: PostsOverTimeChart, AuditLogTable, SystemHealth, and updated UserManagement with edit/delete functionality. Integrated Chart.js and react-chartjs-2 for data visualization. Enhanced the admin styling with responsive layouts, improved charts, tables, and navigation styling for better UI/UX." />
     <MESSAGE value="Refactor navbar styles and improve mobile responsiveness.&#10;&#10;Reorganized and cleaned up SCSS for the navbar component to enhance readability and maintainability. Improved mobile styling by refining the navbar links' toggling behavior and ensuring better responsiveness. Simplified button classes for consistency." />
     <MESSAGE value="Update Firestore reference usage for clarity and consistency.&#10;&#10;Replaced direct `db` imports with explicitly aliased `firestore` references to improve code readability and alignment with naming conventions. Adjusted all Firestore function calls to use the updated `firestore` alias without changing functionality. Minor indentation fixes were applied for better code formatting." />
-    <option name="LAST_COMMIT_MESSAGE" value="Update Firestore reference usage for clarity and consistency.&#10;&#10;Replaced direct `db` imports with explicitly aliased `firestore` references to improve code readability and alignment with naming conventions. Adjusted all Firestore function calls to use the updated `firestore` alias without changing functionality. Minor indentation fixes were applied for better code formatting." />
+    <MESSAGE value="firebase" />
+    <option name="LAST_COMMIT_MESSAGE" value="firebase" />
   </component>
 </project>

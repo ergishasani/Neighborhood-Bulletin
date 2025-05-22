@@ -3,11 +3,18 @@
     display: flex;
     border-bottom: 1px solid #ddd;
     margin-bottom: 1rem;
+    overflow-x: auto;                     // allow horizontal scroll on small screens
+    -webkit-overflow-scrolling: touch;    // smooth scrolling on iOS
+
+    &::-webkit-scrollbar {
+      display: none;                      // hide scrollbar
+    }
 
     .tabs__header {
+      flex: 0 0 auto;                     // don’t shrink — keep touch target size
       background: none;
       border: none;
-      padding: 0.5rem 1rem;
+      padding: 0.75rem 1.25rem;
       cursor: pointer;
       font-weight: 600;
       color: #555;
@@ -26,6 +33,23 @@
   }
 
   &__content {
-    // Your panel content renders here
+    // panel content
+  }
+}
+
+@media (max-width: 768px) {
+  .tabs {
+    &__headers {
+      margin-bottom: 0.75rem;
+
+      .tabs__header {
+        padding: 0.5rem 1rem;    // slightly smaller for mobile
+        font-size: 0.9rem;
+      }
+    }
+
+    &__content {
+      padding: 0 1rem;          // prevent content touching edges
+    }
   }
 }

@@ -1,3 +1,5 @@
+// src/styles/pages/_profile.scss
+
 .profile-page {
   .container {
     max-width: 900px;
@@ -10,32 +12,39 @@
     gap: 2rem;
     align-items: center;
     margin-top: -60px; // if cover overlaps
+
     .avatar-uploader {
       flex-shrink: 0;
     }
+
     .header-info {
       flex: 1;
+
       h1 {
         margin: 0;
         font-size: 2rem;
       }
+
       .bio {
         font-style: italic;
         color: #555;
         margin: 0.5rem 0;
       }
+
       .meta {
         display: flex;
         gap: 1rem;
         color: #666;
         font-size: 0.9rem;
         margin-bottom: 1rem;
+
         span {
           display: flex;
           align-items: center;
           gap: 0.25rem;
         }
       }
+
       .header-actions {
         display: flex;
         gap: 0.5rem;
@@ -50,10 +59,6 @@
     margin-bottom: 2rem;
   }
 
-  .profile-map {
-    margin-bottom: 2rem;
-  }
-
   .profile-tabs {
     margin-bottom: 2rem;
   }
@@ -62,5 +67,59 @@
     color: #d32f2d;
     text-align: center;
     margin: 2rem 0;
+  }
+
+  // ----------------------------------
+  // MOBILE STYLES (≤ 768px)
+  // ----------------------------------
+  @media (max-width: 768px) {
+    .profile-header {
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      margin-top: -40px;
+
+      .avatar-uploader {
+        width: 80px;      // smaller avatar
+        height: 80px;
+      }
+
+      .header-info {
+        text-align: center;
+        width: 100%;
+
+        h1 {
+          font-size: 1.5rem;
+        }
+
+        .bio {
+          font-size: 0.9rem;
+          margin: 0.5rem 0;
+        }
+
+        .meta {
+          flex-direction: column;
+          gap: 0.5rem;
+          font-size: 0.8rem;
+          margin-bottom: 0.75rem;
+        }
+
+        .header-actions {
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 0.75rem;
+        }
+      }
+    }
+
+    .profile-summary {
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .profile-tabs {
+      padding: 0 1rem;
+    }
   }
 }

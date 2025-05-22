@@ -1,20 +1,17 @@
+// src/pages/Profile.jsx
+
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getUserByUid, getPosts, updateUser, uploadImage } from "../../firebase/firestore";
 import { useAuth } from "../../context/AuthContext";
 import Loader from "../../components/Loader";
-import CoverPhoto from "../../components/CoverPhoto";
 import AvatarUploader from "../../components/AvatarUploader";
 import FollowButton from "../../components/FollowButton";
-import ThemeToggle from "../../components/ThemeToggle";
 import Tabs from "../../components/Tabs";
 import ActivityStats from "../../components/ActivityStats";
-import ActivityMap from "../../components/ActivityMap";
 import ActivityFeed from "../../components/ActivityFeed";
 import GroupsAndEvents from "../../components/GroupsAndEvents";
 import Bookmarks from "../../components/Bookmarks";
-import BadgesList from "../../components/BadgesList";
-import InterestsCloud from "../../components/InterestsCloud";
 import "../../styles/pages/_profile.scss";
 
 export default function Profile() {
@@ -70,7 +67,6 @@ export default function Profile() {
     garage: posts.filter(p => p.category === "garage-sale").length,
   };
 
-  // Tabs without Settings
   const tabs = [
     {
       label: `Feed (${counts.all})`,
@@ -108,12 +104,7 @@ export default function Profile() {
 
   return (
       <div className="profile-page">
-        {/* Cover Photo */}
-        <CoverPhoto
-            src={user.coverPhotoURL}
-            editable={isMe}
-            onUpload={file => handleImageUpload(file, "coverPhotoURL")}
-        />
+
 
         <div className="profile-header container">
           {/* Avatar */}
@@ -143,21 +134,12 @@ export default function Profile() {
                   ? <Link to="/edit-profile" className="btn btn-outline">Settings</Link>
                   : <FollowButton userId={id} />
               }
-              <ThemeToggle />
+
             </div>
           </div>
         </div>
 
-        {/* Badges & Interests */}
-        <div className="profile-summary container">
-          <BadgesList badges={user.badges} />
-          <InterestsCloud interests={user.interests} />
-        </div>
 
-        {/* Map */}
-        <div className="profile-map container">
-          <ActivityMap posts={posts} />
-        </div>
 
         {/* Tabbed content */}
         <div className="profile-tabs container">

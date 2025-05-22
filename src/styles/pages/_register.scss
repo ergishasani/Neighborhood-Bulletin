@@ -1,3 +1,5 @@
+// src/styles/components/_register.scss
+
 @use '../variables' as *;
 
 .register-container {
@@ -41,7 +43,6 @@
       h1 {
         font-size: 3rem;
         font-weight: 700;
-        margin-bottom: $spacing-md;
         line-height: 1.2;
         text-transform: uppercase;
         margin-bottom: 1rem;
@@ -78,7 +79,6 @@
             align-items: center;
             justify-content: center;
             backdrop-filter: blur(2px);
-
           }
         }
       }
@@ -91,16 +91,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0;
     background: $white;
     height: 100vh;
     overflow-y: auto;
+    padding: 0;
 
     .auth-container {
       max-width: 420px;
       width: 100%;
-      height: fit-content;
-
+      padding: $spacing-lg;
 
       .form-header {
         margin-bottom: $spacing-xl;
@@ -131,15 +130,13 @@
       }
 
       form {
-
         .form-row {
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: $spacing-xxl;
+          margin-bottom: $spacing-md;
         }
-        .form-group-name, .form-group-lastname{
-          width: 95%;
-        }
+
         .form-group {
           margin-bottom: $spacing-md;
 
@@ -152,7 +149,7 @@
           }
 
           input {
-            width: 95%;
+            width: 100%;
             padding: $spacing-sm;
             border: 1px solid $gray-border;
             border-radius: $border-radius-md;
@@ -193,7 +190,6 @@
             label {
               font-size: 0.85rem;
               color: $gray-800;
-              -webkit-user-select: none;
               user-select: none;
             }
           }
@@ -220,6 +216,7 @@
           font-weight: 600;
           cursor: pointer;
           transition: background-color 0.2s;
+          margin-bottom: $spacing-md;
 
           &:hover {
             background-color: $primary-hover;
@@ -271,8 +268,8 @@
           font-size: 0.95rem;
           font-weight: 500;
           cursor: pointer;
-          transition: all 0.2s;
-          margin-bottom: 0.5rem;
+          transition: border-color 0.2s;
+          margin-bottom: $spacing-sm;
 
           &:hover {
             border-color: $gray-500;
@@ -284,10 +281,11 @@
             height: 18px;
           }
         }
-        .login-link{
+
+        .login-link {
           text-align: center;
           margin-top: $spacing-md;
-          margin-bottom: 1rem;
+          margin-bottom: $spacing-sm;
 
           a {
             color: $primary-color;
@@ -304,49 +302,50 @@
   }
 }
 
-// Responsive Styles
-@media (max-width: 768px) {
+// ----------------------------------
+// MOBILE RESPONSIVE (≤ 768px)
+// ----------------------------------
+@media (max-width: $breakpoint-md) {
   .register-container {
     flex-direction: column;
     height: auto;
     min-height: 100vh;
 
     .image-section {
-      height: 40vh;
-      max-height: 40vh;
-
-      .image-overlay {
-        padding: $spacing-lg;
-
-        h1 {
-          font-size: 1.5rem;
-        }
-
-        p {
-          font-size: 0.9rem;
-        }
-      }
+      display: none;
     }
 
     .form-section {
       height: auto;
       padding: $spacing-lg $spacing-md;
+
+      .auth-container {
+        max-width: 100%;
+      }
     }
   }
 }
 
+// ----------------------------------
+// SMALLER SCREENS (≤ 480px)
+// ----------------------------------
 @media (max-width: 480px) {
-  .auth-container {
-    form {
-      .form-row {
-        grid-template-columns: 1fr;
-      }
+  .register-container {
+    .form-section {
+      .auth-container {
+        form {
+          .form-row {
+            grid-template-columns: 1fr;
+            gap: 0;
+            margin-bottom: 0;
+          }
 
-      .form-options {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: $spacing-sm;
-
+          .form-options {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: $spacing-sm;
+          }
+        }
       }
     }
   }

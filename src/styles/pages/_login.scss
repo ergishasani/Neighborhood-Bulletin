@@ -1,3 +1,5 @@
+// src/styles/components/_login.scss
+
 @use '../variables' as *;
 
 .login-container {
@@ -8,27 +10,22 @@
 
   .login-image-container {
     position: relative; // Needed for absolute positioning of image
-    height: 100vh; // Full viewport height
-    width: 50%; // Takes half the screen (adjust if needed)
-    overflow: hidden; // Prevents scr ollbars
-    // Center the image both vertically and horizontally
+    height: 100vh;      // Full viewport height
+    width: 50%;         // Takes half the screen
+    overflow: hidden;   // Prevents scrollbars
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0; // Remove all padding
-    margin: 0; // Remove all margins
+    padding: 0;
+    margin: 0;
 
     .login-image {
-      // Make image cover available space while maintaining aspect ratio
       object-fit: cover;
       width: 100%;
       height: 100%;
-
-      // Optional: Add subtle shadow if needed
       filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
     }
   }
-
 
   .login-form-container {
     flex: 1;
@@ -52,22 +49,20 @@
         font-weight: 700;
         color: $black;
         margin-bottom: 0.5rem;
-
       }
 
       p {
         color: $black;
         font-size: 1rem;
         width: 70%;
-
       }
     }
 
     .login-form {
-
       display: flex;
       flex-direction: column;
       align-items: center;
+
       .error-message {
         color: #ef4444;
         margin-bottom: 1rem;
@@ -82,11 +77,9 @@
           margin-bottom: 0.5rem;
           font-weight: 500;
           color: $black;
-
         }
 
         input {
-          width: 70%;
           padding: 0.875rem;
           border: 1px solid $gray-border;
           border-radius: $border-radius-md;
@@ -102,10 +95,10 @@
       }
 
       .form-options {
-        width: 27.4rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        width: 27.4rem;
         margin-bottom: 1.5rem;
 
         .remember-me {
@@ -121,7 +114,6 @@
           color: $primary-color;
           text-decoration: none;
           font-size: 0.875rem;
-          margin-left: 8.8rem;
 
           &:hover {
             text-decoration: underline;
@@ -130,7 +122,6 @@
       }
 
       .signin-button {
-        width: 70%;
         padding: 0.875rem;
         background-color: $primary-color;
         color: white;
@@ -140,6 +131,7 @@
         font-weight: 500;
         cursor: pointer;
         margin-bottom: 1.5rem;
+        width: 70%;
 
         &:hover {
           background-color: darken($primary-color, 5%);
@@ -149,27 +141,23 @@
       .divider {
         display: flex;
         align-items: center;
-        margin-bottom: 1.5rem;
-        color: $gray-light;
         width: 25rem;
         color: $black;
+        margin-bottom: 1.5rem;
 
         &::before,
         &::after {
           content: "";
           flex: 1;
           border-bottom: 1px solid $gray-border;
-
         }
 
         span {
           padding: 0 1rem;
-
         }
       }
 
       .google-signin {
-        width: 70%;
         padding: 0.875rem;
         background-color: white;
         color: $black;
@@ -183,6 +171,7 @@
         justify-content: center;
         gap: 0.5rem;
         margin-bottom: 1.5rem;
+        width: 70%;
 
         &:hover {
           background-color: darken(white, 5%);
@@ -209,6 +198,69 @@
           &:hover {
             text-decoration: underline;
           }
+        }
+      }
+    }
+  }
+
+  // ----------------------------------
+  // MOBILE RESPONSIVE
+  // ----------------------------------
+  @media (max-width: $breakpoint-md) {
+    flex-direction: column;
+
+    .login-image-container {
+      width: 100%;
+      display: none;
+      height: 40vh;       // smaller image height on mobile
+    }
+
+    .login-form-container {
+      width: 100%;
+      max-width: 100%;
+      padding: 2rem 1.5rem;
+
+      .login-header {
+        h1 {
+          width: 100%;
+          font-size: 1.4rem;
+        }
+        p {
+          width: 100%;
+          font-size: 0.9rem;
+        }
+      }
+
+      .login-form {
+        .form-group {
+          input {
+            width: 21rem;
+          }
+        }
+
+        .form-options {
+          width: 100%;
+          .forgot-password {
+            margin-left: 0;
+          }
+        }
+
+        .signin-button,
+        .google-signin {
+          width: 100%;
+        }
+
+        .divider {
+          width: 100%;
+          &::before,
+          &::after {
+            border-bottom: 1px solid $gray-border;
+          }
+        }
+
+        .signup-link {
+          width: 100%;
+          margin-top: 1rem;
         }
       }
     }

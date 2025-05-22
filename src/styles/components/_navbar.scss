@@ -25,8 +25,9 @@
     display: none;
     background: none;
     border: none;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     cursor: pointer;
+    z-index: 20; // ensure it sits above the menu
   }
 
   .navbar-links {
@@ -64,58 +65,121 @@
 
   .navbar-auth {
     display: flex;
-    gap: $spacing-xs;
+    align-items: center;
+    gap: $spacing-md; // increased spacing
 
+    .btn-login,
+    .btn-register,
+    .btn-logout {
+      position: relative;
+      overflow: hidden;
+      padding: $spacing-xs $spacing-lg;
+      border-radius: $border-radius-md;
+      font-weight: $font-weight-medium;
+      text-transform: uppercase;
+      transition:
+              background 0.3s ease,
+              color      0.3s ease,
+              transform  0.2s ease;
+
+      // subtle “lift” on hover
+      &:hover {
+        transform: translateY(-2px);
+      }
+
+      // animated underline
+      &::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: 4px;
+        width: 0;
+        height: 2px;
+        background: currentColor;
+        transition:
+                width  0.3s ease,
+                left   0.3s ease;
+      }
+      &:hover::after {
+        width: 100%;
+        left: 0;
+      }
+    }
+
+    // LOGIN / REGISTER buttons
     .btn-login,
     .btn-register {
       background: transparent;
-      border: 1px solid $primary-color;
+      border: 2px solid $primary-color;
       color: $primary-color;
-      padding: $spacing-xs $spacing-md;
-      border-radius: $border-radius-sm;
-      transition: background $transition-fast;
+
       &:hover {
         background: $primary-color;
         color: $white;
       }
     }
 
+    // LOGOUT button
     .btn-logout {
       background: $danger-color;
+      border: 2px solid $danger-color;
       color: $white;
-      padding: $spacing-xs $spacing-md;
-      border: none;
-      border-radius: $border-radius-sm;
-      transition: background $transition-fast;
+
       &:hover {
         background: darken($danger-color, 10%);
+        border-color: darken($danger-color, 10%);
       }
     }
   }
 
+  // MOBILE STYLES
   @media (max-width: $breakpoint-md) {
+
     .navbar-burger {
       display: block;
     }
 
-    .navbar-links {
+    // hide desktop nav and auth
+    .navbar-links,
+    .navbar-auth {
       display: none;
+    }
+
+    // slide-down mobile menu
+    .navbar-links.open {
+      display: flex;
+      flex-direction: column;
       position: absolute;
       top: 100%;
       left: 0;
       width: 100%;
-      flex-direction: column;
+      max-height: calc(100vh - #{$spacing-xl});
+      overflow-y: auto;
       background: $white;
       border-bottom: 1px solid $gray-border;
-      z-index: 10;
-
-      &.open {
-        display: flex;
-      }
+      padding: $spacing-md 0;
+      z-index: 15;
 
       .nav-link {
         width: 100%;
-        padding: $spacing-sm;
+        padding: $spacing-sm $spacing-md;
+      }
+    }
+
+    // bring auth buttons into the mobile menu
+    .navbar-links.open + .navbar-auth {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-md;
+      padding: $spacing-sm $spacing-md;
+      background: $white;
+      border-bottom: 1px solid $gray-border;
+
+      .btn-login,
+      .btn-register,
+      .btn-logout {
+        width: 100%;
+        justify-content: center;
       }
     }
   }

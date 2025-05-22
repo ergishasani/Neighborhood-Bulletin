@@ -1,3 +1,5 @@
+// src/styles/pages/_post-form.scss
+
 .post-form-page {
   .container {
     max-width: 700px;
@@ -18,7 +20,7 @@
     background: #fff;
     border-radius: 6px;
     padding: 1.5rem;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 
     .form-group {
       margin-bottom: 1.25rem;
@@ -150,6 +152,98 @@
 
     h2 {
       margin-bottom: 1rem;
+    }
+  }
+
+  // ------------------------------
+  // MOBILE RESPONSIVE (≤ 768px)
+  // ------------------------------
+  @media (max-width: 768px) {
+    .container {
+      padding: 1rem;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .post-form {
+      padding: 1rem;
+
+      .form-group {
+        margin-bottom: 1rem;
+
+        label {
+          font-size: 0.9rem;
+        }
+
+        input,
+        textarea {
+          padding: 0.4rem;
+        }
+      }
+
+      .category-select {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+
+        span {
+          margin-bottom: 0.25rem;
+        }
+
+        label {
+          width: 100%;
+          padding: 0.5rem;
+        }
+      }
+
+      .char-counter {
+        font-size: 0.8rem;
+      }
+
+      .tags-input {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+
+        input {
+          width: 100%;
+        }
+      }
+
+      .tags-list {
+        justify-content: flex-start;
+
+        .tag-item {
+          font-size: 0.85rem;
+        }
+      }
+
+      .image-upload button {
+        width: 100%;
+        text-align: center;
+      }
+
+      .image-preview img {
+        max-width: 100%;
+      }
+
+      .form-actions {
+        flex-direction: column;
+        gap: 0.75rem;
+
+        button {
+          width: 100%;
+        }
+      }
+    }
+
+    .preview-section {
+      h2 {
+        font-size: 1.25rem;
+      }
     }
   }
 }
