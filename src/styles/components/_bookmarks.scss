@@ -1,7 +1,36 @@
+@import "../variables";
+@import "../mixins";
+
+
 .bookmarks {
-  background: #fff;
-  border: 1px solid #e1e4e8;
-  border-radius: 6px;
-  padding: 1rem;
-  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  .bookmark-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .remove-bookmark {
+    align-self: flex-end;
+    padding: 0;
+    font-size: 0.9rem;
+    color: $danger-color;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+
+    &:hover {
+      color: darken($danger-color, 10%);
+    }
+  }
+
+  .no-bookmarks,
+  .error-message {
+    text-align: center;
+    color: #495057;
+  }
 }

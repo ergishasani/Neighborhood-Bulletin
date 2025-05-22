@@ -1,3 +1,5 @@
+// src/styles/pages/_adminDashboard.scss
+
 @import "../_variables";
 
 .admin-dashboard {
@@ -6,17 +8,14 @@
   display: grid;
   grid-row-gap: $spacing-lg;
 
-  // Card wrapper common style
-  .card-wrapper {
+  // Base card style
+  .card, .chart-card, .geo-map, .flagged-list, .recent-users,
+  .activity-feed, .system-health, .notifications, .audit-logs,
+  .settings-links {
     background: $white;
     padding: $spacing-md;
     border-radius: $border-radius-md;
     box-shadow: $shadow-sm;
-
-    h3, h4 {
-      margin-bottom: $spacing-sm;
-      color: $dark-color;
-    }
   }
 
   // Metrics Cards
@@ -26,39 +25,23 @@
     gap: $spacing-md;
 
     .card {
-      @extend .card-wrapper;
       transition: transform 0.2s, box-shadow 0.2s;
-
+      h4 { color: $primary-color; margin-bottom: $spacing-sm; }
+      p  { font-size: 1.5rem; font-weight: $font-weight-bold; color: $dark-color; }
       &:hover {
         transform: translateY(-3px);
         box-shadow: $shadow-md;
       }
-
-      h4 {
-        color: $primary-color;
-      }
-
-      p {
-        font-size: 1.5rem;
-        font-weight: $font-weight-bold;
-        color: $dark-color;
-      }
     }
   }
 
-  // Charts
+  // Charts Grid
   .charts-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: $spacing-lg;
 
-    @media (max-width: $breakpoint-md) {
-      grid-template-columns: 1fr;
-    }
-
     .chart-card {
-      @extend .card-wrapper;
-
       .chart-container {
         canvas {
           width: 100% !important;
@@ -68,30 +51,28 @@
     }
   }
 
-  // Map
+  // Geo Map
   .geo-map {
-    @extend .card-wrapper;
-
     .leaflet-container {
       height: 300px;
       width: 100%;
     }
   }
 
-  // Flagged List
+  // Flagged Content
   .flagged-list {
-    @extend .card-wrapper;
-
     ul {
       list-style: none;
+      margin: 0;
       padding: 0;
 
       li {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         margin-bottom: $spacing-xs;
 
-        button {
+        .actions button {
           margin-left: $spacing-xs;
           padding: $spacing-xxs $spacing-xs;
           border: none;
@@ -111,104 +92,9 @@
 
   // Recent Users
   .recent-users {
-    @extend .card-wrapper;
+    h3 { margin-bottom: $spacing-sm; }
 
     table {
-      width: 100%;
-      border-collapse: collapse;
-
-      th, td {
-        padding: $spacing-xs;
-        text-align: left;
-      }
-
-      th {
-        background: $gray-200;
-        color: $gray-800;
-      }
-
-      tr {
-        &:nth-child(even) {
-          background: $gray-100;
-        }
-        &:hover {
-          background: $primary-light;
-        }
-      }
-
-      img {
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-      }
-
-      .btn-admin, .btn-user {
-        padding: $spacing-xxs $spacing-xs;
-        border: none;
-        border-radius: $border-radius-sm;
-        font-size: 0.85rem;
-        cursor: pointer;
-      }
-
-      .btn-admin {
-        background: $info-color;
-        color: $white;
-      }
-
-      .btn-user {
-        background: $gray-200;
-        color: $gray-800;
-      }
-    }
-  }
-
-  // Activity Feed
-  .activity-feed {
-    @extend .card-wrapper;
-
-    .activity-feed-list {
-      list-style: none;
-      padding: 0;
-
-      li {
-        margin-bottom: $spacing-xxs;
-
-        code {
-          color: $gray-600;
-        }
-      }
-    }
-  }
-
-  // System Health
-  .system-health {
-    @extend .card-wrapper;
-
-    .health-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: $spacing-sm;
-
-      div {
-        font-size: 0.9rem;
-      }
-    }
-  }
-
-  // Notifications
-  .notifications {
-    @extend .card-wrapper;
-
-    p {
-      color: $gray-800;
-    }
-  }
-
-  // Audit Logs
-  .audit-logs {
-    @extend .card-wrapper;
-
-    .audit-log-table {
       width: 100%;
       border-collapse: collapse;
 
@@ -225,28 +111,98 @@
       tr:nth-child(even) {
         background: $gray-100;
       }
+      tr:hover {
+        background: $primary-light;
+      }
+
+      img {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+      }
+
+      .btn-admin, .btn-user {
+        padding: $spacing-xxs $spacing-xs;
+        border: none;
+        border-radius: $border-radius-sm;
+        font-size: 0.85rem;
+        cursor: pointer;
+      }
+      .btn-admin {
+        background: $info-color;
+        color: $white;
+      }
+      .btn-user {
+        background: $gray-200;
+        color: $gray-800;
+      }
     }
   }
 
-  // Bulk Export
+  // Activity Feed
+  .activity-feed {
+    ul.activity-feed-list {
+      list-style: none;
+      padding: 0;
+      li {
+        margin-bottom: $spacing-xxs;
+        code { color: $gray-600; }
+      }
+    }
+  }
+
+  // System Health
+  .system-health {
+    .health-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: $spacing-sm;
+      div { font-size: 0.9rem; }
+    }
+  }
+
+  // Notifications
+  .notifications {
+    p { color: $gray-800; }
+  }
+
+  // Audit Logs
+  .audit-logs {
+    .audit-log-table {
+      width: 100%;
+      border-collapse: collapse;
+
+      th, td {
+        padding: $spacing-xs;
+        text-align: left;
+      }
+      th {
+        background: $gray-200;
+        color: $gray-800;
+      }
+      tr:nth-child(even) {
+        background: $gray-100;
+      }
+    }
+  }
+
+  // Bulk Export & Delete
   .bulk-export {
     display: flex;
     gap: $spacing-sm;
 
     button {
+      flex: 1;
       padding: $spacing-xs $spacing-md;
       border: none;
       border-radius: $border-radius-sm;
-      flex: 1;
-      cursor: pointer;
       font-weight: $font-weight-medium;
+      cursor: pointer;
     }
-
     .btn-export {
       background: $success-color;
       color: $white;
     }
-
     .btn-bulk-delete {
       background: $danger-color;
       color: $white;
@@ -272,18 +228,13 @@
 
   // Settings Links
   .settings-links {
-    @extend .card-wrapper;
-
     ul {
       list-style: none;
       padding: 0;
-
       li {
         margin-bottom: $spacing-xs;
-
         a {
           color: $primary-color;
-
           &:hover {
             text-decoration: underline;
           }
@@ -291,4 +242,14 @@
       }
     }
   }
+
+  // Mobile tweaks
+  @media (max-width: $breakpoint-md) {
+    .charts-grid, .metrics-cards {
+      grid-template-columns: 1fr;
+    }
+  }
 }
+
+
+// in _adminDashboard.scss (or _charts.scss)

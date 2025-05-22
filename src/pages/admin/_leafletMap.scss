@@ -1,0 +1,28 @@
+// src/styles/pages/_adminDashboard.scss
+
+@import "../../styles/_variables.scss";
+
+// src/styles/components/_leafletMap.scss
+.geo-map{
+  height: 30rem !important  ;
+}
+.admin-leaflet-map {
+  width: 100%;
+  height: 300px!important;           // or whatever fixed height you prefer
+  border-radius: $border-radius-md;
+  box-shadow: $shadow-sm;
+  overflow: hidden;
+
+  // ensure the tiles & markers fill
+  .leaflet-container {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// For responsive: full width on small screens
+@media (max-width: $breakpoint-md) {
+  .admin-leaflet-map {
+    height: 200px;
+  }
+}

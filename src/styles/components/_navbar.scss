@@ -49,16 +49,10 @@
         color: $primary-color;
         border-radius: $border-radius-sm;
       }
-      &:hover {
-        background: $gray-light;
-        border-radius: $border-radius-sm;
-      }
+
       &.admin-link {
-        color: $danger-color;
-        &:hover,
-        &.active {
-          background: rgba($danger-color, 0.1);
-        }
+        color: $primary-color;
+
       }
     }
   }
@@ -83,9 +77,7 @@
               transform  0.2s ease;
 
       // subtle “lift” on hover
-      &:hover {
-        transform: translateY(-2px);
-      }
+
 
       // animated underline
       &::after {
@@ -100,10 +92,7 @@
                 width  0.3s ease,
                 left   0.3s ease;
       }
-      &:hover::after {
-        width: 100%;
-        left: 0;
-      }
+
     }
 
     // LOGIN / REGISTER buttons
@@ -113,22 +102,16 @@
       border: 2px solid $primary-color;
       color: $primary-color;
 
-      &:hover {
-        background: $primary-color;
-        color: $white;
-      }
+
     }
 
     // LOGOUT button
     .btn-logout {
-      background: $danger-color;
-      border: 2px solid $danger-color;
+      background: $primary-color;
+      border: 2px solid $primary-color;
       color: $white;
 
-      &:hover {
-        background: darken($danger-color, 10%);
-        border-color: darken($danger-color, 10%);
-      }
+
     }
   }
 

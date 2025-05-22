@@ -1,7 +1,60 @@
+@import "../variables";
+@import "../mixins";
+
+
 .groups-events {
-  background: #fff;
-  border: 1px solid #e1e4e8;
-  border-radius: 6px;
-  padding: 1rem;
-  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  section {
+    background: $white;
+    border-radius: $border-radius-sm;
+    padding: $spacing-md;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+
+    h3 {
+      margin-top: 0;
+      margin-bottom: $spacing-sm;
+      font-size: 1.25rem;
+      color: $dark-color;
+    }
+  }
+
+  .groups-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      margin-bottom: $spacing-xs;
+
+      .group-link {
+        color: $primary-color;
+        text-decoration: none;
+        font-weight: $font-weight-medium;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  .events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: $spacing-md;
+  }
+
+  .no-groups,
+  .no-events {
+    color: $gray-600;
+    font-style: italic;
+  }
+
+  .error-message {
+    color: $danger-color;
+    text-align: center;
+  }
 }

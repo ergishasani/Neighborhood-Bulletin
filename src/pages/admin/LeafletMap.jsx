@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { getPosts } from "../../firebase/firestore";
+import "./_leafletMap.scss";
 
 export default function LeafletMap() {
     const [markers, setMarkers] = useState([]);
