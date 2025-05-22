@@ -5,20 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9402c50b-973b-4364-81de-a8e229ecd4c6" name="Changes" comment="firebase">
-      <change afterPath="$PROJECT_DIR$/src/pages/admin/_leafletMap.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/styles/pages/_events.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Bookmarks.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Bookmarks.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/GroupsAndEvents.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GroupsAndEvents.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/AdminDashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/AdminDashboard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/LeafletMap.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/LeafletMap.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/PostsOverTimeChart.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/PostsOverTimeChart.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/categories/Events.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/categories/Events.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/components/_bookmarks.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/components/_bookmarks.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/components/_groupsAndEvents.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/components/_groupsAndEvents.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/components/_navbar.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/components/_navbar.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/pages/_adminDashboard.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/pages/_adminDashboard.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/pages/_home.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/pages/_home.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,7 +126,7 @@
       <workItem from="1747762149458" duration="89000" />
       <workItem from="1747768445857" duration="539000" />
       <workItem from="1747922542812" duration="454000" />
-      <workItem from="1747923465536" duration="8486000" />
+      <workItem from="1747923465536" duration="9161000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed the bug for blank page on the main page">
       <option name="closed" value="true" />

@@ -1,40 +1,33 @@
 // src/pages/admin/AdminDashboard.jsx
 
 import React, { useEffect, useState } from "react";
-import {
-    getPosts,
-    getUsers,
-    getReports,
-    toggleUserRole,
-    deletePost,
-    fetchAuditLogs,
-    fetchSystemHealth,
-} from "../../firebase/firestore";
+import { getPosts, getUsers, getReports } from "../../firebase/firestore";
 
 import PostsOverTimeChart    from "./PostsOverTimeChart";
 import CategoryDoughnutChart from "./CategoryDoughnutChart";
 import CommentsBarChart      from "./CommentsBarChart";
 import LeafletMap            from "./LeafletMap";
 
-
 import "../../styles/pages/_adminDashboard.scss";
 
 export default function AdminDashboard() {
-    const [stats, setStats]               = useState({ users: 0, posts: 0, comments: 0, reports: 0 });
-
-
-    const [loading, setLoading]           = useState(true);
+    const [stats, setStats]     = useState({
+        users: 0,
+        posts: 0,
+        comments: 0,
+        reports: 0,
+    });
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         async function loadAll() {
             setLoading(true);
             try {
+                // only these three promises, so destructure accordingly
                 const [pRes, uRes, rRes] = await Promise.all([
                     getPosts({ limitCount: 0 }),
                     getUsers(),
                     getReports(),
-                    fetchAuditLogs(),
-                    fetchSystemHealth(),
                 ]);
 
                 setStats({
@@ -43,13 +36,8 @@ export default function AdminDashboard() {
                     comments: pRes.data.reduce((sum, p) => sum + (p.commentCount || 0), 0),
                     reports:  rRes.data.length,
                 });
-
-
-
-
-
             } catch (err) {
-                console.error(err);
+                console.error("Failed to load admin stats:", err);
             } finally {
                 setLoading(false);
             }
@@ -57,13 +45,12 @@ export default function AdminDashboard() {
         loadAll();
     }, []);
 
-
-
-    if (loading) return <div className="admin-dashboard--loading">Loading…</div>;
+    if (loading) {
+        return <div className="admin-dashboard--loading">Loading…</div>;
+    }
 
     return (
         <div className="admin-dashboard">
-
             {/* 1) Top metrics */}
             <section className="metrics-cards">
                 {["Users","Posts","Comments","Reports"].map((label, i) => {
@@ -89,7 +76,6 @@ export default function AdminDashboard() {
                 <h3>Posts by Location</h3>
                 <LeafletMap />
             </section>
-
         </div>
     );
 }
