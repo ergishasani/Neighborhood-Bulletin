@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9402c50b-973b-4364-81de-a8e229ecd4c6" name="Changes" comment="Refactor navbar styles and improve mobile responsiveness.&#10;&#10;Reorganized and cleaned up SCSS for the navbar component to enhance readability and maintainability. Improved mobile styling by refining the navbar links' toggling behavior and ensuring better responsiveness. Simplified button classes for consistency.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="9402c50b-973b-4364-81de-a8e229ecd4c6" name="Changes" comment="Update Firestore reference usage for clarity and consistency.&#10;&#10;Replaced direct `db` imports with explicitly aliased `firestore` references to improve code readability and alignment with naming conventions. Adjusted all Firestore function calls to use the updated `firestore` alias without changing functionality. Minor indentation fixes were applied for better code formatting.">
+      <change beforePath="$PROJECT_DIR$/src/firebase/firestore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/firestore.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,7 +126,7 @@
       <workItem from="1747762149458" duration="89000" />
       <workItem from="1747768445857" duration="539000" />
       <workItem from="1747922542812" duration="454000" />
-      <workItem from="1747923465536" duration="3291000" />
+      <workItem from="1747923465536" duration="3889000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed the bug for blank page on the main page">
       <option name="closed" value="true" />
@@ -264,7 +264,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747768963864</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Update Firestore reference usage for clarity and consistency.&#10;&#10;Replaced direct `db` imports with explicitly aliased `firestore` references to improve code readability and alignment with naming conventions. Adjusted all Firestore function calls to use the updated `firestore` alias without changing functionality. Minor indentation fixes were applied for better code formatting.">
+      <option name="closed" value="true" />
+      <created>1747927055722</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1747927055722</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -311,6 +319,7 @@
     <MESSAGE value="Update .nvmrc, dependencies, and code improvements&#10;&#10;Added .nvmrc to define Node.js version 18 for consistent development. Updated dependencies like `@mui`, `@firebase`, and `react-router` to their latest versions for better performance and security. Improved code by addressing linter warnings and simplifying unused variables in components." />
     <MESSAGE value="Add admin dashboard components and enhance styling&#10;&#10;Introduced new components for the admin dashboard: PostsOverTimeChart, AuditLogTable, SystemHealth, and updated UserManagement with edit/delete functionality. Integrated Chart.js and react-chartjs-2 for data visualization. Enhanced the admin styling with responsive layouts, improved charts, tables, and navigation styling for better UI/UX." />
     <MESSAGE value="Refactor navbar styles and improve mobile responsiveness.&#10;&#10;Reorganized and cleaned up SCSS for the navbar component to enhance readability and maintainability. Improved mobile styling by refining the navbar links' toggling behavior and ensuring better responsiveness. Simplified button classes for consistency." />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor navbar styles and improve mobile responsiveness.&#10;&#10;Reorganized and cleaned up SCSS for the navbar component to enhance readability and maintainability. Improved mobile styling by refining the navbar links' toggling behavior and ensuring better responsiveness. Simplified button classes for consistency." />
+    <MESSAGE value="Update Firestore reference usage for clarity and consistency.&#10;&#10;Replaced direct `db` imports with explicitly aliased `firestore` references to improve code readability and alignment with naming conventions. Adjusted all Firestore function calls to use the updated `firestore` alias without changing functionality. Minor indentation fixes were applied for better code formatting." />
+    <option name="LAST_COMMIT_MESSAGE" value="Update Firestore reference usage for clarity and consistency.&#10;&#10;Replaced direct `db` imports with explicitly aliased `firestore` references to improve code readability and alignment with naming conventions. Adjusted all Firestore function calls to use the updated `firestore` alias without changing functionality. Minor indentation fixes were applied for better code formatting." />
   </component>
 </project>
