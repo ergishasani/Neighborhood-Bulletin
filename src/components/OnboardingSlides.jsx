@@ -1,3 +1,5 @@
+// src/components/OnboardingSlides.jsx
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/components/_onBoardingSlides.scss";
@@ -30,15 +32,21 @@ export default function OnboardingSlides({ onFinish }) {
     const navigate = useNavigate();
     const isLast = idx === slides.length - 1;
 
-    const next = () => setIdx((i) => Math.min(i + 1, slides.length - 1));
-    const back = () => setIdx((i) => Math.max(i - 1, 0));
-    const skip = () => onFinish();
-    const goLogin = () => {
-        onFinish();
+    const next = () => setIdx(i => Math.min(i + 1, slides.length - 1));
+    const back = () => setIdx(i => Math.max(i - 1, 0));
+
+    const skip = () => {
+        if (onFinish) onFinish();
         navigate("/login");
     };
+
+    const goLogin = () => {
+        if (onFinish) onFinish();
+        navigate("/login");
+    };
+
     const goRegister = () => {
-        onFinish();
+        if (onFinish) onFinish();
         navigate("/register");
     };
 
@@ -50,9 +58,10 @@ export default function OnboardingSlides({ onFinish }) {
 
             <img
                 src={slides[idx].img}
-                alt=""
+                alt={slides[idx].title}
                 className="onboarding__image"
             />
+
             <h2 className="onboarding__title">{slides[idx].title}</h2>
             <p className="onboarding__text">{slides[idx].text}</p>
 
@@ -86,7 +95,8 @@ export default function OnboardingSlides({ onFinish }) {
                     <span
                         key={i}
                         className={
-                            "onboarding__dot" + (i === idx ? " onboarding__dot--active" : "")
+                            "onboarding__dot" +
+                            (i === idx ? " onboarding__dot--active" : "")
                         }
                         onClick={() => setIdx(i)}
                     />

@@ -12,7 +12,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: $spacing-sm 0;
+    padding: $spacing-sm 1rem;
   }
 
   .navbar-brand {
@@ -27,7 +27,7 @@
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
-    z-index: 20; // ensure it sits above the menu
+    z-index: 30;
   }
 
   .navbar-links {
@@ -36,9 +36,6 @@
     align-items: center;
 
     .nav-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.25rem;
       padding: $spacing-xs $spacing-sm;
       color: $dark-color;
       font-weight: $font-weight-medium;
@@ -49,18 +46,13 @@
         color: $primary-color;
         border-radius: $border-radius-sm;
       }
-
-      &.admin-link {
-        color: $primary-color;
-
-      }
     }
   }
 
   .navbar-auth {
     display: flex;
     align-items: center;
-    gap: $spacing-md; // increased spacing
+    gap: $spacing-md;
 
     .btn-login,
     .btn-register,
@@ -76,10 +68,6 @@
               color      0.3s ease,
               transform  0.2s ease;
 
-      // subtle “lift” on hover
-
-
-      // animated underline
       &::after {
         content: "";
         position: absolute;
@@ -89,81 +77,104 @@
         height: 2px;
         background: currentColor;
         transition:
-                width  0.3s ease,
-                left   0.3s ease;
+                width 0.3s ease,
+                left  0.3s ease;
       }
 
+      &:hover::after {
+        width: 80%;
+        left: 10%;
+      }
+
+      &:hover {
+        transform: translateY(-2px);
+      }
     }
 
-    // LOGIN / REGISTER buttons
     .btn-login,
     .btn-register {
       background: transparent;
       border: 2px solid $primary-color;
       color: $primary-color;
-
-
     }
 
-    // LOGOUT button
     .btn-logout {
       background: $primary-color;
       border: 2px solid $primary-color;
       color: $white;
-
-
     }
   }
 
   // MOBILE STYLES
   @media (max-width: $breakpoint-md) {
-
     .navbar-burger {
       display: block;
     }
 
-    // hide desktop nav and auth
     .navbar-links,
     .navbar-auth {
       display: none;
     }
 
-    // slide-down mobile menu
+    // sliding drawer
     .navbar-links.open {
       display: flex;
       flex-direction: column;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      width: 100%;
-      max-height: calc(100vh - #{$spacing-xl});
-      overflow-y: auto;
+      position: fixed;
+      align-content: center;
+      justify-content: center;
+      top: 0;
+      right: 0;
+      height: 100vh;
+      width: 75%;
+      max-width: 300px;
       background: $white;
-      border-bottom: 1px solid $gray-border;
-      padding: $spacing-md 0;
-      z-index: 15;
+      box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      padding-top: $spacing-lg;
+      align-items: center;
 
       .nav-link {
         width: 100%;
-        padding: $spacing-sm $spacing-md;
+        text-align: center;
+        padding: $spacing-md 0;
       }
     }
 
-    // bring auth buttons into the mobile menu
-    .navbar-links.open + .navbar-auth {
+    // when open class is present, slide in
+    .navbar-links.open--active {
+      transform: translateX(0);
+    }
+
+    // auth buttons in drawer
+    .navbar-auth.open {
       display: flex;
       flex-direction: column;
-      gap: $spacing-md;
-      padding: $spacing-sm $spacing-md;
+      position: fixed;
+      top: auto;
+      bottom: 0;
+      right: 0;
+      width: 75%;
+      max-width: 300px;
       background: $white;
-      border-bottom: 1px solid $gray-border;
+      padding: $spacing-md 0;
+      box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      align-items: center;
 
       .btn-login,
       .btn-register,
       .btn-logout {
-        width: 100%;
-        justify-content: center;
+        width: 90%;
+        margin-bottom: $spacing-sm;
+        text-align: center;
       }
+    }
+
+    .navbar-auth.open--active {
+      transform: translateX(0);
     }
   }
 }

@@ -26,61 +26,92 @@ export default function Navbar() {
       currentUser?.uid === ADMIN_UID
   );
 
+  const closeMobile = () => setMobileOpen(false);
+
   return (
       <nav className="navbar">
         <div className="navbar-container container">
-          <Link to="/" className="navbar-brand">
+          <Link to="/" className="navbar-brand" onClick={closeMobile}>
             Neighborhood Bulletin
           </Link>
 
           <button
               className="navbar-burger"
-              onClick={() => setMobileOpen(!mobileOpen)}
+              onClick={() => setMobileOpen(o => !o)}
               aria-label="Toggle menu"
           >
             <FaBars />
           </button>
 
-          <div className={`navbar-links ${mobileOpen ? "open" : ""}`}>
-            <NavLink to="/" className="nav-link" onClick={() => setMobileOpen(false)}>
+          {/* Links drawer */}
+          <div
+              className={`navbar-links ${mobileOpen ? "open open--active" : ""}`}
+          >
+            <NavLink to="/"        className="nav-link" onClick={closeMobile}>
               <FaHome /> Home
             </NavLink>
-            <NavLink to="/events" className="nav-link" onClick={() => setMobileOpen(false)}>
+            <NavLink to="/events"  className="nav-link" onClick={closeMobile}>
               <FaCalendarAlt /> Events
             </NavLink>
-            <NavLink to="/search" className="nav-link" onClick={() => setMobileOpen(false)}>
+            <NavLink to="/search"  className="nav-link" onClick={closeMobile}>
               <FaSearch /> Search
             </NavLink>
 
             {currentUser && (
                 <>
-                  <NavLink to="/create-post" className="nav-link" onClick={() => setMobileOpen(false)}>
+                  <NavLink
+                      to="/create-post"
+                      className="nav-link"
+                      onClick={closeMobile}
+                  >
                     <FaPlus /> Create Post
                   </NavLink>
-                  <NavLink to={`/profile/${currentUser.uid}`} className="nav-link" onClick={() => setMobileOpen(false)}>
+                  <NavLink
+                      to={`/profile/${currentUser.uid}`}
+                      className="nav-link"
+                      onClick={closeMobile}
+                  >
                     <FaUser /> Profile
                   </NavLink>
                 </>
             )}
 
             {isAdmin && (
-                <NavLink to="/admin" className="nav-link admin-link" onClick={() => setMobileOpen(false)}>
+                <NavLink
+                    to="/admin"
+                    className="nav-link admin-link"
+                    onClick={closeMobile}
+                >
                   <FaTachometerAlt /> Dashboard
                 </NavLink>
             )}
           </div>
 
-          <div className="navbar-auth">
+          {/* Auth drawer */}
+          <div
+              className={`navbar-auth ${mobileOpen ? "open open--active" : ""}`}
+          >
             {currentUser ? (
-                <button onClick={logout} className="btn btn-logout">
+                <button
+                    onClick={() => { logout(); closeMobile(); }}
+                    className="btn btn-logout"
+                >
                   Logout
                 </button>
             ) : (
                 <>
-                  <Link to="/login" className="btn btn-login">
+                  <Link
+                      to="/login"
+                      className="btn btn-login"
+                      onClick={closeMobile}
+                  >
                     Login
                   </Link>
-                  <Link to="/register" className="btn btn-register">
+                  <Link
+                      to="/register"
+                      className="btn btn-register"
+                      onClick={closeMobile}
+                  >
                     Register
                   </Link>
                 </>
