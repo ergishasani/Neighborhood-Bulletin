@@ -21,8 +21,7 @@ import "../../styles/pages/_adminDashboard.scss";
 
 export default function AdminDashboard() {
     const [stats, setStats]               = useState({ users: 0, posts: 0, comments: 0, reports: 0 });
-    const [recentUsers, setRecentUsers]   = useState([]);
-    const [flaggedPosts, setFlaggedPosts] = useState([]);
+
 
     const [loading, setLoading]           = useState(true);
 
@@ -30,7 +29,7 @@ export default function AdminDashboard() {
         async function loadAll() {
             setLoading(true);
             try {
-                const [pRes, uRes, rRes, logsRes, healthRes] = await Promise.all([
+                const [pRes, uRes, rRes] = await Promise.all([
                     getPosts({ limitCount: 0 }),
                     getUsers(),
                     getReports(),
@@ -45,13 +44,9 @@ export default function AdminDashboard() {
                     reports:  rRes.data.length,
                 });
 
-                setRecentUsers(
-                    uRes.data
-                        .sort((a, b) => b.createdAt.seconds - a.createdAt.seconds)
-                        .slice(0, 10)
-                );
 
-                setFlaggedPosts(rRes.data);
+
+
 
             } catch (err) {
                 console.error(err);
@@ -62,19 +57,7 @@ export default function AdminDashboard() {
         loadAll();
     }, []);
 
-    const handleToggleAdmin = async (uid, isAdmin) => {
-        await toggleUserRole(uid, !isAdmin);
-        setRecentUsers(us => us.map(u => u.uid === uid ? { ...u, admin: !isAdmin } : u));
-    };
 
-    const handleDeleteFlagged = async (postId) => {
-        await deletePost(postId);
-        setFlaggedPosts(fs => fs.filter(r => r.postId !== postId));
-    };
-
-    const handleDismissFlagged = (postId) => {
-        setFlaggedPosts(fs => fs.filter(r => r.postId !== postId));
-    };
 
     if (loading) return <div className="admin-dashboard--loading">Loading…</div>;
 
