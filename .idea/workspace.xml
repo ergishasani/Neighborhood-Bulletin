@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9402c50b-973b-4364-81de-a8e229ecd4c6" name="Changes" comment="firebase">
+      <change afterPath="$PROJECT_DIR$/src/pages/user/editprofile.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/OnboardingSlides.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/OnboardingSlides.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/auth/Register.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/auth/Register.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/styles/components/_navbar.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/components/_navbar.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -130,7 +130,9 @@
       <workItem from="1747768445857" duration="539000" />
       <workItem from="1747922542812" duration="454000" />
       <workItem from="1747923465536" duration="9161000" />
-      <workItem from="1747940125388" duration="629000" />
+      <workItem from="1747940125388" duration="930000" />
+      <workItem from="1747950186757" duration="312000" />
+      <workItem from="1747983652670" duration="1785000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed the bug for blank page on the main page">
       <option name="closed" value="true" />

@@ -7,6 +7,7 @@
   position: relative;
   background: $white;
   border-bottom: 1px solid $gray-border;
+  z-index: 9999;
 
   .navbar-container {
     display: flex;
@@ -27,7 +28,7 @@
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
-    z-index: 30;
+    z-index: 1000;
   }
 
   .navbar-links {
